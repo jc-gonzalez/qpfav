@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1009</width>
+    <height>691</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>8</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>QPF Archive Viewer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons_nav.qrc">
+    <normaloff>:/img/QPFav.png</normaloff>:/img/QPFav.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_11">
+    <property name="spacing">
+     <number>2</number>
+    </property>
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="QStackedWidget" name="stckMain">
+      <property name="toolTipDuration">
+       <number>-24</number>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="pgLocalArch">
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1000">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="100,20,1,1,1,1">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblLocalArch">
+            <property name="text">
+             <string>Local Archive</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cboxLocalArchAuto">
+            <item>
+             <property name="text">
+              <string>Auto Update</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Auto Expand</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Auto Resize</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtnRefresh">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="icons_nav.qrc">
+              <normaloff>:/img/refresh.png</normaloff>:/img/refresh.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_3">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons_nav.qrc">
+              <normaloff>:/img/expand.png</normaloff>:/img/expand.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_2">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons_nav.qrc">
+              <normaloff>:/img/collapse.png</normaloff>:/img/collapse.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="icons_nav.qrc">
+              <normaloff>:/img/resize.png</normaloff>:/img/resize.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="LocalArchiveView" name="localArchView" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgProcTasks">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1000">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lblProcTasks">
+          <property name="text">
+           <string>Processing Tasks</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="TasksView" name="tasksView" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgProdView">
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,1000">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lblProdView">
+          <property name="text">
+           <string>Product Viewer</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="tabwdgViewers">
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgFilters">
+       <layout class="QVBoxLayout" name="verticalLayout_16">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lblFilters">
+          <property name="text">
+           <string>Report Filters</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="tabwdgFilters">
+          <property name="currentIndex">
+           <number>-1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgAlerts">
+       <layout class="QVBoxLayout" name="verticalLayout_14">
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>2</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="lblAlerts">
+          <property name="text">
+           <string>Alerts</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="tabwdgAlerts">
+          <property name="tabPosition">
+           <enum>QTabWidget::North</enum>
+          </property>
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="tabBarAutoHide">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="tabProcAlerts">
+           <attribute name="title">
+            <string>Processing Alerts</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_12">
+            <property name="leftMargin">
+             <number>2</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>2</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item>
+             <widget class="ProcAlertsView" name="procAlertsView" native="true"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tabSysAlerts">
+           <attribute name="title">
+            <string>System Alerts</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <property name="leftMargin">
+             <number>2</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>2</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item>
+             <widget class="SysAlertsView" name="sysAlertsView" native="true"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgMonit">
+       <layout class="QVBoxLayout" name="verticalLayout_7" stretch="1,1000">
+        <item>
+         <widget class="QLabel" name="lblMonit">
+          <property name="text">
+           <string>Monitoring Information</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frmMonit">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgLog">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,5">
+          <item>
+           <widget class="QLabel" name="lblLog">
+            <property name="text">
+             <string>Logging Information</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cboxLog"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QStackedWidget" name="stckLogs">
+          <widget class="QWidget" name="page"/>
+          <widget class="QWidget" name="page_2"/>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pgTools">
+       <layout class="QVBoxLayout" name="verticalLayout_15">
+        <item>
+         <widget class="QLabel" name="lblTools">
+          <property name="text">
+           <string>Tools</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="1">
+              <widget class="QPushButton" name="btnCfgTool_txt">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>38</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Open Configuration Tool dialog</string>
+               </property>
+               <property name="text">
+                <string>Configuration Tool</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="flat">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="btnVerbosity_txt">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>38</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Shows available Verbosity Levels</string>
+               </property>
+               <property name="text">
+                <string>Verbosity</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QPushButton" name="btnUserDefTools_txt">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>38</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Show user-defined tools list</string>
+               </property>
+               <property name="text">
+                <string>User defined Tools</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QPushButton" name="btnDBBrowser_txt">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>38</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Shows QPF Database Browser</string>
+               </property>
+               <property name="text">
+                <string>Database Browser</string>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="btnCfgTool">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons_nav.qrc">
+                 <normaloff>:/img/general.png</normaloff>:/img/general.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="btnDBBrowser">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons_nav.qrc">
+                 <normaloff>:/img/storage.png</normaloff>:/img/storage.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="btnVerbosity">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons_nav.qrc">
+                 <normaloff>:/img/verblevel.png</normaloff>:/img/verblevel.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QPushButton" name="btnUserDefTools">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="icons_nav.qrc">
+                 <normaloff>:/img/exttools.png</normaloff>:/img/exttools.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>607</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1009</width>
+     <height>18</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="dckNavigator">
+   <property name="windowTitle">
+    <string>Navigator</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dckNavigatorContents">
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <property name="leftMargin">
+      <number>2</number>
+     </property>
+     <property name="topMargin">
+      <number>2</number>
+     </property>
+     <property name="rightMargin">
+      <number>2</number>
+     </property>
+     <property name="bottomMargin">
+      <number>2</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="tbtnArchive">
+         <property name="toolTip">
+          <string>Click on this button to show the list of products in the Local Archive</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the list of products in the Local Archive</string>
+         </property>
+         <property name="text">
+          <string>A</string>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/archive.png</normaloff>:/img/archive.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnTasks">
+         <property name="toolTip">
+          <string>Click on this button to show the list of Processing Tasks</string>
+         </property>
+         <property name="toolTipDuration">
+          <number>7</number>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the list of Processing Tasks</string>
+         </property>
+         <property name="text">
+          <string>T</string>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/tasks.png</normaloff>:/img/tasks.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnViewer">
+         <property name="toolTip">
+          <string>Click on this button to show the set of products open for viewing</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the set of products open for viewing</string>
+         </property>
+         <property name="text">
+          <string>V</string>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/view.png</normaloff>:/img/view.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnFilter">
+         <property name="toolTip">
+          <string>Click on this button to show the create and view filters on data products</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the set of products open for viewing</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/filter.png</normaloff>:/img/filter.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnAlerts">
+         <property name="toolTip">
+          <string>Click on this button to show the list of processing and system alerts registered</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the list of processing and system alerts registered</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/alerts.png</normaloff>:/img/alerts.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnMonit">
+         <property name="toolTip">
+          <string>Click on this button to show a set of monitoring statistics and monitoring information</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show a set of monitoring statistics and monitoring information</string>
+         </property>
+         <property name="text">
+          <string>M</string>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/monit.png</normaloff>:/img/monit.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnLog">
+         <property name="toolTip">
+          <string>Click on this button to show the contents of the log files</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show the contents of the log files</string>
+         </property>
+         <property name="text">
+          <string>L</string>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/log.png</normaloff>:/img/log.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tbtnTools">
+         <property name="toolTip">
+          <string>Click on this button to show a set of tools for the QPF Archive Viewer</string>
+         </property>
+         <property name="statusTip">
+          <string>Click on this button to show a set of tools for the QPF Archive Viewer</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="icons_nav.qrc">
+           <normaloff>:/img/tools.png</normaloff>:/img/tools.png</iconset>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">btngrpNavigator</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="lblVerbosity">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QToolBox" name="tboxNavigator">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="navpgProducts">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>274</width>
+          <height>469</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Products</string>
+        </attribute>
+        <attribute name="toolTip">
+         <string>List of open products</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <item>
+          <widget class="QListView" name="lstvwProducts"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="navpgFilters">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>274</width>
+          <height>469</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Filters</string>
+        </attribute>
+        <attribute name="toolTip">
+         <string>List of filters on QLA reports</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <widget class="QListView" name="lstvwFilters"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="navpgViews">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>274</width>
+          <height>469</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Views</string>
+        </attribute>
+        <attribute name="toolTip">
+         <string>List of QLA local archive defined views</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <widget class="QListView" name="lstvwViews"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="navpgLogs">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>274</width>
+          <height>469</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Logs</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QListView" name="lstvwLogs"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TasksView</class>
+   <extends>QWidget</extends>
+   <header location="global">tasksview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LocalArchiveView</class>
+   <extends>QWidget</extends>
+   <header location="global">localarchview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SysAlertsView</class>
+   <extends>QWidget</extends>
+   <header location="global">sysalertsview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProcAlertsView</class>
+   <extends>QWidget</extends>
+   <header location="global">procalertsview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="icons_nav.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>btngrpNavigator</sender>
+   <signal>buttonClicked(int)</signal>
+   <receiver>stckMain</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>488</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="btngrpNavigator"/>
+ </buttongroups>
+</ui>
