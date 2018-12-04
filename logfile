@@ -1,6 +1,0 @@
-2018-12-03 10:22:53.120 CET [25047] LOG:  listening on IPv6 address "::1", port 5432
-2018-12-03 10:22:53.120 CET [25047] LOG:  listening on IPv4 address "127.0.0.1", port 5432
-2018-12-03 10:22:53.121 CET [25047] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-2018-12-03 10:22:53.125 CET [25047] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
-2018-12-03 10:22:53.149 CET [25047] LOG:  redirecting log output to logging collector process
-2018-12-03 10:22:53.149 CET [25047] HINT:  Future log output will appear in directory "log".

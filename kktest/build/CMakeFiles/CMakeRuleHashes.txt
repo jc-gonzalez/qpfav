@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-d6f305d1aca2912f50ae8aa2b60ad185 moc_main.cxx
-e767c0ca4099398d4790e26c5b2c3426 ui_main.h
