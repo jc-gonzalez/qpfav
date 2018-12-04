@@ -6,6 +6,8 @@
 #include <QVector>
 #include <QColor>
 
+#include <QStandardItemModel>
+
 #include "actionshandler.h"
 #include "hmitypes.h"
 
@@ -40,7 +42,8 @@ class MainWindow : public QMainWindow
     static const QString VOSpaceURL;
 
 public:
-    explicit MainWindow(QWidget *parent, QString & cfgFile);
+    explicit MainWindow(QWidget *parent, QString & cfgFile, 
+                        QString s = QString("cleanlooks"));
     ~MainWindow();
 
     void getProductTypes(std::vector<std::string> & pTypes, int & siz);
@@ -67,18 +70,32 @@ public slots:
     void about();
 
 private:
+    void completeUi();
     void initPalette();
     void setDB();
 
+    void getUserToolsFromSettings();
+    void putUserToolsToSettings();
+	
     void storeQUTools2Cfg(MapOfUserDefTools qutmap);
     void setUToolTasks();
 
 private:
     Ui::MainWindow *ui;
 
+    ActionsHandler * aHdl;
+    
     // User Defined Tools
     MapOfUserDefTools userDefTools;
     QStringList       userDefProdTypes;
+
+    QString styleName;
+
+    QStandardItemModel* Model;
+    QStandardItem* Item1;
+    QStandardItem* Item2;
+ 
+    std::vector<QStandardItem*> Items;
 
     friend class ActionsHandler;
 };

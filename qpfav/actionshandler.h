@@ -46,6 +46,7 @@ private:
     QMenu * toolsMenu;
     QMenu * helpMenu;
 
+public:
     // - File menu
     QAction * acProcessPath;
     QAction * acQuit;

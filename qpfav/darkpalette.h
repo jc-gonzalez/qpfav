@@ -8,7 +8,7 @@ class DarkPalette
 public:
     DarkPalette(QMainWindow * parent);
 
-    void apply(QString palName);
+    void apply(QString styleName, QString palName);
 
 private:
     QString buildQss(QString &palName);

@@ -80,23 +80,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="cboxLocalArchAuto">
-            <item>
-             <property name="text">
-              <string>Auto Update</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Auto Expand</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Auto Resize</string>
-             </property>
-            </item>
-           </widget>
+           <widget class="QComboBox" name="cboxLocalArchAuto"/>
           </item>
           <item>
            <widget class="QToolButton" name="tbtnRefresh">
@@ -110,7 +94,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_3">
+           <widget class="QToolButton" name="tbtnExpand">
             <property name="text">
              <string>...</string>
             </property>
@@ -121,7 +105,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_2">
+           <widget class="QToolButton" name="tbtnCollapse">
             <property name="text">
              <string>...</string>
             </property>
@@ -132,7 +116,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton">
+           <widget class="QToolButton" name="tbtnResize">
             <property name="text">
              <string>...</string>
             </property>

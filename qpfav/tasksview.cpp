@@ -8,6 +8,7 @@ TasksView::TasksView(QWidget *parent) :
     ui(new Ui::TasksView)
 {
     ui->setupUi(this);
+    ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     model = new TasksModel;
     ui->vw->setModel(model);

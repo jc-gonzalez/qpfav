@@ -49,8 +49,12 @@ const std::string MainWindow::OPERATIONAL_StateName("OPERATIONAL");
 const QString MainWindow::VOSpaceURL =
     "https://vospace.esac.esa.int/vospace/";
 
-MainWindow::MainWindow(QWidget *parent, QString & cfgFile) :
+//----------------------------------------------------------------------
+// Constructor
+//----------------------------------------------------------------------
+MainWindow::MainWindow(QWidget *parent, QString & cfgFile, QString s) :
     QMainWindow(parent),
+    styleName(s),
     ui(new Ui::MainWindow)
 {
     // Load configuration
@@ -62,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent, QString & cfgFile) :
     // Set UI
     ui->setupUi(this);
 
-    ActionsHandler * aHdl = new ActionsHandler(this);
+    aHdl = new ActionsHandler(this);
 
     // Initialize palette
     initPalette();
@@ -74,19 +78,59 @@ MainWindow::MainWindow(QWidget *parent, QString & cfgFile) :
                        ui->tbtnLog, ui->tbtnTools}) {
         ui->btngrpNavigator->setId(tbtn, i++);
     }
+
+    completeUi();
 }
 
+//----------------------------------------------------------------------
+// Destructor
+//----------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: completeUi
+// Rest of operations to setup UI completly
+//----------------------------------------------------------------------
+void MainWindow::completeUi()
+{
+    // Local Archive panel
+    ui->localArchView->setAutoButtons(ui->cboxLocalArchAuto);
+    connect(ui->tbtnRefresh, SIGNAL(clicked()), ui->localArchView, SLOT(arefresh()));
+    connect(ui->tbtnExpand,  SIGNAL(clicked()), ui->localArchView, SLOT(aexpand()));
+    connect(ui->tbtnCollapse, SIGNAL(clicked()), ui->localArchView, SLOT(acollapse()));
+    connect(ui->tbtnResize, SIGNAL(clicked()), ui->localArchView, SLOT(aresize()));
+
+    // Tasks panel
+
+    // Tools panel
+    connect(ui->btnCfgTool, SIGNAL(clicked()), aHdl->acConfigTool, SLOT(trigger()));
+    connect(ui->btnDBBrowser, SIGNAL(clicked()), aHdl->acBrowseDB, SLOT(trigger()));
+    connect(ui->btnUserDefTools, SIGNAL(clicked()), aHdl->acExtTools, SLOT(trigger()));
+    connect(ui->btnVerbosity, SIGNAL(clicked()), aHdl->acVerbosity, SLOT(trigger()));
+
+    connect(ui->btnCfgTool_txt, SIGNAL(clicked()), aHdl->acConfigTool, SLOT(trigger()));
+    connect(ui->btnDBBrowser_txt, SIGNAL(clicked()), aHdl->acBrowseDB, SLOT(trigger()));
+    connect(ui->btnUserDefTools_txt, SIGNAL(clicked()), aHdl->acExtTools, SLOT(trigger()));
+    connect(ui->btnVerbosity_txt, SIGNAL(clicked()), aHdl->acVerbosity, SLOT(trigger()));
+}
+
+//----------------------------------------------------------------------
+// Method: initPalette
+// Initialize palete for the GUI (dark)
+//----------------------------------------------------------------------
 void MainWindow::initPalette()
 {
     DarkPalette darkPalette(this);
-    darkPalette.apply("DarkBlue");
+    darkPalette.apply(styleName, "DarkBlue");
 }
 
+//----------------------------------------------------------------------
+// Method: setDB
+// Specify connection settings for internal QPF DB
+//----------------------------------------------------------------------
 void MainWindow::setDB()
 {
     // Prepare DBManager
@@ -108,6 +152,47 @@ void MainWindow::setDB()
     statusBar()->showMessage(tr("QPF HMI Ready . . ."), MessageDelay);
 }
 
+//----------------------------------------------------------------------
+// Method: getUserToolsFromSettings
+// Retrieves user defined tools from settings file
+//----------------------------------------------------------------------
+void MainWindow::getUserToolsFromSettings()
+{
+    userDefTools.clear();
+	QJsonArray & uts = cfg.userDefToolsArray();
+    int numUdefTools = uts.size();
+    for (int i = 0; i < numUdefTools; ++i) {
+        QUserDefTool qudt;
+        qudt.name       = uts.at(i).toObject()["name"].toString();
+        qudt.desc       = uts.at(i).toObject()["description"].toString();
+        qudt.exe        = uts.at(i).toObject()["executable"].toString();
+        qudt.args       = uts.at(i).toObject()["arguments"].toString();
+        qudt.prod_types = uts.at(i).toObject()["productTypes"].toString().split(",");
+
+        userDefTools[qudt.name] = qudt;
+    }
+
+    userDefProdTypes.clear();
+    for (auto & s : cfg.products.productTypes()) {
+        userDefProdTypes.append(QString::fromStdString(s));
+    }
+}
+
+//----------------------------------------------------------------------
+// Method: putUserToolsToSettings
+// Retrieves user defined tools from settings file
+//----------------------------------------------------------------------
+void MainWindow::putUserToolsToSettings()
+{
+    /*
+     TODO
+     */
+}
+
+//----------------------------------------------------------------------
+// Method: getProductTypes
+// Provide the list (vector) of product type names
+//----------------------------------------------------------------------
 void MainWindow::getProductTypes(std::vector<std::string> & pTypes, int & siz)
 {
     siz = 0;
@@ -119,6 +204,10 @@ void MainWindow::getProductTypes(std::vector<std::string> & pTypes, int & siz)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: quitQPFAV
+// Quits the application
+//----------------------------------------------------------------------
 void MainWindow::quitQPFAV()
 {
     qApp->quit();

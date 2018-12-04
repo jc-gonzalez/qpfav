@@ -8,6 +8,7 @@ SysAlertsView::SysAlertsView(QWidget *parent) :
     ui(new Ui::SysAlertsView)
 {
     ui->setupUi(this);
+    ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     model = new SysAlertModel();
     ui->vw->setModel(model);

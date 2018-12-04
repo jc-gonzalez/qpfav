@@ -147,17 +147,17 @@ void ActionsHandler::buildTasksActions()
 
 }
 
-void ActionsHandler::buildAlertsActions()
-{
-
-}
-
 void ActionsHandler::buildProductViewerActions()
 {
 
 }
 
 void ActionsHandler::buildFilterActions()
+{
+
+}
+
+void ActionsHandler::buildAlertsActions()
 {
 
 }

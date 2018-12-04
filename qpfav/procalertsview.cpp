@@ -6,6 +6,7 @@ ProcAlertsView::ProcAlertsView(QWidget *parent) :
     ui(new Ui::ProcAlertsView)
 {
     ui->setupUi(this);
+    ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     model = new ProcAlertModel;
     ui->vw->setModel(model);

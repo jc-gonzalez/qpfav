@@ -15,6 +15,7 @@
 #include <QHostInfo>
 
 #include <QDebug>
+#include <QStyleFactory>
 
 #include <thread>
 
@@ -133,6 +134,10 @@ void lookedUp(const QHostInfo &host)
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    foreach (const QString & s, QStyleFactory::keys()) {
+        std::cerr << "Style: " << s.toStdString() << '\n';
+    }
+    //a.setStyle(QStyleFactory::create("Fusion"));
 
     QString hostName = QHostInfo::localHostName();
     QHostInfo hostInfo = QHostInfo::fromName(hostName);
@@ -142,13 +147,14 @@ int main(int argc, char *argv[])
     QString configStr("");
     QString sessionStr("");
     QString masterIpAddress("");
+    QString styleName("cleanlooks");
     int initialPort(DEFAULT_INITIAL_PORT);
     bool showConfigTool = false;
 
     int exitCode = EXIT_FAILURE;
 
     int opt;
-    while ((opt = getopt(argc, argv, "hvCp:c:s:I:")) != -1) {
+    while ((opt = getopt(argc, argv, "hvCp:c:s:I:S:")) != -1) {
         switch (opt) {
         case 'v':
             verbosityLevel++;
@@ -164,6 +170,9 @@ int main(int argc, char *argv[])
             break;
         case 's':
             sessionStr = QString(optarg);
+            break;
+        case 'S':
+            styleName = QString(optarg);
             break;
         case 'I':
             masterIpAddress = QString(optarg);
@@ -185,7 +194,7 @@ int main(int argc, char *argv[])
 
     ctrlMsg(splash);
 
-    MainWindow w(0, configStr);
+    MainWindow w(0, configStr, styleName);
     // QPF::MainWindow w(configStr, sessionStr, masterIpAddress, initialPort);
 
     ctrlMsg(splash);

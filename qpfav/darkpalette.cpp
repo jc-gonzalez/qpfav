@@ -3,13 +3,15 @@
 #include <QApplication>
 #include <QStyleFactory>
 
+#include <iostream>
+
 DarkPalette::DarkPalette(QMainWindow * parent) : mw(parent)
 {
 }
 
-void DarkPalette::apply(QString palName)
+void DarkPalette::apply(QString styleName, QString palName)
 {
-    qApp->setStyle(QStyleFactory::create("Fusion"));
+    qApp->setStyle(QStyleFactory::create(styleName));
 
     QPalette darkPalette;
     darkPalette.setColor(QPalette::Window, QColor(53,53,53));
@@ -78,7 +80,7 @@ QString DarkPalette::buildQss(QString & palName)
     "QTabBar::tab:!selected:hover{border-top-left-radius:3px;border-top-right-radius:3px;background-color:QLinearGradient(x1:0,y1:0,x2:0,y2:1,stop:1 #212121,stop:0.4 #343434,stop:0.2 #343434,stop:0.1 %4)}"
     "QRadioButton::indicator:checked,QRadioButton::indicator:unchecked{color:#b1b1b1;background-color:#323232;border:1px solid #b1b1b1;border-radius:6px}"
     "QRadioButton::indicator:checked{background-color:qradialgradient(cx: 0.5,cy: 0.5,fx: 0.5,fy: 0.5,radius: 1.0,stop: 0.25 %4,stop: 0.3 #323232)}"
-    "QCheckBox::indicator{color:#b1b1b1;background-color:#323232;border:1px solid #b1b1b1;width:9px;height:9px}QRadioButton::indicator{border-radius:6px}"
+    "QCheckBox::indicator{color:%1;background-color:%4;border:1px solid %2;width:9px;height:9px}QRadioButton::indicator{border-radius:6px}"
     "QRadioButton::indicator:hover,QCheckBox::indicator:hover{border:1px solid %4}QCheckBox::indicator:checked{image:url(:/img/checkbox.png)}"
     "QCheckBox::indicator:disabled,QRadioButton::indicator:disabled{border:1px solid #444}"
     /*"QDial{background-color:QLinearGradient(x1: 0.177, y1: 0.004, x2: 0.831, y2: 0.911, "
@@ -104,6 +106,7 @@ QString DarkPalette::buildQss(QString & palName)
         finalQss.replace(QString("%%1").arg(i), c.name());
         ++i;
     }
+    std::cout << finalQss.toStdString() << '\n';
 
     return finalQss;
 }
