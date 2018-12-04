@@ -159,7 +159,7 @@ void MainWindow::setDB()
 void MainWindow::getUserToolsFromSettings()
 {
     userDefTools.clear();
-	QJsonArray & uts = cfg.userDefToolsArray();
+	QJsonArray uts = cfg.userDefToolsArray();
     int numUdefTools = uts.size();
     for (int i = 0; i < numUdefTools; ++i) {
         QUserDefTool qudt;
@@ -173,8 +173,8 @@ void MainWindow::getUserToolsFromSettings()
     }
 
     userDefProdTypes.clear();
-    for (auto & s : cfg.products.productTypes()) {
-        userDefProdTypes.append(QString::fromStdString(s));
+    foreach (QJsonValue s, cfg.products()["productTypes"].toArray()) {
+        userDefProdTypes.append(s.toString());
     }
 }
 

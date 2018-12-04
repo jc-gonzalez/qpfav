@@ -1,0 +1,116 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "qpfav", "qpfav.mdproj", "{21C6D7FB-366E-4461-B9DD-ED94763E8E1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BBF85D86-EF90-4789-8B1A-8AE8BFF3BFB1}"
+	ProjectSection(SolutionItems) = preProject
+		Makefile = Makefile
+		qpfav.pro = qpfav.pro
+		qpfav\actionshandler.cpp = qpfav\actionshandler.cpp
+		qpfav\actionshandler.h = qpfav\actionshandler.h
+		qpfav\alert.cpp = qpfav\alert.cpp
+		qpfav\alert.h = qpfav\alert.h
+		qpfav\auxtypes.h = qpfav\auxtypes.h
+		qpfav\browser.cpp = qpfav\browser.cpp
+		qpfav\browser.h = qpfav\browser.h
+		qpfav\browserwidget.ui = qpfav\browserwidget.ui
+		qpfav\CMakeLists.txt = qpfav\CMakeLists.txt
+		qpfav\config.cpp = qpfav\config.cpp
+		qpfav\config.h = qpfav\config.h
+		qpfav\configtool.cpp = qpfav\configtool.cpp
+		qpfav\configtool.h = qpfav\configtool.h
+		qpfav\configtool.qrc = qpfav\configtool.qrc
+		qpfav\configtool.ui = qpfav\configtool.ui
+		qpfav\connectionwidget.cpp = qpfav\connectionwidget.cpp
+		qpfav\connectionwidget.h = qpfav\connectionwidget.h
+		qpfav\conthostedit.cpp = qpfav\conthostedit.cpp
+		qpfav\conthostedit.h = qpfav\conthostedit.h
+		qpfav\conthostedit.ui = qpfav\conthostedit.ui
+		qpfav\darkpalette.cpp = qpfav\darkpalette.cpp
+		qpfav\darkpalette.h = qpfav\darkpalette.h
+		qpfav\dbbrowser.cpp = qpfav\dbbrowser.cpp
+		qpfav\dbbrowser.h = qpfav\dbbrowser.h
+		qpfav\dbbrowser.ui = qpfav\dbbrowser.ui
+		qpfav\dbmng.cpp = qpfav\dbmng.cpp
+		qpfav\dbmng.h = qpfav\dbmng.h
+		qpfav\dbtblmodel.cpp = qpfav\dbtblmodel.cpp
+		qpfav\dbtblmodel.h = qpfav\dbtblmodel.h
+		qpfav\dbtreemodel.cpp = qpfav\dbtreemodel.cpp
+		qpfav\dbtreemodel.h = qpfav\dbtreemodel.h
+		qpfav\exttooledit.cpp = qpfav\exttooledit.cpp
+		qpfav\exttooledit.h = qpfav\exttooledit.h
+		qpfav\exttooledit.ui = qpfav\exttooledit.ui
+		qpfav\exttoolsdef.cpp = qpfav\exttoolsdef.cpp
+		qpfav\exttoolsdef.h = qpfav\exttoolsdef.h
+		qpfav\exttoolsdef.ui = qpfav\exttoolsdef.ui
+		qpfav\hmitypes.h = qpfav\hmitypes.h
+		qpfav\icons_nav.qrc = qpfav\icons_nav.qrc
+		qpfav\localarchview.cpp = qpfav\localarchview.cpp
+		qpfav\localarchview.h = qpfav\localarchview.h
+		qpfav\localarchview.ui = qpfav\localarchview.ui
+		qpfav\main.cpp = qpfav\main.cpp
+		qpfav\mainwindow.cpp = qpfav\mainwindow.cpp
+		qpfav\mainwindow.h = qpfav\mainwindow.h
+		qpfav\mainwindow.ui = qpfav\mainwindow.ui
+		qpfav\Makefile = qpfav\Makefile
+		qpfav\procalertmodel.cpp = qpfav\procalertmodel.cpp
+		qpfav\procalertmodel.h = qpfav\procalertmodel.h
+		qpfav\procalertsview.cpp = qpfav\procalertsview.cpp
+		qpfav\procalertsview.h = qpfav\procalertsview.h
+		qpfav\procalertsview.ui = qpfav\procalertsview.ui
+		qpfav\productsmodel.cpp = qpfav\productsmodel.cpp
+		qpfav\productsmodel.h = qpfav\productsmodel.h
+		qpfav\propdef.h = qpfav\propdef.h
+		qpfav\qpfav.pro = qpfav\qpfav.pro
+		qpfav\qpfav.pro.user = qpfav\qpfav.pro.user
+		qpfav\ruleedit.cpp = qpfav\ruleedit.cpp
+		qpfav\ruleedit.h = qpfav\ruleedit.h
+		qpfav\ruleedit.ui = qpfav\ruleedit.ui
+		qpfav\swarmedit.cpp = qpfav\swarmedit.cpp
+		qpfav\swarmedit.h = qpfav\swarmedit.h
+		qpfav\swarmedit.ui = qpfav\swarmedit.ui
+		qpfav\sysalertmodel.cpp = qpfav\sysalertmodel.cpp
+		qpfav\sysalertmodel.h = qpfav\sysalertmodel.h
+		qpfav\sysalertsview.cpp = qpfav\sysalertsview.cpp
+		qpfav\sysalertsview.h = qpfav\sysalertsview.h
+		qpfav\sysalertsview.ui = qpfav\sysalertsview.ui
+		qpfav\tasksmodel.cpp = qpfav\tasksmodel.cpp
+		qpfav\tasksmodel.h = qpfav\tasksmodel.h
+		qpfav\tasksview.cpp = qpfav\tasksview.cpp
+		qpfav\tasksview.h = qpfav\tasksview.h
+		qpfav\tasksview.ui = qpfav\tasksview.ui
+		qpfav\verbleveldlg.cpp = qpfav\verbleveldlg.cpp
+		qpfav\verbleveldlg.h = qpfav\verbleveldlg.h
+		qpfav\verbleveldlg.ui = qpfav\verbleveldlg.ui
+		qpfav\version.h = qpfav\version.h
+		qslog\LICENSE.txt = qslog\LICENSE.txt
+		qslog\Makefile = qslog\Makefile
+		qslog\QsLog.cpp = qslog\QsLog.cpp
+		qslog\QsLog.h = qslog\QsLog.h
+		qslog\QsLog.pri = qslog\QsLog.pri
+		qslog\qslog.pro = qslog\qslog.pro
+		qslog\QsLogChanges.txt = qslog\QsLogChanges.txt
+		qslog\QsLogDest.cpp = qslog\QsLogDest.cpp
+		qslog\QsLogDest.h = qslog\QsLogDest.h
+		qslog\QsLogDestConsole.cpp = qslog\QsLogDestConsole.cpp
+		qslog\QsLogDestConsole.h = qslog\QsLogDestConsole.h
+		qslog\QsLogDestFile.cpp = qslog\QsLogDestFile.cpp
+		qslog\QsLogDestFile.h = qslog\QsLogDestFile.h
+		qslog\QsLogDestFunctor.cpp = qslog\QsLogDestFunctor.cpp
+		qslog\QsLogDestFunctor.h = qslog\QsLogDestFunctor.h
+		qslog\QsLogDisableForThisFile.h = qslog\QsLogDisableForThisFile.h
+		qslog\QsLogLevel.h = qslog\QsLogLevel.h
+		qslog\QsLogReadme.txt = qslog\QsLogReadme.txt
+		qslog\README.md = qslog\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21C6D7FB-366E-4461-B9DD-ED94763E8E1C}.Default|Any CPU.ActiveCfg = Default|Any CPU
+		{21C6D7FB-366E-4461-B9DD-ED94763E8E1C}.Default|Any CPU.Build.0 = Default|Any CPU
+	EndGlobalSection
+EndGlobal

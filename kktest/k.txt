@@ -1,0 +1,162 @@
+@ demo.cpp
+#include <QApplication>
+ 
+#include "main.h"
+ 
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    MainWindow window;
+    window.show();
+    return app.exec();
+}
+@ main.h
+#ifndef MainWindow_H
+#define MainWindow_H
+ 
+#include <QMainWindow>
+#include <QStandardItemModel>
+ 
+#include "ui_main.h"
+ 
+class MainWindow : public QMainWindow, public Ui::MainWindow
+{
+Q_OBJECT
+ 
+public:
+  MainWindow(QMainWindow *parent = 0);
+ 
+public slots:
+ 
+  //void slot_changed();
+  void slot_changed(const QModelIndex&, const QModelIndex&);
+ 
+protected:
+  QStandardItemModel* Model;
+  QStandardItem* Item1;
+  QStandardItem* Item2;
+ 
+  std::vector<QStandardItem*> Items;
+};
+ 
+#endif
+@ main.cpp
+#include <QtGui>
+ 
+#include <iostream>
+ 
+#include "main.h"
+ 
+MainWindow::MainWindow(QMainWindow* parent) : QMainWindow(parent)
+{
+  setupUi(this);
+  this->Model = new QStandardItemModel;
+  this->Item1 = new QStandardItem;
+ 
+  this->Item1->setText("test");
+  this->Item1->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+  this->Item1->setData(Qt::Unchecked, Qt::CheckStateRole);
+ 
+  this->Item2 = new QStandardItem;
+  this->Item2->setText("test2");
+  this->Item2->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
+  this->Item2->setData(Qt::Unchecked, Qt::CheckStateRole);
+ 
+  connect(this->Model, SIGNAL(dataChanged ( const QModelIndex&, const QModelIndex&)), this, SLOT(slot_changed(const QModelIndex&, const QModelIndex&)));
+ 
+  this->Model->insertRow(0, this->Item1);
+  this->Model->insertRow(1, this->Item2);
+ 
+  this->Items.push_back(this->Item1);
+  this->Items.push_back(this->Item2);
+ 
+  this->comboBox->setModel(this->Model);
+ 
+  std::cout << comboBox->model()->rowCount() << " rows after." << std::endl;
+}
+ 
+void MainWindow::slot_changed(const QModelIndex& topLeft, const QModelIndex& bottomRight)
+{
+  //std::cout << "topLeft: " << topLeft.row() << std::endl;
+  //std::cout << "bottomRight: " << bottomRight.row() << std::endl;
+  std::cout << "Item " << topLeft.row() << " " << std::endl;
+  QStandardItem* item = this->Items[topLeft.row()];
+  if(item->checkState() == Qt::Unchecked)
+    {
+    std::cout << "Unchecked!" << std::endl;
+    }
+  else if(item->checkState() == Qt::Checked)
+    {
+    std::cout << "Checked!" << std::endl;
+    }
+ 
+}
+@ main.ui
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>150</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Item1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Item2</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+@ CMakeLists.txt
+cmake_minimum_required(VERSION 2.6)
+ 
+PROJECT(ComboBoxOfCheckBoxes)
+ 
+FIND_PACKAGE(Qt4 REQUIRED)
+INCLUDE(${QT_USE_FILE})
+ 
+include_directories(${include_directories} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+ 
+QT4_WRAP_UI(UISrcs main.ui)
+QT4_WRAP_CPP(MOCSrcs main.h)
+ 
+ADD_EXECUTABLE(ComboBoxOfCheckBoxes demo.cpp main.h main.cpp ${MOCSrcs} ${UISrcs})
+TARGET_LINK_LIBRARIES(ComboBoxOfCheckBoxes ${QT_LIBRARIES})
+

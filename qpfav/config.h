@@ -4,12 +4,13 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#define Sec(g)       DefGrp(g) \
-                     DefGrpArray(g) \
-                     DefGrpSec(g)
-#define DefGrp(g)    QJsonObject g () { return config[ #g ].toObject(); }
+#define Sec(g)         DefGrp(g) \
+                       DefGrpArray(g) \
+                       DefGrpSec(g)
+                       
+#define DefGrp(g)      QJsonObject g () { return config[ #g ].toObject(); }
 #define DefGrpArray(g) QJsonArray g ## Array () { return config[ #g ].toArray(); }
-#define DefGrpSec(g) QJsonValue g ( QString s ) { return g().value( s ); }
+#define DefGrpSec(g)   QJsonValue g ( QString s ) { return g().value( s ); }
 
 class Config
 {

@@ -1006,8 +1006,8 @@ void ConfigTool::transferCfgToGUI()
 
     hdr.clear();
     hdr << "Swarm Id" << "Srv. name" << "Manager" << "Workers" << "Scale" << "Image" << "Exec" << "Args";
-    ModelView * mvSwarms = createTableModelView(ui->tblviewSwarms, swarmsTable, hdr);
-    (void)(mvSwarms);
+    //ModelView * mvSwarms = createTableModelView(ui->tblviewSwarms, swarmsTable, hdr);
+    //(void)(mvSwarms);
 
     ui->spboxStartingPort->setValue(cfg.network("startingPort").toInt());
 
@@ -1063,7 +1063,7 @@ void ConfigTool::transferCfgToGUI()
     ui->edIPythonPath->setText(ipy.value("path").toString());
     
     // 8. FLAGS
-    transferFlagsFromCfgToGUI();
+    //transferFlagsFromCfgToGUI();
 
     QStringList levels;
     for (int lvl = (int)(TRACE); lvl <= (int)(FATAL); lvl++) {
@@ -1248,7 +1248,7 @@ bool ConfigTool::transferGUIToCfg()
     cfg["connectivity"]["ipython"] = ipy;
 
     // 8. FLAGS
-    transferFlagsFromGUIToCfg();
+    //transferFlagsFromGUIToCfg();
     cfg["general"]["logLevel"] = LogLevelName[ui->cboxMinLogLevel->currentIndex()];
 
     return true;
