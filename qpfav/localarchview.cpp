@@ -1,14 +1,10 @@
 #include "localarchview.h"
 #include "ui_localarchview.h"
 
-#include "mainwindow.h"
-
 #include <QListView>
 #include <QTimer>
 
 #include <iostream>
-
-using QPF::MainWindow;
 
 //----------------------------------------------------------------------
 // Constructor
@@ -22,9 +18,13 @@ LocalArchiveView::LocalArchiveView(QWidget *parent) :
 
     std::vector<std::string> pTypes;
     int siz = 0;
-    MainWindow * mw = qobject_cast<MainWindow*>(parent);
+
+    mw = qobject_cast<MainWindow*>(parent);
     mw->getProductTypes(pTypes, siz);
 
+    ui->vw->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->vw->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    
     model = new ProductsModel(pTypes, siz);
     ui->vw->setModel(model);
 
@@ -158,4 +158,62 @@ void LocalArchiveView::aresize()
     for (int i = 0; i < model->columnCount(); ++i) {
         ui->vw->resizeColumnToContents(i);
     }
+}
+
+void LocalArchiveView::setActionsHandler(ActionsHandler * a)
+{
+    aHdl = a;
+    
+    connect(aHdl->acArchiveShow, SIGNAL(triggered()), 
+            this, SLOT(openLocation()));
+    connect(aHdl->acDefault, SIGNAL(triggered()), 
+            this, SLOT(openWithDefault()));
+    connect(aHdl->acReprocess, SIGNAL(triggered()), 
+            this, SLOT(reprocessProduct()));
+    connect(aHdl->acAnalyzeIPython, SIGNAL(triggered()), 
+            this, SLOT(analyzeProduct()));
+    connect(aHdl->acAnalyzeJupyter, SIGNAL(triggered()), 
+            this, SLOT(analyzeProduct()));
+    connect(aHdl->acExport, SIGNAL(triggered()), 
+            this, SLOT(exportProduct()));
+
+    /*
+    connect(aHdl->acExportRemote, SIGNAL(triggered()), 
+            this, SLOT(exportProduct()));
+    connect(aHdl->acExportVOSpace, SIGNAL(triggered()), 
+            this, SLOT(exportProduct()));
+    connect(aHdl->acExportVOSpaceOther, SIGNAL(triggered()), 
+            this, SLOT(exportProduct()));
+    */
+
+    connect(ui->vw, SIGNAL(customContextMenuRequested(const QPoint &)),
+            aHdl, SLOT(showLocalArchiveContextMenu(const QPoint &)));
+    
+    connect(ui->vw, SIGNAL(doubleClicked(QModelIndex)),
+            this, SLOT(openLocalArchiveElement(QModelIndex)));
+}
+
+void LocalArchiveView::openLocation()
+{
+}
+
+void LocalArchiveView::openWithDefault()
+{
+}
+
+void LocalArchiveView::reprocessProduct()
+{
+}
+
+void LocalArchiveView::analyzeProduct()
+{
+}
+
+void LocalArchiveView::exportProduct()
+{
+}
+
+void LocalArchiveView::openLocalArchiveElement(QModelIndex idx)
+{
+    
 }

@@ -1,7 +1,8 @@
 #include "sysalertsview.h"
 #include "ui_sysalertsview.h"
+#include "dlgalert.h"
 
-#include "sysalertmodel.h"
+using QPF::DlgAlert;
 
 SysAlertsView::SysAlertsView(QWidget *parent) :
     QWidget(parent),
@@ -10,6 +11,10 @@ SysAlertsView::SysAlertsView(QWidget *parent) :
     ui->setupUi(this);
     ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+    mw = qobject_cast<MainWindow*>(parent);
+
+    ui->vw->setContextMenuPolicy(Qt::CustomContextMenu);
+
     model = new SysAlertModel();
     ui->vw->setModel(model);
 }
@@ -17,4 +22,26 @@ SysAlertsView::SysAlertsView(QWidget *parent) :
 SysAlertsView::~SysAlertsView()
 {
     delete ui;
+}
+
+void SysAlertsView::setActionsHandler(ActionsHandler * a)
+{
+    aHdl = a;
+    connect(aHdl->acSysAlertDisplayInfo, SIGNAL(triggered()),
+            this, SLOT(showSysAlertInfo()));
+
+    connect(ui->vw, SIGNAL(customContextMenuRequested(const QPoint &)),
+            aHdl, SLOT(showSysAlertsContextMenu(const QPoint &)));
+}
+
+void SysAlertsView::showSysAlertInfo()
+{
+    Alert alert = model->getAlertAt( ui->vw->currentIndex() );
+
+    DlgAlert * dlg = new DlgAlert;
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setAlert(alert);
+    dlg->show();
+    dlg->raise();
+    dlg->activateWindow();
 }

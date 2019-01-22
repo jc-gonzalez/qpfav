@@ -103,7 +103,10 @@ void MainWindow::completeUi()
     connect(ui->tbtnCollapse, SIGNAL(clicked()), ui->localArchView, SLOT(acollapse()));
     connect(ui->tbtnResize, SIGNAL(clicked()), ui->localArchView, SLOT(aresize()));
 
+    ui->localArchView->setActionsHandler(aHdl);
+
     // Tasks panel
+    ui->tasksView->setActionsHandler(aHdl);
 
     // Tools panel
     connect(ui->btnCfgTool, SIGNAL(clicked()), aHdl->acConfigTool, SLOT(trigger()));
@@ -115,6 +118,10 @@ void MainWindow::completeUi()
     connect(ui->btnDBBrowser_txt, SIGNAL(clicked()), aHdl->acBrowseDB, SLOT(trigger()));
     connect(ui->btnUserDefTools_txt, SIGNAL(clicked()), aHdl->acExtTools, SLOT(trigger()));
     connect(ui->btnVerbosity_txt, SIGNAL(clicked()), aHdl->acVerbosity, SLOT(trigger()));
+
+    // Alerts panel
+    ui->procAlertsView->setActionsHandler(aHdl);
+    ui->sysAlertsView->setActionsHandler(aHdl);
 }
 
 //----------------------------------------------------------------------

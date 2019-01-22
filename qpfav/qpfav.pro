@@ -45,7 +45,12 @@ SOURCES += \
     conthostedit.cpp \
     swarmedit.cpp \
     ruleedit.cpp \
-    connectionwidget.cpp
+    connectionwidget.cpp \
+    dlgalert.cpp \
+    util.cpp \
+    dlgjsonviewer.cpp \
+    qjsonitem.cpp \
+    qjsonmodel.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -78,7 +83,12 @@ HEADERS  += \
     conthostedit.h \
     swarmedit.h \
     ruleedit.h \
-    connectionwidget.h
+    connectionwidget.h \
+    dlgalert.h \
+    util.h \
+    dlgjsonviewer.h \
+    qjsonitem.h \
+    qjsonmodel.h
 
 FORMS    += \
     mainwindow.ui \
@@ -94,7 +104,9 @@ FORMS    += \
     browserwidget.ui \
     conthostedit.ui \
     swarmedit.ui \
-    ruleedit.ui
+    ruleedit.ui \
+    dlgalert.ui \
+    dlgjsonviewer.ui
 
 RESOURCES += \
     icons_nav.qrc

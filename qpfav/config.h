@@ -3,6 +3,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QMap>
 
 #define Sec(g)         DefGrp(g) \
                        DefGrpArray(g) \
@@ -52,14 +53,17 @@ public:
     // Method: operator[]
     // Reference to internal section
     //----------------------------------------------------------------------
-    const QJsonObject & operator[](QString s) { return config[s].toObject(); }
+    const QJsonObject operator[](QString s) { return config[s].toObject(); }
 
+    
 private:
     //----------------------------------------------------------------------
     // Constructor
     //----------------------------------------------------------------------
     Config() {}
 
+    void storeAgentsAndHosts();
+    
 private:
     QJsonObject config;
 
@@ -95,6 +99,8 @@ public:
 
     mode_t PATHMode;
 
+    QMap<QString,QStringList> agentsInHost;
+    QMap<QString,QString>     hostForAgent;
 };
 
 

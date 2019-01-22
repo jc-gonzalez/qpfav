@@ -5,6 +5,11 @@
 #include <QComboBox>
 
 #include "productsmodel.h"
+#include "mainwindow.h"
+#include "actionshandler.h"
+
+using QPF::MainWindow;
+using QPF::ActionsHandler;
 
 namespace Ui {
 class LocalArchiveView;
@@ -31,6 +36,16 @@ public slots:
     void acollapse();
     void aresize();
 
+    void setActionsHandler(ActionsHandler * a);
+    
+    void openLocation();
+    void openWithDefault();
+    void reprocessProduct();
+    void analyzeProduct();
+    void exportProduct();
+
+    void openLocalArchiveElement(QModelIndex idx);
+
 private:
     enum AutoBehavior { AUTO_UPDATE, 
                         AUTO_EXPAND, 
@@ -44,6 +59,9 @@ private:
     std::vector<QStandardItem*> autoBtns;
 
     bool autoUpdate, autoExpand, autoResize;
+
+    MainWindow * mw;
+    ActionsHandler * aHdl;
 };
 
 #endif // LOCALARCHVIEW_H

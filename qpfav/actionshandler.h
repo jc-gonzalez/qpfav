@@ -21,6 +21,11 @@ public slots:
     void processPath();
     void quitQPFAV();
 
+    void showLocalArchiveContextMenu(const QPoint & p);
+    void showTaskMonitContextMenu(const QPoint & p);
+    void showProcAlertsContextMenu(const QPoint & p);
+    void showSysAlertsContextMenu(const QPoint & p);
+
 private:
     void init();
 
@@ -72,25 +77,35 @@ public:
     QAction * acSeparator;
 
     // Local Archive - Main buttons
-    QAction * acLocArchRefresh;
-    QAction * acLocArchExpand;
-    QAction * acLocArchCollapse;
-    QAction * acLocArchResize;
-    QAction * acLocArchToggleAuto;
+    QMenu * acArchiveOpenExt;
+    QAction * acArchiveShow;
+    QAction * acDefault;
+    QAction * acReprocess;
+    QAction * acAnalyzeIPython;
+    QAction * acAnalyzeJupyter;
+    QAction * acExport;
+    // QAction * acExportRemote;
+    // QAction * acExportVOSpace;
+    // QAction * acExportVOSpaceOther;
 
-    // Local Archive - Custom popup menu
-    QAction * acLocArchShowLocation;
-    QAction * acLocArchOpenWith;
-    QAction * acLocArchReprocess;
-    QAction * acLocArchAnalyzeIPython;
-    QAction * acLocArchAnalyzeJupyter;
-    QAction * acLocArchExport;
+    // Tasks View
+    QAction * acWorkDir;
+    QAction * acShowTaskInfo;
 
-    // Tasks - Custom popup menu
-    QAction * acTasksDisplayInfo;
-    QAction * acTasksPauseTask;
-    QAction * acTasksResumeTask;
-    QAction * acTasksCancelTask;
+    // QAction * acStopTask;
+    // QAction * acRestartTask;
+
+    QAction * acTaskPause;
+    QAction * acTaskResume;
+    QAction * acTaskCancel;
+
+    // QAction * acAgentSuspend;
+    // QAction * acAgentStop;
+    // QAction * acAgentReactivate;
+
+    QAction * acHostSuspend;
+    QAction * acHostStop;
+    QAction * acHostReactivate;
 
     // System Alerts - Custom popup menu
     QAction * acSysAlertDisplayInfo;
@@ -114,6 +129,9 @@ public:
 
     // Logs
     QAction * acShowLog;
+
+    // User Tools
+    QMap<QString, QAction *> acUserTools;
 };
 
 }

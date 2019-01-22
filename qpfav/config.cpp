@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QJsonDocument>
 
+
 Config & Config::_()
 {
     static Config configInstance {};
@@ -25,7 +26,38 @@ bool Config::load(QString fileName)
     QJsonDocument loadDoc(QJsonDocument::fromJson(readData));
     config = loadDoc.object();
 
+    storeAgentsAndHosts();
+
     return true;
+}
+
+void Config::storeAgentsAndHosts()
+{
+    // Now processing host lines
+    int j = 1;
+    QJsonObject procNodes = network("processingNodes").toObject();
+    for (auto & k : procNodes.keys()) {
+        QString & pnName = k;
+        int numOfTskAgents = procNodes[k].toInt();
+
+        bool storeInMaps = (agentsInHost.find(pnName) == agentsInHost.end());
+
+        QStringList agList;
+        for (unsigned int i = 0; i < numOfTskAgents; ++i) {
+            QString nn = QString("TskAgent_%1_%2")
+                .arg(j,2,10,QLatin1Char('0'))
+                .arg(i+1,2,10,QLatin1Char('0'));
+            if (storeInMaps) {
+                agList << nn;
+                hostForAgent[nn] = pnName;
+            }
+        }
+        if (storeInMaps) {
+            agentsInHost[pnName] = agList;
+        }
+        ++j;
+    }
+
 }
 
 //----------------------------------------------------------------------
