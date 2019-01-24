@@ -81,7 +81,8 @@ SOURCES       = main.cpp \
 		util.cpp \
 		dlgjsonviewer.cpp \
 		qjsonitem.cpp \
-		qjsonmodel.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
+		qjsonmodel.cpp \
+		dlgreproc.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
 		../build/qpfav.dir/moc/moc_mainwindow.cpp \
 		../build/qpfav.dir/moc/moc_procalertsview.cpp \
 		../build/qpfav.dir/moc/moc_sysalertsview.cpp \
@@ -107,7 +108,8 @@ SOURCES       = main.cpp \
 		../build/qpfav.dir/moc/moc_connectionwidget.cpp \
 		../build/qpfav.dir/moc/moc_dlgalert.cpp \
 		../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp \
-		../build/qpfav.dir/moc/moc_qjsonmodel.cpp
+		../build/qpfav.dir/moc/moc_qjsonmodel.cpp \
+		../build/qpfav.dir/moc/moc_dlgreproc.cpp
 OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/mainwindow.o \
 		../build/qpfav.dir/obj/darkpalette.o \
@@ -140,6 +142,7 @@ OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/dlgjsonviewer.o \
 		../build/qpfav.dir/obj/qjsonitem.o \
 		../build/qpfav.dir/obj/qjsonmodel.o \
+		../build/qpfav.dir/obj/dlgreproc.o \
 		../build/qpfav.dir/obj/qrc_icons_nav.o \
 		../build/qpfav.dir/obj/moc_mainwindow.o \
 		../build/qpfav.dir/obj/moc_procalertsview.o \
@@ -166,7 +169,8 @@ OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/moc_connectionwidget.o \
 		../build/qpfav.dir/obj/moc_dlgalert.o \
 		../build/qpfav.dir/obj/moc_dlgjsonviewer.o \
-		../build/qpfav.dir/obj/moc_qjsonmodel.o
+		../build/qpfav.dir/obj/moc_qjsonmodel.o \
+		../build/qpfav.dir/obj/moc_dlgreproc.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
 		/usr/lib64/qt5/mkspecs/common/linux.conf \
@@ -368,7 +372,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		util.h \
 		dlgjsonviewer.h \
 		qjsonitem.h \
-		qjsonmodel.h main.cpp \
+		qjsonmodel.h \
+		dlgreproc.h main.cpp \
 		mainwindow.cpp \
 		darkpalette.cpp \
 		procalertsview.cpp \
@@ -399,7 +404,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		util.cpp \
 		dlgjsonviewer.cpp \
 		qjsonitem.cpp \
-		qjsonmodel.cpp
+		qjsonmodel.cpp \
+		dlgreproc.cpp
 QMAKE_TARGET  = qpfav
 DESTDIR       = ../build/qpfav.dir/
 TARGET        = ../build/qpfav.dir/qpfav
@@ -408,7 +414,7 @@ TARGET        = ../build/qpfav.dir/qpfav
 first: all
 ####### Build rules
 
-$(TARGET): ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h $(OBJECTS)  
+$(TARGET): ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h $(OBJECTS)  
 	@test -d ../build/qpfav.dir/ || mkdir -p ../build/qpfav.dir/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -775,9 +781,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents icons_nav.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.ui procalertsview.ui sysalertsview.ui tasksview.ui localarchview.ui exttooledit.ui exttoolsdef.ui configtool.ui dbbrowser.ui verbleveldlg.ui browserwidget.ui conthostedit.ui swarmedit.ui ruleedit.ui dlgalert.ui dlgjsonviewer.ui $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h dlgreproc.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp dlgreproc.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.ui procalertsview.ui sysalertsview.ui tasksview.ui localarchview.ui exttooledit.ui exttoolsdef.ui configtool.ui dbbrowser.ui verbleveldlg.ui browserwidget.ui conthostedit.ui swarmedit.ui ruleedit.ui dlgalert.ui dlgjsonviewer.ui dlgreproc.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -877,9 +883,9 @@ compiler_moc_predefs_clean:
 ../build/qpfav.dir/moc/moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o ../build/qpfav.dir/moc/moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp
+compiler_moc_header_make_all: ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp
+	-$(DEL_FILE) ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp
 ../build/qpfav.dir/moc/moc_mainwindow.cpp: actionshandler.h \
 		hmitypes.h \
 		mainwindow.h \
@@ -918,6 +924,7 @@ compiler_moc_header_clean:
 		mainwindow.h \
 		actionshandler.h \
 		hmitypes.h \
+		util.h \
 		tasksview.h \
 		../build/qpfav.dir/moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
@@ -1052,8 +1059,8 @@ compiler_moc_header_clean:
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/eucops/Work/Euclid/QPF/qpfav/qpfav/../build/qpfav.dir/moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/eucops/Work/Euclid/QPF/qpfav/qpfav -I/home/eucops/Work/Euclid/QPF/qpfav/qslog -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include dlgalert.h -o ../build/qpfav.dir/moc/moc_dlgalert.cpp
 
-../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp: alert.h \
-		propdef.h \
+../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp: qjsonmodel.h \
+		qjsonitem.h \
 		dlgjsonviewer.h \
 		../build/qpfav.dir/moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
@@ -1065,11 +1072,17 @@ compiler_moc_header_clean:
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/eucops/Work/Euclid/QPF/qpfav/qpfav/../build/qpfav.dir/moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/eucops/Work/Euclid/QPF/qpfav/qpfav -I/home/eucops/Work/Euclid/QPF/qpfav/qslog -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include qjsonmodel.h -o ../build/qpfav.dir/moc/moc_qjsonmodel.cpp
 
+../build/qpfav.dir/moc/moc_dlgreproc.cpp: hmitypes.h \
+		dlgreproc.h \
+		../build/qpfav.dir/moc/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/eucops/Work/Euclid/QPF/qpfav/qpfav/../build/qpfav.dir/moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/eucops/Work/Euclid/QPF/qpfav/qpfav -I/home/eucops/Work/Euclid/QPF/qpfav/qslog -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include dlgreproc.h -o ../build/qpfav.dir/moc/moc_dlgreproc.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h
+compiler_uic_make_all: ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h
 compiler_uic_clean:
-	-$(DEL_FILE) ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h
+	-$(DEL_FILE) ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h
 ../build/qpfav.dir/ui/ui_mainwindow.h: mainwindow.ui \
 		/usr/lib64/qt5/bin/uic \
 		tasksview.h \
@@ -1083,6 +1096,7 @@ compiler_uic_clean:
 		mainwindow.h \
 		actionshandler.h \
 		hmitypes.h \
+		util.h \
 		productsmodel.h \
 		dbtreemodel.h \
 		mainwindow.h \
@@ -1168,6 +1182,10 @@ compiler_uic_clean:
 		/usr/lib64/qt5/bin/uic
 	/usr/lib64/qt5/bin/uic dlgjsonviewer.ui -o ../build/qpfav.dir/ui/ui_dlgjsonviewer.h
 
+../build/qpfav.dir/ui/ui_dlgreproc.h: dlgreproc.ui \
+		/usr/lib64/qt5/bin/uic
+	/usr/lib64/qt5/bin/uic dlgreproc.ui -o ../build/qpfav.dir/ui/ui_dlgreproc.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -1201,6 +1219,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		sysalertmodel.h \
 		tasksview.h \
 		tasksmodel.h \
+		util.h \
 		darkpalette.h \
 		dbmng.h \
 		config.h \
@@ -1247,9 +1266,12 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		mainwindow.h \
 		actionshandler.h \
 		hmitypes.h \
-		../build/qpfav.dir/ui/ui_tasksview.h \
 		util.h \
-		dlgjsonviewer.h
+		../build/qpfav.dir/ui/ui_tasksview.h \
+		dlgjsonviewer.h \
+		qjsonmodel.h \
+		qjsonitem.h \
+		config.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/tasksview.o tasksview.cpp
 
 ../build/qpfav.dir/obj/localarchview.o: localarchview.cpp localarchview.h \
@@ -1258,7 +1280,10 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		mainwindow.h \
 		actionshandler.h \
 		hmitypes.h \
-		../build/qpfav.dir/ui/ui_localarchview.h
+		../build/qpfav.dir/ui/ui_localarchview.h \
+		config.h \
+		util.h \
+		dlgreproc.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/localarchview.o localarchview.cpp
 
 ../build/qpfav.dir/obj/dbtblmodel.o: dbtblmodel.cpp dbtblmodel.h \
@@ -1321,6 +1346,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		sysalertmodel.h \
 		tasksview.h \
 		tasksmodel.h \
+		util.h \
 		config.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/actionshandler.o actionshandler.cpp
 
@@ -1392,11 +1418,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/util.o util.cpp
 
 ../build/qpfav.dir/obj/dlgjsonviewer.o: dlgjsonviewer.cpp dlgjsonviewer.h \
-		alert.h \
-		propdef.h \
-		../build/qpfav.dir/ui/ui_dlgjsonviewer.h \
 		qjsonmodel.h \
-		qjsonitem.h
+		qjsonitem.h \
+		../build/qpfav.dir/ui/ui_dlgjsonviewer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/dlgjsonviewer.o dlgjsonviewer.cpp
 
 ../build/qpfav.dir/obj/qjsonitem.o: qjsonitem.cpp qjsonitem.h
@@ -1405,6 +1429,12 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ../build/qpfav.dir/obj/qjsonmodel.o: qjsonmodel.cpp qjsonmodel.h \
 		qjsonitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/qjsonmodel.o qjsonmodel.cpp
+
+../build/qpfav.dir/obj/dlgreproc.o: dlgreproc.cpp dlgreproc.h \
+		hmitypes.h \
+		../build/qpfav.dir/ui/ui_dlgreproc.h \
+		config.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/dlgreproc.o dlgreproc.cpp
 
 ../build/qpfav.dir/obj/qrc_icons_nav.o: ../build/qpfav.dir/rcc/qrc_icons_nav.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/qrc_icons_nav.o ../build/qpfav.dir/rcc/qrc_icons_nav.cpp
@@ -1486,6 +1516,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ../build/qpfav.dir/obj/moc_qjsonmodel.o: ../build/qpfav.dir/moc/moc_qjsonmodel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/moc_qjsonmodel.o ../build/qpfav.dir/moc/moc_qjsonmodel.cpp
+
+../build/qpfav.dir/obj/moc_dlgreproc.o: ../build/qpfav.dir/moc/moc_dlgreproc.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/moc_dlgreproc.o ../build/qpfav.dir/moc/moc_dlgreproc.cpp
 
 ####### Install
 

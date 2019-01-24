@@ -10,6 +10,14 @@ std::map<TaskStatus, std::string> TaskStatusName = { TLIST_TASK_STATUS };
 std::map<std::string, TaskStatus> TaskStatusValue = { TLIST_TASK_STATUS };
 #undef T
 
+#define T(x) std::string( #x )
+const std::string UserAreaName[] = { TLISTOF_USER_AREA_TYPES };
+#undef T
+
+const std::map<std::string, UserAreaId> UserAreaIdx = { {UserAreaName[UA_NOMINAL], UA_NOMINAL},
+                                                        {UserAreaName[UA_LOCAL],   UA_LOCAL},
+                                                        {UserAreaName[UA_VOSPACE], UA_VOSPACE} };
+
 QJsonObject qStringToJObj(QString s) {
     QJsonDocument json_doc = QJsonDocument::fromJson(s.toLocal8Bit());
     if (json_doc.isNull()) { exit(2); }

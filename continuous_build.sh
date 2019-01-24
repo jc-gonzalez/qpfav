@@ -15,4 +15,6 @@ while [ -d . ]; do
 
     rm -f ${MARK_FILE}
 
+    sync
+
 done

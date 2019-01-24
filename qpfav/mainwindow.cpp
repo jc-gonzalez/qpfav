@@ -160,13 +160,22 @@ void MainWindow::setDB()
 }
 
 //----------------------------------------------------------------------
+// Method: getUserTools
+// Returns a reference to the user defined tools map
+//----------------------------------------------------------------------
+MapOfUserDefTools & MainWindow::getUserTools()
+{
+    return userDefTools;
+}
+
+//----------------------------------------------------------------------
 // Method: getUserToolsFromSettings
 // Retrieves user defined tools from settings file
 //----------------------------------------------------------------------
 void MainWindow::getUserToolsFromSettings()
 {
     userDefTools.clear();
-	QJsonArray uts = cfg.userDefToolsArray();
+    QJsonArray uts = cfg.userDefToolsArray();
     int numUdefTools = uts.size();
     for (int i = 0; i < numUdefTools; ++i) {
         QUserDefTool qudt;

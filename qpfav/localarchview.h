@@ -46,6 +46,10 @@ public slots:
 
     void openLocalArchiveElement(QModelIndex idx);
 
+private slots:
+    void openWith();
+    void openLocalArchiveFullPath(QString fullPath);
+    
 private:
     enum AutoBehavior { AUTO_UPDATE, 
                         AUTO_EXPAND, 

@@ -69,6 +69,8 @@ public slots:
     // Help menu
     void about();
 
+    MapOfUserDefTools & getUserTools();
+
 private:
     void completeUi();
     void initPalette();
@@ -76,7 +78,7 @@ private:
 
     void getUserToolsFromSettings();
     void putUserToolsToSettings();
-	
+
     void storeQUTools2Cfg(MapOfUserDefTools qutmap);
     void setUToolTasks();
 
@@ -84,7 +86,7 @@ private:
     Ui::MainWindow *ui;
 
     ActionsHandler * aHdl;
-    
+
     // User Defined Tools
     MapOfUserDefTools userDefTools;
     QStringList       userDefProdTypes;

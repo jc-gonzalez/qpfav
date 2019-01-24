@@ -50,7 +50,8 @@ SOURCES += \
     util.cpp \
     dlgjsonviewer.cpp \
     qjsonitem.cpp \
-    qjsonmodel.cpp
+    qjsonmodel.cpp \
+    dlgreproc.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -88,7 +89,8 @@ HEADERS  += \
     util.h \
     dlgjsonviewer.h \
     qjsonitem.h \
-    qjsonmodel.h
+    qjsonmodel.h \
+    dlgreproc.h
 
 FORMS    += \
     mainwindow.ui \
@@ -106,7 +108,8 @@ FORMS    += \
     swarmedit.ui \
     ruleedit.ui \
     dlgalert.ui \
-    dlgjsonviewer.ui
+    dlgjsonviewer.ui \
+    dlgreproc.ui
 
 RESOURCES += \
     icons_nav.qrc
