@@ -187,11 +187,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QTabWidget" name="tabwdgViewers">
-          <property name="currentIndex">
-           <number>-1</number>
-          </property>
-         </widget>
+         <widget class="ProductsViewer" name="prodsViewer" native="true"/>
         </item>
        </layout>
       </widget>
@@ -883,7 +879,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_8">
          <item>
-          <widget class="QListView" name="lstvwProducts"/>
+          <widget class="QListWidget" name="lstvwProducts"/>
          </item>
         </layout>
        </widget>
@@ -976,6 +972,12 @@
    <class>ProcAlertsView</class>
    <extends>QWidget</extends>
    <header location="global">procalertsview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProductsViewer</class>
+   <extends>QWidget</extends>
+   <header location="global">productsviewer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

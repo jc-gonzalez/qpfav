@@ -48,10 +48,13 @@ SOURCES += \
     connectionwidget.cpp \
     dlgalert.cpp \
     util.cpp \
+    qjsonviewer.cpp \
     dlgjsonviewer.cpp \
     qjsonitem.cpp \
     qjsonmodel.cpp \
-    dlgreproc.cpp
+    dlgreproc.cpp \
+    productsviewer.cpp \
+    xmlsyntaxhighlight.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -87,10 +90,13 @@ HEADERS  += \
     connectionwidget.h \
     dlgalert.h \
     util.h \
+    qjsonviewer.h \
     dlgjsonviewer.h \
     qjsonitem.h \
     qjsonmodel.h \
-    dlgreproc.h
+    dlgreproc.h \
+    productsviewer.h \
+    xmlsyntaxhighlight.h
 
 FORMS    += \
     mainwindow.ui \
@@ -108,8 +114,10 @@ FORMS    += \
     swarmedit.ui \
     ruleedit.ui \
     dlgalert.ui \
+    qjsonviewer.ui \
     dlgjsonviewer.ui \
-    dlgreproc.ui
+    dlgreproc.ui \
+    productsviewer.ui 
 
 RESOURCES += \
     icons_nav.qrc

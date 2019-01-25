@@ -42,9 +42,6 @@
 #define DLGJSONVIEWER_H
 
 #include <QDialog>
-#include <QDateTime>
-
-#include "qjsonmodel.h"
 
 namespace Ui {
 class DlgJSONViewer;
@@ -58,24 +55,8 @@ public:
     explicit DlgJSONViewer(QString title, QByteArray jsonData, QWidget *parent);
     ~DlgJSONViewer();
 
-private slots:
-    void showJsonContextMenu(const QPoint & p);
-
-    void jsontreeExpand();
-    void jsontreeExpandSubtree();
-    void jsontreeExpandAll();
-
-    void jsontreeCollapse();
-    void jsontreeCollapseSubtree();
-    void jsontreeCollapseAll();
-
-    void getAllChildren(QModelIndex index, QModelIndexList &indices);
-
 private:
     Ui::DlgJSONViewer *ui;
-
-    QJsonModel * model;
-    QPoint pointOfAction;
 };
 
 #endif // DLGJSONVIEWER_H

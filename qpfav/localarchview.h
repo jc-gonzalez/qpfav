@@ -26,6 +26,9 @@ public:
     ~LocalArchiveView();
     void setAutoButtons(QComboBox * cboxAuto);
 
+signals:
+    void openProductInViewer(QString);
+    
 public slots:
     void autoBtnsChanged(const QModelIndex& topLeft, 
                          const QModelIndex& bottomRight);
@@ -45,9 +48,9 @@ public slots:
     void exportProduct();
 
     void openLocalArchiveElement(QModelIndex idx);
+    void openWith();
 
 private slots:
-    void openWith();
     void openLocalArchiveFullPath(QString fullPath);
     
 private:

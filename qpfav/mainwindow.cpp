@@ -45,6 +45,16 @@ const std::string MainWindow::INITIALISED_StateName("INITIALISED");
 const std::string MainWindow::RUNNING_StateName("RUNNING");
 const std::string MainWindow::OPERATIONAL_StateName("OPERATIONAL");
 
+// Sections in HMI
+const int SectionArchive = 0;    
+const int SectionTasks   = 1;  
+const int SectionViewer  = 2;   
+const int SectionFilter  = 3;   
+const int SectionAlerts  = 4;   
+const int SectionMonit   = 5;  
+const int SectionLog     = 6;
+const int SectionTools   = 7;  
+
 // Template for pushTo/pullFromVoSpace request file
 const QString MainWindow::VOSpaceURL =
     "https://vospace.esac.esa.int/vospace/";
@@ -54,18 +64,46 @@ const QString MainWindow::VOSpaceURL =
 //----------------------------------------------------------------------
 MainWindow::MainWindow(QWidget *parent, QString & cfgFile, QString s) :
     QMainWindow(parent),
-    styleName(s),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    styleName(s)
 {
-    // Load configuration
-    cfg.load(cfgFile);
-
-    // Initialize DB
-    setDB();
+    // Configure object
+    configure(cfgFile);
 
     // Set UI
     ui->setupUi(this);
+    completeUi();
+}
 
+//----------------------------------------------------------------------
+// Destructor
+//----------------------------------------------------------------------
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+//----------------------------------------------------------------------
+// Method: configure
+// Rest of operations to setup UI completly
+//----------------------------------------------------------------------
+void MainWindow::configure(QString & cfgFile)
+{
+    // Load configuration
+    cfg.load(cfgFile);
+    getUserToolsFromSettings();
+
+    // Initialize DB
+    setDB();
+}
+
+//----------------------------------------------------------------------
+// Method: completeUi
+// Rest of operations to setup UI completly
+//----------------------------------------------------------------------
+void MainWindow::completeUi()
+{
+    // Create general GUI actions handler
     aHdl = new ActionsHandler(this);
 
     // Initialize palette
@@ -79,23 +117,6 @@ MainWindow::MainWindow(QWidget *parent, QString & cfgFile, QString s) :
         ui->btngrpNavigator->setId(tbtn, i++);
     }
 
-    completeUi();
-}
-
-//----------------------------------------------------------------------
-// Destructor
-//----------------------------------------------------------------------
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-//----------------------------------------------------------------------
-// Method: completeUi
-// Rest of operations to setup UI completly
-//----------------------------------------------------------------------
-void MainWindow::completeUi()
-{
     // Local Archive panel
     ui->localArchView->setAutoButtons(ui->cboxLocalArchAuto);
     connect(ui->tbtnRefresh, SIGNAL(clicked()), ui->localArchView, SLOT(arefresh()));
@@ -107,6 +128,16 @@ void MainWindow::completeUi()
 
     // Tasks panel
     ui->tasksView->setActionsHandler(aHdl);
+
+    // Product viewers panel
+    connect(ui->localArchView, SIGNAL(openProductInViewer(QString)),
+            ui->prodsViewer, SLOT(createNewViewer(QString)));
+    connect(ui->prodsViewer, SIGNAL(newProductViewerAvailable(QString)),
+            this, SLOT(addToProdViewersList(QString)));
+    connect(ui->lstvwProducts, &QListWidget::itemDoubleClicked,
+            [this](QListWidgetItem *item) { 
+                this->ui->prodsViewer->selectProductViewer(item->text());
+                this->showSection(SectionViewer); });
 
     // Tools panel
     connect(ui->btnCfgTool, SIGNAL(clicked()), aHdl->acConfigTool, SLOT(trigger()));
@@ -345,7 +376,7 @@ void MainWindow::showVerbLevel()
     VerbLevelDlg dlg;
 
     if (dlg.exec()) {
-        int minLvl = dlg.getVerbosityLevelIdx();
+        //int minLvl = dlg.getVerbosityLevelIdx();
         //Log::setMinLogLevel((Log::LogLevel)(minLvl));
         ui->lblVerbosity->setText(dlg.getVerbosityLevelName());
         //hmiNode->sendMinLogLevel(dlg.getVerbosityLevelName().toStdString());
@@ -360,27 +391,22 @@ void MainWindow::showVerbLevel()
 //----------------------------------------------------------------------
 void MainWindow::storeQUTools2Cfg(MapOfUserDefTools qutmap)
 {
-    /*
-    json uts;
-
+    QJsonArray uts;
     QMap<QString, QUserDefTool>::const_iterator it  = qutmap.constBegin();
     auto end = qutmap.constEnd();
-    int i = 0;
     while (it != end) {
         const QUserDefTool & t = it.value();
-
-        uts[i]["name"]         = t.name.toStdString();
-        uts[i]["description"]  = t.desc.toStdString();
-        uts[i]["executable"]   = t.exe.toStdString();
-        uts[i]["arguments"]    = t.args.toStdString();
-        uts[i]["productTypes"] = t.prod_types.join(",").toStdString();
-
+        QJsonObject ut = { {"name", t.name},
+                           {"description", t.desc},
+                           {"executable", t.exe},
+                           {"arguments", t.args},
+                           {"productTypes", t.prod_types.join(",")} };
+        uts.append(ut);
         ++it;
-        ++i;
     }
 
-    cfg.userDefTools.fromStr(JValue(uts).str());
-    */
+    cfg.data().remove("userDefTools");
+    cfg.data().insert("userDefTools", uts); 
 }
 
 //----------------------------------------------------------------------
@@ -389,17 +415,33 @@ void MainWindow::storeQUTools2Cfg(MapOfUserDefTools qutmap)
 //----------------------------------------------------------------------
 void MainWindow::setUToolTasks()
 {
-    /*
-    actHdl->getAcUserTools().clear();
+    aHdl->getAcUserTools().clear();
     foreach (QString key, userDefTools.keys()) {
         const QUserDefTool & udt = userDefTools.value(key);
-        QAction * ac = new QAction(key, ui->treevwArchive);
+        QAction * ac = new QAction(key, ui->localArchView);
         ac->setStatusTip(udt.desc);
-        connect(ac, SIGNAL(triggered()), this, SLOT(openWith()));
-        actHdl->getAcUserTools()[key] = ac;
+        connect(ac, SIGNAL(triggered()), ui->localArchView, SLOT(openWith()));
+        aHdl->getAcUserTools()[key] = ac;
     }
-    */
 }
 
+//----------------------------------------------------------------------
+// Method: addToProdViewersList
+// Add viewer
+//----------------------------------------------------------------------
+void MainWindow::addToProdViewersList(QString name)
+{
+    ui->lstvwProducts->addItem(name);
+    showSection(SectionViewer);
+}
+
+//----------------------------------------------------------------------
+// Method: showSection()
+// Add viewer
+//----------------------------------------------------------------------
+void MainWindow::showSection(int sec)
+{
+    ui->stckMain->setCurrentIndex(sec);
+}
 
 }

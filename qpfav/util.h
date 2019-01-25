@@ -3,6 +3,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QFile>
 
 #include <map>
 
@@ -63,5 +64,10 @@ enum OutputsLocation {
 
 QJsonObject qStringToJObj(QString s);
 QJsonObject stdStringToJObj(std::string s);
+
+QString getFileContent(QFile * file);
+QString getFileContent(QString fileName);
+
+void binaryGetFITSHeader(QString fileName, QString & str);
 
 #endif // UTIL_H

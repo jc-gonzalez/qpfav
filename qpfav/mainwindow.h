@@ -69,9 +69,13 @@ public slots:
     // Help menu
     void about();
 
+    // Product Viewers
+    void addToProdViewersList(QString);
+
     MapOfUserDefTools & getUserTools();
 
 private:
+    void configure(QString & cfgFile);
     void completeUi();
     void initPalette();
     void setDB();
@@ -81,6 +85,7 @@ private:
 
     void storeQUTools2Cfg(MapOfUserDefTools qutmap);
     void setUToolTasks();
+    void showSection(int sec);
 
 private:
     Ui::MainWindow *ui;

@@ -27,16 +27,6 @@ public:
     Sec(userDefTools)
     Sec(flags)
 
-
-/*
-    DefGrp(general)
-    DefGrp(db)
-    DefGrp(products)
-
-    DefGrpSec(general)
-    DefGrpSec(db)
-    DefGrpSec(products)
-*/
     //----------------------------------------------------------------------
     // Method: load
     // Loads the data from the configuration file
@@ -55,6 +45,11 @@ public:
     //----------------------------------------------------------------------
     const QJsonObject operator[](QString s) { return config[s].toObject(); }
 
+    //----------------------------------------------------------------------
+    // Method: data
+    // Reference to internal data
+    //----------------------------------------------------------------------
+    QJsonObject & data() { return config; }
     
 private:
     //----------------------------------------------------------------------
