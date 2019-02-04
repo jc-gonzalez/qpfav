@@ -34,6 +34,10 @@ ProductsViewer::~ProductsViewer()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: createNewViewer
+// createNewViewer
+//----------------------------------------------------------------------
 void ProductsViewer::createNewViewer(QString fullPath)
 {
     QFileInfo fs(fullPath);
@@ -102,6 +106,10 @@ void ProductsViewer::createNewViewer(QString fullPath)
     emit newProductViewerAvailable(tabName);
 }
 
+//----------------------------------------------------------------------
+// Method: selectProductViewer
+// selectProductViewer
+//----------------------------------------------------------------------
 bool ProductsViewer::selectProductViewer(QString name)
 {
     QWidget * existingWdg = ui->tabs->findChild<QWidget*>(name);

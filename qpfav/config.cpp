@@ -13,6 +13,10 @@ Config & Config::_()
     return configInstance;
 }
 
+//----------------------------------------------------------------------
+// Method: load
+// load
+//----------------------------------------------------------------------
 bool Config::load(QString fileName)
 {
     QFile loadFile(fileName);
@@ -31,6 +35,10 @@ bool Config::load(QString fileName)
     return true;
 }
 
+//----------------------------------------------------------------------
+// Method: storeAgentsAndHosts
+// storeAgentsAndHosts
+//----------------------------------------------------------------------
 void Config::storeAgentsAndHosts()
 {
     // Now processing host lines

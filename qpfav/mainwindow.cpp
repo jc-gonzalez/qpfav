@@ -105,6 +105,7 @@ void MainWindow::completeUi()
 {
     // Create general GUI actions handler
     aHdl = new ActionsHandler(this);
+    setUToolTasks();
 
     // Initialize palette
     initPalette();
@@ -118,6 +119,7 @@ void MainWindow::completeUi()
     }
 
     // Local Archive panel
+    ui->localArchView->init(this);
     ui->localArchView->setAutoButtons(ui->cboxLocalArchAuto);
     connect(ui->tbtnRefresh, SIGNAL(clicked()), ui->localArchView, SLOT(arefresh()));
     connect(ui->tbtnExpand,  SIGNAL(clicked()), ui->localArchView, SLOT(aexpand()));
@@ -194,9 +196,14 @@ void MainWindow::setDB()
 // Method: getUserTools
 // Returns a reference to the user defined tools map
 //----------------------------------------------------------------------
-MapOfUserDefTools & MainWindow::getUserTools()
+void MainWindow::getUserTools(MapOfUserDefTools & u)
 {
-    return userDefTools;
+    if (! u.isEmpty()) { u.clear(); }
+
+    foreach (QString k, userDefTools.keys()) { 
+        QUserDefTool udt = userDefTools[k];
+        u.insert(k, udt); 
+    }
 }
 
 //----------------------------------------------------------------------
@@ -215,7 +222,11 @@ void MainWindow::getUserToolsFromSettings()
         qudt.exe        = uts.at(i).toObject()["executable"].toString();
         qudt.args       = uts.at(i).toObject()["arguments"].toString();
         qudt.prod_types = uts.at(i).toObject()["productTypes"].toString().split(",");
-
+        std::cerr << qudt.name.toStdString() << ", " 
+                  << qudt.desc.toStdString() << ", " 
+                  << qudt.exe.toStdString() << ", " 
+                  << qudt.args.toStdString() << ", " 
+                  << std::endl;
         userDefTools[qudt.name] = qudt;
     }
 
@@ -415,13 +426,13 @@ void MainWindow::storeQUTools2Cfg(MapOfUserDefTools qutmap)
 //----------------------------------------------------------------------
 void MainWindow::setUToolTasks()
 {
-    aHdl->getAcUserTools().clear();
+    aHdl->acUserTools.clear();
     foreach (QString key, userDefTools.keys()) {
         const QUserDefTool & udt = userDefTools.value(key);
         QAction * ac = new QAction(key, ui->localArchView);
         ac->setStatusTip(udt.desc);
         connect(ac, SIGNAL(triggered()), ui->localArchView, SLOT(openWith()));
-        aHdl->getAcUserTools()[key] = ac;
+        aHdl->acUserTools[key] = ac;
     }
 }
 

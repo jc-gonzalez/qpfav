@@ -40,6 +40,10 @@ TasksView::~TasksView()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setActionsHandler
+// setActionsHandler
+//----------------------------------------------------------------------
 void TasksView::setActionsHandler(ActionsHandler * a)
 {
     aHdl = a;
@@ -82,6 +86,10 @@ void TasksView::setActionsHandler(ActionsHandler * a)
             aHdl, SLOT(showTaskMonitContextMenu(const QPoint &)));
 }
 
+//----------------------------------------------------------------------
+// Method: showWorkDir
+// showWorkDir
+//----------------------------------------------------------------------
 void TasksView::showWorkDir()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -105,6 +113,10 @@ void TasksView::showWorkDir()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: displayTaskInfo
+// displayTaskInfo
+//----------------------------------------------------------------------
 void TasksView::displayTaskInfo()
 {
     QModelIndex idx = ui->vw->currentIndex();
@@ -119,14 +131,26 @@ void TasksView::displayTaskInfo()
     dlg.exec();
 }
 
+//----------------------------------------------------------------------
+// Method: stopTask
+// stopTask
+//----------------------------------------------------------------------
 void TasksView::stopTask()
 {
 }
 
+//----------------------------------------------------------------------
+// Method: restartTask
+// restartTask
+//----------------------------------------------------------------------
 void TasksView::restartTask()
 {
 }
 
+//----------------------------------------------------------------------
+// Method: doTaskPause
+// doTaskPause
+//----------------------------------------------------------------------
 void TasksView::doTaskPause()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -142,6 +166,10 @@ void TasksView::doTaskPause()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doTaskResume
+// doTaskResume
+//----------------------------------------------------------------------
 void TasksView::doTaskResume()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -157,6 +185,10 @@ void TasksView::doTaskResume()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doTaskCancel
+// doTaskCancel
+//----------------------------------------------------------------------
 void TasksView::doTaskCancel()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -172,6 +204,10 @@ void TasksView::doTaskCancel()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doAgentSuspend
+// doAgentSuspend
+//----------------------------------------------------------------------
 void TasksView::doAgentSuspend()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -191,6 +227,10 @@ void TasksView::doAgentSuspend()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doAgentStop
+// doAgentStop
+//----------------------------------------------------------------------
 void TasksView::doAgentStop()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -209,6 +249,10 @@ void TasksView::doAgentStop()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doAgentReactivate
+// doAgentReactivate
+//----------------------------------------------------------------------
 void TasksView::doAgentReactivate()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -228,6 +272,10 @@ void TasksView::doAgentReactivate()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: doHostSuspend
+// doHostSuspend
+//----------------------------------------------------------------------
 void TasksView::doHostSuspend()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -252,6 +300,10 @@ void TasksView::doHostSuspend()
         TaskStatusName[hostProcStatus[qhostId]]);
 }
 
+//----------------------------------------------------------------------
+// Method: doHostStop
+// doHostStop
+//----------------------------------------------------------------------
 void TasksView::doHostStop()
 {
     QModelIndex idx        = ui->vw->currentIndex();
@@ -276,6 +328,10 @@ void TasksView::doHostStop()
         TaskStatusName[hostProcStatus[qhostId]]);
 }
 
+//----------------------------------------------------------------------
+// Method: doHostReactivate
+// doHostReactivate
+//----------------------------------------------------------------------
 void TasksView::doHostReactivate()
 {
     QModelIndex idx        = ui->vw->currentIndex();

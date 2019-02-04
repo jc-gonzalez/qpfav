@@ -36,6 +36,10 @@ QJsonModel::QJsonModel(QObject *parent) :
 
 }
 
+//----------------------------------------------------------------------
+// Method: load
+// load
+//----------------------------------------------------------------------
 bool QJsonModel::load(const QString &fileName)
 {
     QFile file(fileName);
@@ -49,11 +53,19 @@ bool QJsonModel::load(const QString &fileName)
     return success;
 }
 
+//----------------------------------------------------------------------
+// Method: load
+// load
+//----------------------------------------------------------------------
 bool QJsonModel::load(QIODevice *device)
 {
     return loadJson(device->readAll());
 }
 
+//----------------------------------------------------------------------
+// Method: loadJson
+// loadJson
+//----------------------------------------------------------------------
 bool QJsonModel::loadJson(const QByteArray &json)
 {
     mDocument = QJsonDocument::fromJson(json);
@@ -150,6 +162,10 @@ QModelIndex QJsonModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
+//----------------------------------------------------------------------
+// Method: rowCount
+// rowCount
+//----------------------------------------------------------------------
 int QJsonModel::rowCount(const QModelIndex &parent) const
 {
     QJsonTreeItem *parentItem;
@@ -164,12 +180,20 @@ int QJsonModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 
+//----------------------------------------------------------------------
+// Method: columnCount
+// columnCount
+//----------------------------------------------------------------------
 int QJsonModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return 2;
 }
 
+//----------------------------------------------------------------------
+// Method: setIcon
+// setIcon
+//----------------------------------------------------------------------
 void QJsonModel::setIcon(const QJsonValue::Type &type, const QIcon &icon)
 {
     mTypeIcons.insert(type,icon);
@@ -200,6 +224,10 @@ QModelIndex QJsonModel::find(QAbstractItemModel * model, QString content,
     return finalIdx;
 }
 
+//----------------------------------------------------------------------
+// Method: findSequence
+// findSequence
+//----------------------------------------------------------------------
 bool QJsonModel::findSequence(QAbstractItemModel * model, QStringList & seq,
                               QList<QModelIndex> & idxs)
 {

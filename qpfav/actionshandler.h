@@ -15,11 +15,6 @@ class ActionsHandler : public QObject
 public:
     explicit ActionsHandler(QWidget * parent = 0);
 
-    //--- Accessor to acUserTools
-    QMap<QString, QAction *> & getAcUserTools() { return acUserTools; }
-
-signals:
-
 public slots:
     void processPath();
     void quitQPFAV();

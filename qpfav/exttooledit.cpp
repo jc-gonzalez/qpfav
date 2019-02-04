@@ -61,11 +61,19 @@ ExtToolEdit::~ExtToolEdit()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setProdTypes
+// setProdTypes
+//----------------------------------------------------------------------
 void ExtToolEdit::setProdTypes(QStringList pts)
 {
     prodTypes = pts;
 }
 
+//----------------------------------------------------------------------
+// Method: editTool
+// editTool
+//----------------------------------------------------------------------
 void ExtToolEdit::editTool(QUserDefTool & udt)
 {
     ui->edName->setText(udt.name);
@@ -75,6 +83,10 @@ void ExtToolEdit::editTool(QUserDefTool & udt)
     ui->edProdTypes->setText(udt.prod_types.join("|"));
 }
 
+//----------------------------------------------------------------------
+// Method: getToolInfo
+// getToolInfo
+//----------------------------------------------------------------------
 void ExtToolEdit::getToolInfo(QUserDefTool & udt)
 {
     udt.name       = ui->edName->text();
@@ -84,6 +96,10 @@ void ExtToolEdit::getToolInfo(QUserDefTool & udt)
     udt.prod_types = ui->edProdTypes->text().split("|");
 }
 
+//----------------------------------------------------------------------
+// Method: showHelp
+// showHelp
+//----------------------------------------------------------------------
 void ExtToolEdit::showHelp()
 {
     QString helpMsg =
@@ -100,11 +116,6 @@ void ExtToolEdit::showHelp()
            "  %f\tProduct file name (without path)\n"
            "  %F\tProduct complete file name (with path)\n"
            "  %p\tPath where the product file is located\n"
-           "  %i\tProduct Id\n"
-           "  %o\tObservation Id\n"
-           "  %s\tStart time stamp\n"
-           "  %e\tEnd time stamp\n"
-           "  %t\tProduct type\n"
            "  %x\tProduct file extension\n"
            "  %1 - %9\tUser-requested inputs");
 
@@ -112,6 +123,10 @@ void ExtToolEdit::showHelp()
                                    helpMsg, QMessageBox::Ok);
 }
 
+//----------------------------------------------------------------------
+// Method: selectApp
+// selectApp
+//----------------------------------------------------------------------
 void ExtToolEdit::selectApp()
 {
     QString fileName =
@@ -123,6 +138,10 @@ void ExtToolEdit::selectApp()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: selectProdTypes
+// selectProdTypes
+//----------------------------------------------------------------------
 void ExtToolEdit::selectProdTypes()
 {
     QLabel *lbl = new QLabel("Select product types:");

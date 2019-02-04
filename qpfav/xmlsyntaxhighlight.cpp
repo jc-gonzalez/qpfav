@@ -61,6 +61,10 @@ XMLBasicSyntaxHighlighter::XMLBasicSyntaxHighlighter(QTextEdit * parent) :
     setFormats();
 }
 
+//----------------------------------------------------------------------
+// Method: highlightBlock
+// highlightBlock
+//----------------------------------------------------------------------
 void XMLBasicSyntaxHighlighter::highlightBlock(const QString & text)
 {
     // Special treatment for xml element regex as we use captured text to emulate lookbehind
@@ -87,6 +91,10 @@ void XMLBasicSyntaxHighlighter::highlightBlock(const QString & text)
     highlightByRegex(m_xmlValueFormat, m_xmlValueRegex, text);
 }
 
+//----------------------------------------------------------------------
+// Method: highlightByRegex
+// highlightByRegex
+//----------------------------------------------------------------------
 void XMLBasicSyntaxHighlighter::highlightByRegex(const QTextCharFormat & format,
                                                  const QRegExp & regex, const QString & text)
 {
@@ -101,6 +109,10 @@ void XMLBasicSyntaxHighlighter::highlightByRegex(const QTextCharFormat & format,
     }
 }
 
+//----------------------------------------------------------------------
+// Method: setRegexes
+// setRegexes
+//----------------------------------------------------------------------
 void XMLBasicSyntaxHighlighter::setRegexes()
 {
     m_xmlElementRegex.setPattern("<[\\s]*[/]?[\\s]*([^\\n]\\w*)(?=[\\s/>])");
@@ -113,6 +125,10 @@ void XMLBasicSyntaxHighlighter::setRegexes()
                                            << QRegExp("\\?>");
 }
 
+//----------------------------------------------------------------------
+// Method: setFormats
+// setFormats
+//----------------------------------------------------------------------
 void XMLBasicSyntaxHighlighter::setFormats()
 {
     m_xmlKeywordFormat.setForeground(Qt::blue);

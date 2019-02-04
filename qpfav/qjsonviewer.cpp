@@ -51,6 +51,10 @@ QJSONViewer::QJSONViewer(QWidget *parent) :
     ui->setupUi(this);
 }
 
+//----------------------------------------------------------------------
+// Method: init
+// init
+//----------------------------------------------------------------------
 void QJSONViewer::init(QString & title, QByteArray & jsonData)
 {
     ui->grpboxViewer->setTitle(title);

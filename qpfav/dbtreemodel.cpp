@@ -51,12 +51,20 @@ DBTreeBoldHeaderDelegate::DBTreeBoldHeaderDelegate(QObject *parent)
 {
 }
 
+//----------------------------------------------------------------------
+// Method: setCustomFilter
+// setCustomFilter
+//----------------------------------------------------------------------
 void DBTreeBoldHeaderDelegate::setCustomFilter(bool b)
 {
     isCustomFilter = b;
 }
 
 
+//----------------------------------------------------------------------
+// Method: paint
+// paint
+//----------------------------------------------------------------------
 void DBTreeBoldHeaderDelegate::paint(QPainter* painter,
                                      const QStyleOptionViewItem& option,
                                      const QModelIndex& index) const
@@ -85,6 +93,10 @@ DBTreeModel::DBTreeModel(QString q, QStringList hdr) :
     refresh();
 }
 
+//----------------------------------------------------------------------
+// Method: setHeaders
+// setHeaders
+//----------------------------------------------------------------------
 void DBTreeModel::setHeaders(QStringList & hdr)
 {
     int i = 0;
@@ -94,27 +106,47 @@ void DBTreeModel::setHeaders(QStringList & hdr)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: defineHeaders
+// defineHeaders
+//----------------------------------------------------------------------
 void DBTreeModel::defineHeaders(QStringList hdr)
 {
     headerLabels = hdr;
     if (initialHeaders.size() < 1) { initialHeaders = hdr; }
 }
 
+//----------------------------------------------------------------------
+// Method: defineQuery
+// defineQuery
+//----------------------------------------------------------------------
 void DBTreeModel::defineQuery(QString q)
 {
     queryString = q;
     if (initialQuery.isEmpty()) { initialQuery = q; }
 }
 
+//----------------------------------------------------------------------
+// Method: setBoldHeader
+// setBoldHeader
+//----------------------------------------------------------------------
 void DBTreeModel::setBoldHeader(bool b)
 {
 }
 
+//----------------------------------------------------------------------
+// Method: setCustomFilter
+// setCustomFilter
+//----------------------------------------------------------------------
 void DBTreeModel::setCustomFilter(bool b)
 {
     isCustomFilter = b;
 }
 
+//----------------------------------------------------------------------
+// Method: restart
+// restart
+//----------------------------------------------------------------------
 void DBTreeModel::restart()
 {
     defineQuery(initialQuery);
@@ -123,6 +155,10 @@ void DBTreeModel::restart()
     refresh();
 }
 
+//----------------------------------------------------------------------
+// Method: skipColumns
+// skipColumns
+//----------------------------------------------------------------------
 void DBTreeModel::skipColumns(int n)
 {
     if (initialSkippedColumns < 0) {
@@ -131,6 +167,10 @@ void DBTreeModel::skipColumns(int n)
     skippedColumns = n;
 }
 
+//----------------------------------------------------------------------
+// Method: refresh
+// refresh
+//----------------------------------------------------------------------
 void DBTreeModel::refresh()
 {
     if (! queryString.isEmpty()) {
@@ -157,6 +197,10 @@ void traverse(QAbstractItemModel* model, QModelIndex parent = QModelIndex())
 
 }
 
+//----------------------------------------------------------------------
+// Method: execQuery
+// execQuery
+//----------------------------------------------------------------------
 void DBTreeModel::execQuery(QString & qry, QSqlDatabase & db)
 {
     // Perform query

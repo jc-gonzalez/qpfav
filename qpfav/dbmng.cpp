@@ -60,6 +60,10 @@ DBManager::~DBManager()
     close();
 }
 
+//----------------------------------------------------------------------
+// Method: close
+// close
+//----------------------------------------------------------------------
 void DBManager::close()
 {
     QStringList cnctNames = db.connectionNames();
@@ -71,6 +75,10 @@ void DBManager::close()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: checkTaskStatusInfo
+// checkTaskStatusInfo
+//----------------------------------------------------------------------
 void DBManager::checkTaskStatusInfo()
 {
 
@@ -101,6 +109,10 @@ QSqlError DBManager::addConnection(const QString &driver, const QString &connect
     return err;
 }
 
+//----------------------------------------------------------------------
+// Method: addConnection
+// addConnection
+//----------------------------------------------------------------------
 void DBManager::addConnection(const QString &connectionName, DBConnection & conn)
 {
     QSqlError err = addConnection(conn.driverName, connectionName,
@@ -122,6 +134,10 @@ QString DBManager::getState()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: setState
+// setState
+//----------------------------------------------------------------------
 void DBManager::setState(QString newState)
 {
     QDateTime now(QDateTime::currentDateTime());
@@ -152,6 +168,10 @@ QMap<QString,QString> DBManager::getCurrentStates(QString session)
     return result;
 }
 
+//----------------------------------------------------------------------
+// Method: numOfRowsInDbTable
+// numOfRowsInDbTable
+//----------------------------------------------------------------------
 int DBManager::numOfRowsInDbTable(QString tableName)
 {
     QSqlQuery qry(QString("SELECT reltuples::bigint AS estimate "
@@ -165,6 +185,10 @@ int DBManager::numOfRowsInDbTable(QString tableName)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: addICommand
+// addICommand
+//----------------------------------------------------------------------
 void DBManager::addICommand(QString cmd)
 {
     QDateTime now(QDateTime::currentDateTime());
@@ -186,6 +210,10 @@ void DBManager::addICommand(QString cmd)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: getICommand
+// getICommand
+//----------------------------------------------------------------------
 bool DBManager::getICommand(QString cmd, bool removeCmd)
 {
     bool result = true;
@@ -222,6 +250,10 @@ bool DBManager::getICommand(QString cmd, bool removeCmd)
     return result;
 }
 
+//----------------------------------------------------------------------
+// Method: removeICommands
+// removeICommands
+//----------------------------------------------------------------------
 void DBManager::removeICommands(QString cmd)
 {
     QString sqry(QString("DELETE FROM icommands cmd "
@@ -230,6 +262,10 @@ void DBManager::removeICommands(QString cmd)
 }
 
 /*
+//----------------------------------------------------------------------
+// Method: getTasksInfo
+// getTasksInfo
+//----------------------------------------------------------------------
 bool DBManager::getTasksInfo(QMap<QString, QJsonObject> & newTasks, int offset)
 {
     QSqlQuery qry(QString("SELECT * FROM tasks_info ORDER BY id OFFSET %1;")

@@ -55,6 +55,10 @@ DBTableModel::DBTableModel(QString q, QStringList hdr, DBTableModel::TablePalett
     refresh();
 }
 
+//----------------------------------------------------------------------
+// Method: setHeaders
+// setHeaders
+//----------------------------------------------------------------------
 void DBTableModel::setHeaders(QStringList & hdr)
 {
     int i = 0;
@@ -64,23 +68,39 @@ void DBTableModel::setHeaders(QStringList & hdr)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: defineHeaders
+// defineHeaders
+//----------------------------------------------------------------------
 void DBTableModel::defineHeaders(QStringList hdr)
 {
     headerLabels = hdr;
     if (initialHeaders.size() < 1) { initialHeaders = hdr; }
 }
 
+//----------------------------------------------------------------------
+// Method: defineQuery
+// defineQuery
+//----------------------------------------------------------------------
 void DBTableModel::defineQuery(QString q)
 {
     queryString = q;
     if (initialQuery.isEmpty()) { initialQuery = q; }
 }
 
+//----------------------------------------------------------------------
+// Method: defineTablePalette
+// defineTablePalette
+//----------------------------------------------------------------------
 void DBTableModel::defineTablePalette(DBTableModel::TablePalette pal)
 {
     tblPalette = pal;
 }
 
+//----------------------------------------------------------------------
+// Method: restart
+// restart
+//----------------------------------------------------------------------
 void DBTableModel::restart()
 {
     defineQuery(initialQuery);
@@ -117,11 +137,19 @@ QVariant DBTableModel::data(const QModelIndex &index, int role) const
 }
 
 
+//----------------------------------------------------------------------
+// Method: setFullUpdate
+// setFullUpdate
+//----------------------------------------------------------------------
 void DBTableModel::setFullUpdate(bool b)
 {
     fullUpdate = b;
 }
 
+//----------------------------------------------------------------------
+// Method: refresh
+// refresh
+//----------------------------------------------------------------------
 void DBTableModel::refresh()
 {
     if (! queryString.isEmpty()) {

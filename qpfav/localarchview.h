@@ -25,6 +25,7 @@ public:
     explicit LocalArchiveView(QWidget *parent = 0);
     ~LocalArchiveView();
     void setAutoButtons(QComboBox * cboxAuto);
+    void init(MainWindow * x);
 
 signals:
     void openProductInViewer(QString);

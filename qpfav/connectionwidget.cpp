@@ -73,6 +73,10 @@ static QString qDBCaption(const QSqlDatabase &db)
     return nm;
 }
 
+//----------------------------------------------------------------------
+// Method: refresh
+// refresh
+//----------------------------------------------------------------------
 void ConnectionWidget::refresh()
 {
     tree->clear();
@@ -115,6 +119,10 @@ static void qSetBold(QTreeWidgetItem *item, bool bold)
     item->setFont(0, font);
 }
 
+//----------------------------------------------------------------------
+// Method: setActive
+// setActive
+//----------------------------------------------------------------------
 void ConnectionWidget::setActive(QTreeWidgetItem *item)
 {
     for (int i = 0; i < tree->topLevelItemCount(); ++i) {
@@ -129,6 +137,10 @@ void ConnectionWidget::setActive(QTreeWidgetItem *item)
     activeDb = QSqlDatabase::connectionNames().value(tree->indexOfTopLevelItem(item));
 }
 
+//----------------------------------------------------------------------
+// Method: on_tree_itemActivated
+// on_tree_itemActivated
+//----------------------------------------------------------------------
 void ConnectionWidget::on_tree_itemActivated(QTreeWidgetItem *item, int /* column */)
 {
 
@@ -142,6 +154,10 @@ void ConnectionWidget::on_tree_itemActivated(QTreeWidgetItem *item, int /* colum
     }
 }
 
+//----------------------------------------------------------------------
+// Method: showMetaData
+// showMetaData
+//----------------------------------------------------------------------
 void ConnectionWidget::showMetaData()
 {
     QTreeWidgetItem *cItem = tree->currentItem();
@@ -151,6 +167,10 @@ void ConnectionWidget::showMetaData()
     emit metaDataRequested(cItem->text(0));
 }
 
+//----------------------------------------------------------------------
+// Method: on_tree_currentItemChanged
+// on_tree_currentItemChanged
+//----------------------------------------------------------------------
 void ConnectionWidget::on_tree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *)
 {
     metaDataAction->setEnabled(current && current->parent());

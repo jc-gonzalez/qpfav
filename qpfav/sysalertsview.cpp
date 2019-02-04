@@ -24,6 +24,10 @@ SysAlertsView::~SysAlertsView()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setActionsHandler
+// setActionsHandler
+//----------------------------------------------------------------------
 void SysAlertsView::setActionsHandler(ActionsHandler * a)
 {
     aHdl = a;
@@ -34,6 +38,10 @@ void SysAlertsView::setActionsHandler(ActionsHandler * a)
             aHdl, SLOT(showSysAlertsContextMenu(const QPoint &)));
 }
 
+//----------------------------------------------------------------------
+// Method: showSysAlertInfo
+// showSysAlertInfo
+//----------------------------------------------------------------------
 void SysAlertsView::showSysAlertInfo()
 {
     Alert alert = model->getAlertAt( ui->vw->currentIndex() );

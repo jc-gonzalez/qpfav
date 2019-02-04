@@ -61,6 +61,10 @@ RuleEdit::~RuleEdit()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setRule
+// setRule
+//----------------------------------------------------------------------
 void RuleEdit::setRule(QString name,
                        QStringList products,
                        QVector<int> selInputs, QVector<int> selOutputs,
@@ -82,6 +86,10 @@ void RuleEdit::setRule(QString name,
     ui->cboxProcessor->setCurrentText(processor);
 }
     
+//----------------------------------------------------------------------
+// Method: getRule
+// getRule
+//----------------------------------------------------------------------
 void RuleEdit::getRule(QString & name, QStringList & inputs, QStringList & outputs,
                        QString & condition, QString & processor)
 {

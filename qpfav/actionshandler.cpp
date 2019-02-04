@@ -19,6 +19,10 @@ ActionsHandler::ActionsHandler(QWidget *parent)
     init();
 }
 
+//----------------------------------------------------------------------
+// Method: init
+// init
+//----------------------------------------------------------------------
 void ActionsHandler::init()
 {
     buildMainMenuActions();
@@ -33,6 +37,10 @@ void ActionsHandler::init()
     buildLogActions();
 }
 
+//----------------------------------------------------------------------
+// Method: buildMainMenuActions
+// buildMainMenuActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildMainMenuActions()
 {
     // File menu
@@ -145,6 +153,10 @@ void ActionsHandler::buildMainMenu()
     helpMenu->addAction(acAboutQt);
 }
 
+//----------------------------------------------------------------------
+// Method: buildLocalArchActions
+// buildLocalArchActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildLocalArchActions()
 {
     acArchiveOpenExt = new QMenu(tr("Open with ..."), mw->ui->localArchView);
@@ -170,6 +182,10 @@ void ActionsHandler::buildLocalArchActions()
     */
 }
 
+//----------------------------------------------------------------------
+// Method: buildTasksActions
+// buildTasksActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildTasksActions()
 {
     acWorkDir         = new QAction(tr("Open task working directory..."), mw->ui->tasksView);
@@ -191,16 +207,28 @@ void ActionsHandler::buildTasksActions()
     acHostReactivate  = new QAction(tr("Reactivate Host Processing"),     mw->ui->tasksView);
 }
 
+//----------------------------------------------------------------------
+// Method: buildProductViewerActions
+// buildProductViewerActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildProductViewerActions()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: buildFilterActions
+// buildFilterActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildFilterActions()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: buildAlertsActions
+// buildAlertsActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildAlertsActions()
 {
     acProcAlertDisplayInfo = new QAction(tr("Show alert information"), this);
@@ -209,26 +237,46 @@ void ActionsHandler::buildAlertsActions()
     acSysAlertDisplayInfo = new QAction(tr("Show system alert information"), this);
 }
 
+//----------------------------------------------------------------------
+// Method: buildLocArchViewActions
+// buildLocArchViewActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildLocArchViewActions()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: buildLogActions
+// buildLogActions
+//----------------------------------------------------------------------
 void ActionsHandler::buildLogActions()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: processPath
+// processPath
+//----------------------------------------------------------------------
 void ActionsHandler::processPath()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: quitQPFAV
+// quitQPFAV
+//----------------------------------------------------------------------
 void ActionsHandler::quitQPFAV()
 {
 
 }
 
+//----------------------------------------------------------------------
+// Method: showLocalArchiveContextMenu
+// showLocalArchiveContextMenu
+//----------------------------------------------------------------------
 void ActionsHandler::showLocalArchiveContextMenu(const QPoint & p)
 {
     static const int NumOfProdTypeCol = 3;
@@ -285,6 +333,10 @@ void ActionsHandler::showLocalArchiveContextMenu(const QPoint & p)
     menu.exec(mw->ui->localArchView->mapToGlobal(p));
 }
 
+//----------------------------------------------------------------------
+// Method: showTaskMonitContextMenu
+// showTaskMonitContextMenu
+//----------------------------------------------------------------------
 void ActionsHandler::showTaskMonitContextMenu(const QPoint & p)
 {
     QTableView * tblvw = qobject_cast<QTableView*>(sender());
@@ -320,6 +372,10 @@ void ActionsHandler::showTaskMonitContextMenu(const QPoint & p)
     //mw->isViewsUpdateActive = true;
 }
 
+//----------------------------------------------------------------------
+// Method: showProcAlertsContextMenu
+// showProcAlertsContextMenu
+//----------------------------------------------------------------------
 void ActionsHandler::showProcAlertsContextMenu(const QPoint & p)
 {
     QList<QAction *> actions;
@@ -334,6 +390,10 @@ void ActionsHandler::showProcAlertsContextMenu(const QPoint & p)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: showSysAlertsContextMenu
+// showSysAlertsContextMenu
+//----------------------------------------------------------------------
 void ActionsHandler::showSysAlertsContextMenu(const QPoint & p)
 {
     QList<QAction *> actions;

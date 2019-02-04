@@ -61,6 +61,10 @@ ContHostEdit::~ContHostEdit()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setContHost
+// setContHost
+//----------------------------------------------------------------------
 void ContHostEdit::setContHost(QString ip, bool isMaster, int numAg)
 {
     ui->edHostIP->setText(ip);
@@ -69,6 +73,10 @@ void ContHostEdit::setContHost(QString ip, bool isMaster, int numAg)
     ui->spbxNumAgents->setValue(numAg);
 }
 
+//----------------------------------------------------------------------
+// Method: getContHost
+// getContHost
+//----------------------------------------------------------------------
 void ContHostEdit::getContHost(QString & ip, bool & isMaster, int & numAg)
 {
     ip       = ui->edHostIP->text();

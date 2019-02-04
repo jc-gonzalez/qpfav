@@ -58,6 +58,10 @@ ExtToolsDef::~ExtToolsDef()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: initialize
+// initialize
+//----------------------------------------------------------------------
 void ExtToolsDef::initialize(MapOfUserDefTools & userTools, QStringList pts)
 {
     ui->tblwdgUserDefTools->clear();
@@ -86,6 +90,10 @@ void ExtToolsDef::initialize(MapOfUserDefTools & userTools, QStringList pts)
             this, SLOT(changeToolWithItem(QTableWidgetItem*)));
 }
 
+//----------------------------------------------------------------------
+// Method: addNewTool
+// addNewTool
+//----------------------------------------------------------------------
 void ExtToolsDef::addNewTool()
 {
     ExtToolEdit dlg;
@@ -107,12 +115,20 @@ void ExtToolsDef::addNewTool()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: editTool
+// editTool
+//----------------------------------------------------------------------
 void ExtToolsDef::editTool(QModelIndex idx)
 {
     int row = idx.row();
     editTool(row);
 }
 
+//----------------------------------------------------------------------
+// Method: editTool
+// editTool
+//----------------------------------------------------------------------
 void ExtToolsDef::editTool()
 {
     QList<QTableWidgetItem*> items = ui->tblwdgUserDefTools->selectedItems();
@@ -120,6 +136,10 @@ void ExtToolsDef::editTool()
     editTool(row);
 }
 
+//----------------------------------------------------------------------
+// Method: editTool
+// editTool
+//----------------------------------------------------------------------
 void ExtToolsDef::editTool(int row)
 {
     QString name = ui->tblwdgUserDefTools->item(row, 0)->data(0).toString();
@@ -141,6 +161,10 @@ void ExtToolsDef::editTool(int row)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: changeToolWithItem
+// changeToolWithItem
+//----------------------------------------------------------------------
 void ExtToolsDef::changeToolWithItem(QTableWidgetItem * item)
 {
     QString content = item->data(0).toString();
@@ -156,6 +180,10 @@ void ExtToolsDef::changeToolWithItem(QTableWidgetItem * item)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: removeTool
+// removeTool
+//----------------------------------------------------------------------
 void ExtToolsDef::removeTool()
 {
     QMessageBox msgBox;
@@ -177,11 +205,19 @@ void ExtToolsDef::removeTool()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: cancelDlg
+// cancelDlg
+//----------------------------------------------------------------------
 void ExtToolsDef::cancelDlg()
 {
     userDefTools = origDefTools;
 }
 
+//----------------------------------------------------------------------
+// Method: getTools
+// getTools
+//----------------------------------------------------------------------
 void ExtToolsDef::getTools(MapOfUserDefTools & userTools)
 {
     userTools = userDefTools;

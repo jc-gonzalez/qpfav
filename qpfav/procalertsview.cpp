@@ -24,6 +24,10 @@ ProcAlertsView::~ProcAlertsView()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setActionsHandler
+// setActionsHandler
+//----------------------------------------------------------------------
 void ProcAlertsView::setActionsHandler(ActionsHandler * a)
 {
     aHdl = a;
@@ -37,6 +41,10 @@ void ProcAlertsView::setActionsHandler(ActionsHandler * a)
             aHdl, SLOT(showProcAlertsContextMenu(const QPoint &)));
 }
 
+//----------------------------------------------------------------------
+// Method: showProcAlertInfo
+// showProcAlertInfo
+//----------------------------------------------------------------------
 void ProcAlertsView::showProcAlertInfo()
 {
     Alert alert = model->getAlertAt( ui->vw->currentIndex() );
@@ -49,6 +57,10 @@ void ProcAlertsView::showProcAlertInfo()
     dlg->activateWindow();
 }
 
+//----------------------------------------------------------------------
+// Method: locateAlertInProduct
+// locateAlertInProduct
+//----------------------------------------------------------------------
 void ProcAlertsView::locateAlertInProduct()
 {
 

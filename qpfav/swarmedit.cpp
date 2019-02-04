@@ -61,6 +61,10 @@ SwarmEdit::~SwarmEdit()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setSwarm
+// setSwarm
+//----------------------------------------------------------------------
 void SwarmEdit::setSwarm(QString id, QString name,
                          QString ip, QStringList wips, int scale,
                          QString image, QString exe, QString args)
@@ -75,6 +79,10 @@ void SwarmEdit::setSwarm(QString id, QString name,
     ui->edArgs->setText(args);
 }
     
+//----------------------------------------------------------------------
+// Method: getSwarm
+// getSwarm
+//----------------------------------------------------------------------
 void SwarmEdit::getSwarm(QString & id, QString & name,
                          QString & ip, QStringList & wips, int & scale,
                          QString & image, QString & exe, QString & args)

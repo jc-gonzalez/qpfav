@@ -126,6 +126,10 @@ Alert::VariableHdl Alert::createNewVar(std::string n, double i, double ll, doubl
     return v;
 }
 
+//----------------------------------------------------------------------
+// Method: what
+// what
+//----------------------------------------------------------------------
 std::string Alert::what() const
 {
     std::stringstream ss;
@@ -150,6 +154,10 @@ std::string Alert::what() const
     return ss.str();
 }
 
+//----------------------------------------------------------------------
+// Method: varAsTuple
+// varAsTuple
+//----------------------------------------------------------------------
 std::string Alert::varAsTuple() const
 {
     std::stringstream ss;
@@ -188,6 +196,10 @@ Alert::TimeStampType Alert::now()
     return ts;
 }
 
+//----------------------------------------------------------------------
+// Method: here
+// here
+//----------------------------------------------------------------------
 std::string Alert::here(const char * where, int line)
 {
     std::stringstream ss;
@@ -195,6 +207,10 @@ std::string Alert::here(const char * where, int line)
     return ss.str();
 }
 
+//----------------------------------------------------------------------
+// Method: timeStampString
+// timeStampString
+//----------------------------------------------------------------------
 std::string Alert::timeStampString() const
 {
     char buf[80];
@@ -202,6 +218,10 @@ std::string Alert::timeStampString() const
     return std::string(buf);
 }
 
+//----------------------------------------------------------------------
+// Method: allMessages
+// allMessages
+//----------------------------------------------------------------------
 std::string Alert::allMessages(std::string sep) const
 {
     std::string allMsgs(messages.at(0));
@@ -211,6 +231,10 @@ std::string Alert::allMessages(std::string sep) const
     return allMsgs;
 }
 
+//----------------------------------------------------------------------
+// Method: info
+// info
+//----------------------------------------------------------------------
 std::string Alert::info() const
 {
     return (timeStampString() +
@@ -218,6 +242,10 @@ std::string Alert::info() const
             TypeName[type] + " " + origin + ": " + what());
 }
 
+//----------------------------------------------------------------------
+// Method: dump
+// dump
+//----------------------------------------------------------------------
 std::string Alert::dump() const
 {
     return (timeStampString() +

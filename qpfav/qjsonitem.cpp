@@ -33,6 +33,10 @@ QJsonTreeItem::~QJsonTreeItem()
 
 }
 
+//----------------------------------------------------------------------
+// Method: appendChild
+// appendChild
+//----------------------------------------------------------------------
 void QJsonTreeItem::appendChild(QJsonTreeItem *item)
 {
     mChilds.append(item);
@@ -48,11 +52,19 @@ QJsonTreeItem *QJsonTreeItem::parent()
     return mParent;
 }
 
+//----------------------------------------------------------------------
+// Method: childCount
+// childCount
+//----------------------------------------------------------------------
 int QJsonTreeItem::childCount() const
 {
     return mChilds.count();
 }
 
+//----------------------------------------------------------------------
+// Method: row
+// row
+//----------------------------------------------------------------------
 int QJsonTreeItem::row() const
 {
     if (mParent)
@@ -61,16 +73,28 @@ int QJsonTreeItem::row() const
     return 0;
 }
 
+//----------------------------------------------------------------------
+// Method: setKey
+// setKey
+//----------------------------------------------------------------------
 void QJsonTreeItem::setKey(const QString &key)
 {
     mKey = key;
 }
 
+//----------------------------------------------------------------------
+// Method: setValue
+// setValue
+//----------------------------------------------------------------------
 void QJsonTreeItem::setValue(const QString &value)
 {
     mValue = value;
 }
 
+//----------------------------------------------------------------------
+// Method: setType
+// setType
+//----------------------------------------------------------------------
 void QJsonTreeItem::setType(const QJsonValue::Type &type)
 {
     mType = type;

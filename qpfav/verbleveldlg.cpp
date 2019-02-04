@@ -64,6 +64,10 @@ VerbLevelDlg::VerbLevelDlg(QWidget *parent) :
             this, SLOT(setVerbosityLevel(int)));
 }
 
+//----------------------------------------------------------------------
+// Method: setVerbosityLevel
+// setVerbosityLevel
+//----------------------------------------------------------------------
 void VerbLevelDlg::setVerbosityLevel(int lvl)
 {
     currentLevel = ui->listWidget->currentItem()->text();
@@ -75,6 +79,10 @@ QString VerbLevelDlg::getVerbosityLevelName()
     return currentLevel;
 }
 
+//----------------------------------------------------------------------
+// Method: getVerbosityLevelIdx
+// getVerbosityLevelIdx
+//----------------------------------------------------------------------
 int VerbLevelDlg::getVerbosityLevelIdx()
 {
     return currentLevelIdx;

@@ -72,6 +72,10 @@ Browser::~Browser()
 {
 }
 
+//----------------------------------------------------------------------
+// Method: exec
+// exec
+//----------------------------------------------------------------------
 void Browser::exec()
 {
     QSqlQueryModel *model = new QSqlQueryModel(table);
@@ -110,6 +114,10 @@ QSqlError Browser::addConnection(const QString &driver, const QString &dbName, c
     return err;
 }
 
+//----------------------------------------------------------------------
+// Method: addConnection
+// addConnection
+//----------------------------------------------------------------------
 void Browser::addConnection(DBConnection & conn)
 {
     QSqlError err = addConnection(conn.driverName, conn.databaseName, conn.hostName,
@@ -121,6 +129,10 @@ void Browser::addConnection(DBConnection & conn)
     }
 }
 
+//----------------------------------------------------------------------
+// Method: showTable
+// showTable
+//----------------------------------------------------------------------
 void Browser::showTable(const QString &t)
 {
     QSqlTableModel *model = new CustomModel(table, connectionWidget->currentDatabase());
@@ -140,6 +152,10 @@ void Browser::showTable(const QString &t)
 #endif
 }
 
+//----------------------------------------------------------------------
+// Method: showMetaData
+// showMetaData
+//----------------------------------------------------------------------
 void Browser::showMetaData(const QString &t)
 {
     QSqlRecord rec = connectionWidget->currentDatabase().record(t);
@@ -179,6 +195,10 @@ void Browser::showMetaData(const QString &t)
 #endif
 }
 
+//----------------------------------------------------------------------
+// Method: insertRow
+// insertRow
+//----------------------------------------------------------------------
 void Browser::insertRow()
 {
     QSqlTableModel *model = qobject_cast<QSqlTableModel *>(table->model());
@@ -193,6 +213,10 @@ void Browser::insertRow()
     table->edit(insertIndex);
 }
 
+//----------------------------------------------------------------------
+// Method: deleteRow
+// deleteRow
+//----------------------------------------------------------------------
 void Browser::deleteRow()
 {
     QSqlTableModel *model = qobject_cast<QSqlTableModel *>(table->model());
@@ -211,6 +235,10 @@ void Browser::deleteRow()
 #endif
 }
 
+//----------------------------------------------------------------------
+// Method: updateActions
+// updateActions
+//----------------------------------------------------------------------
 void Browser::updateActions()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -235,6 +263,10 @@ void Browser::updateActions()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: about
+// about
+//----------------------------------------------------------------------
 void Browser::about()
 {
     QMessageBox::about(this, tr("About"), tr("The SQL Browser demonstration "
@@ -242,6 +274,10 @@ void Browser::about()
                                              "statements on a live database"));
 }
 
+//----------------------------------------------------------------------
+// Method: on_fieldStrategyAction_triggered
+// on_fieldStrategyAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_fieldStrategyAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -249,6 +285,10 @@ void Browser::on_fieldStrategyAction_triggered()
         tm->setEditStrategy(QSqlTableModel::OnFieldChange);
 }
 
+//----------------------------------------------------------------------
+// Method: on_rowStrategyAction_triggered
+// on_rowStrategyAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_rowStrategyAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -256,6 +296,10 @@ void Browser::on_rowStrategyAction_triggered()
         tm->setEditStrategy(QSqlTableModel::OnRowChange);
 }
 
+//----------------------------------------------------------------------
+// Method: on_manualStrategyAction_triggered
+// on_manualStrategyAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_manualStrategyAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -263,6 +307,10 @@ void Browser::on_manualStrategyAction_triggered()
         tm->setEditStrategy(QSqlTableModel::OnManualSubmit);
 }
 
+//----------------------------------------------------------------------
+// Method: on_submitAction_triggered
+// on_submitAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_submitAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -270,6 +318,10 @@ void Browser::on_submitAction_triggered()
         tm->submitAll();
 }
 
+//----------------------------------------------------------------------
+// Method: on_revertAction_triggered
+// on_revertAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_revertAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());
@@ -277,6 +329,10 @@ void Browser::on_revertAction_triggered()
         tm->revertAll();
 }
 
+//----------------------------------------------------------------------
+// Method: on_selectAction_triggered
+// on_selectAction_triggered
+//----------------------------------------------------------------------
 void Browser::on_selectAction_triggered()
 {
     QSqlTableModel * tm = qobject_cast<QSqlTableModel *>(table->model());

@@ -9,6 +9,10 @@ DarkPalette::DarkPalette(QMainWindow * parent) : mw(parent)
 {
 }
 
+//----------------------------------------------------------------------
+// Method: apply
+// apply
+//----------------------------------------------------------------------
 void DarkPalette::apply(QString styleName, QString palName)
 {
     qApp->setStyle(QStyleFactory::create(styleName));

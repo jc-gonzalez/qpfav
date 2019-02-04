@@ -55,6 +55,10 @@ DlgAlert::~DlgAlert()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setAlert
+// setAlert
+//----------------------------------------------------------------------
 void DlgAlert::setAlert(Alert & alert)
 {
     ui->edTimestamp->setText(QString::fromStdString(alert.timeStampString()));

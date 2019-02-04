@@ -72,6 +72,10 @@ DlgReproc::~DlgReproc()
     delete ui;
 }
 
+//----------------------------------------------------------------------
+// Method: setLabels
+// setLabels
+//----------------------------------------------------------------------
 void DlgReproc::setLabels(QString aTitle, QString desc, QString aHeading,
                           bool showAddOpt)
 {
@@ -81,6 +85,10 @@ void DlgReproc::setLabels(QString aTitle, QString desc, QString aHeading,
     ui->frmAdditionalOpts->setVisible(showAddOpt);
 }
         
+//----------------------------------------------------------------------
+// Method: setFields
+// setFields
+//----------------------------------------------------------------------
 void DlgReproc::setFields(QStringList inProds, OutputsLocation out,
                           int flags)
     
@@ -102,6 +110,10 @@ void DlgReproc::setFields(QStringList inProds, OutputsLocation out,
     ui->chkBrowserVOSpace->setChecked(flags & OpenVOSpace);
 }
     
+//----------------------------------------------------------------------
+// Method: getFields
+// getFields
+//----------------------------------------------------------------------
 void DlgReproc::getFields(QStringList & inProds, OutputsLocation & out,
                           QString & outDir, int & flags)
 {
@@ -131,6 +143,10 @@ void DlgReproc::getFields(QStringList & inProds, OutputsLocation & out,
                  OpenVOSpace : NullFlags));
 }
 
+//----------------------------------------------------------------------
+// Method: selectLocalFolder
+// selectLocalFolder
+//----------------------------------------------------------------------
 void DlgReproc::selectLocalFolder()
 {
     QString pathName("/");
@@ -143,6 +159,10 @@ void DlgReproc::selectLocalFolder()
     }
 }
     
+//----------------------------------------------------------------------
+// Method: selectLocalFolderToIPythonWorkDir
+// selectLocalFolderToIPythonWorkDir
+//----------------------------------------------------------------------
 void DlgReproc::selectLocalFolderToIPythonWorkDir(bool togl)
 {
     if (togl) {

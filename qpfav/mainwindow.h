@@ -72,7 +72,7 @@ public slots:
     // Product Viewers
     void addToProdViewersList(QString);
 
-    MapOfUserDefTools & getUserTools();
+    void getUserTools(MapOfUserDefTools & u);
 
 private:
     void configure(QString & cfgFile);

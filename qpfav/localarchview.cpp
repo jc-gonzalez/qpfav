@@ -42,11 +42,25 @@ LocalArchiveView::LocalArchiveView(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
+}
 
+//----------------------------------------------------------------------
+// Destructor
+//----------------------------------------------------------------------
+LocalArchiveView::~LocalArchiveView()
+{
+    delete ui;
+}
+
+//----------------------------------------------------------------------
+// METHOD: Define parent main window and configure widget
+//----------------------------------------------------------------------
+void LocalArchiveView::init(MainWindow * x)
+{
     std::vector<std::string> pTypes;
     int siz = 0;
 
-    mw = qobject_cast<MainWindow*>(parent);
+    mw = x;
     mw->getProductTypes(pTypes, siz);
 
     ui->vw->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -78,14 +92,7 @@ LocalArchiveView::LocalArchiveView(QWidget *parent) :
     //std::thread(&LocalArchiveView::run, this).detach();
     QTimer * refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(run()));
-    refreshTimer->start(2000);}
-
-//----------------------------------------------------------------------
-// Destructor
-//----------------------------------------------------------------------
-LocalArchiveView::~LocalArchiveView()
-{
-    delete ui;
+    refreshTimer->start(2000);
 }
 
 //----------------------------------------------------------------------
@@ -187,6 +194,10 @@ void LocalArchiveView::aresize()
     }
 }
 
+//----------------------------------------------------------------------
+// Method: setActionsHandler
+// setActionsHandler
+//----------------------------------------------------------------------
 void LocalArchiveView::setActionsHandler(ActionsHandler * a)
 {
     aHdl = a;
@@ -220,6 +231,10 @@ void LocalArchiveView::setActionsHandler(ActionsHandler * a)
             this, SLOT(openLocalArchiveElement(QModelIndex)));
 }
 
+//----------------------------------------------------------------------
+// Method: openLocation
+// openLocation
+//----------------------------------------------------------------------
 void LocalArchiveView::openLocation()
 {
     QModelIndex m = ui->vw->currentIndex();
@@ -229,6 +244,10 @@ void LocalArchiveView::openLocation()
     QDesktopServices::openUrl(QUrl::fromLocalFile(url));
 }
 
+//----------------------------------------------------------------------
+// Method: openWithDefault
+// openWithDefault
+//----------------------------------------------------------------------
 void LocalArchiveView::openWithDefault()
 {
     QModelIndex m = ui->vw->currentIndex();
@@ -244,8 +263,10 @@ void LocalArchiveView::openWith()
     QAction * ac = qobject_cast<QAction*>(sender());
     QString key = ac->text();
 
-    MapOfUserDefTools & userDefTools = mw->getUserTools();
+    MapOfUserDefTools userDefTools;
+    mw->getUserTools(userDefTools);
 
+    std::cerr << userDefTools.size() << " - " << key.toStdString() << std::endl;
     const QUserDefTool & udt = userDefTools.value(key);
 
     QModelIndex m = ui->vw->currentIndex();
@@ -266,6 +287,11 @@ void LocalArchiveView::openWith()
     args.replace("%F", fileName);
     args.replace("%p", fs.absolutePath());
     args.replace("%x", fs.suffix());
+
+    std::cerr << fileName.toStdString() << ", "
+              << udt.exe.toStdString() << ", "
+              << args.toStdString() << ", "
+              << std::endl;
 
     // Count how many %n placeholders are
     int nph = 0;
@@ -319,10 +345,17 @@ void LocalArchiveView::openWith()
 
     //  Build command line and run the tool
     QString cmd(QString("%1 %2").arg(udt.exe).arg(args));
+
+    std::cerr << cmd.toStdString() << std::endl;
+
     QProcess tool;
     tool.startDetached(cmd);
 }
 
+//----------------------------------------------------------------------
+// Method: reprocessProduct
+// reprocessProduct
+//----------------------------------------------------------------------
 void LocalArchiveView::reprocessProduct()
 {
     QPoint p = aHdl->acReprocess->property("clickedItem").toPoint();
@@ -377,6 +410,10 @@ void LocalArchiveView::reprocessProduct()
 */
 }
 
+//----------------------------------------------------------------------
+// Method: analyzeProduct
+// analyzeProduct
+//----------------------------------------------------------------------
 void LocalArchiveView::analyzeProduct()
 {
     // Create product list
@@ -428,6 +465,10 @@ void LocalArchiveView::analyzeProduct()
     */
 }
 
+//----------------------------------------------------------------------
+// Method: exportProduct
+// exportProduct
+//----------------------------------------------------------------------
 void LocalArchiveView::exportProduct()
 {
     /*
@@ -508,6 +549,10 @@ void LocalArchiveView::exportProduct()
     */
 }
 
+//----------------------------------------------------------------------
+// Method: openLocalArchiveElement
+// openLocalArchiveElement
+//----------------------------------------------------------------------
 void LocalArchiveView::openLocalArchiveElement(QModelIndex idx)
 {
     int row = idx.row();
