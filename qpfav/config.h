@@ -4,6 +4,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QMap>
+#include <QHostAddress>
+#include <QNetworkInterface>
+
+#include <iostream>
 
 #define Sec(g)         DefGrp(g) \
                        DefGrpArray(g) \
@@ -57,6 +61,7 @@ private:
     //----------------------------------------------------------------------
     Config() {}
 
+    void obtainCurrentHostIP();
     void storeAgentsAndHosts();
     
 private:
@@ -96,6 +101,9 @@ public:
 
     QMap<QString,QStringList> agentsInHost;
     QMap<QString,QString>     hostForAgent;
+
+    bool hostIsMaster;
+    QString currentHostIP;
 };
 
 

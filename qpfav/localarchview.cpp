@@ -23,6 +23,7 @@
 #include "config.h"
 #include "util.h"
 #include "dlgreproc.h"
+#include "launcher.h"
 
 using namespace QPF;
 
@@ -417,40 +418,29 @@ void LocalArchiveView::reprocessProduct()
 void LocalArchiveView::analyzeProduct()
 {
     // Create product list
-    /*
     QAction * caller = qobject_cast<QAction*>(sender());
-
     QPoint p = caller->property("clickedItem").toPoint();
 
     QModelIndexList list = ui->vw->selectionModel()->selectedIndexes();
-    ProductList analyzeProducts;
-    FileNameSpec fns;
-    ProductMetadata md;
-
+    QStringList paths;
     foreach (QModelIndex m, list) {
         if (m.column() == NumOfURLCol) {
             QString url = model->index(m.row(), NumOfURLCol, m.parent()).data().toString();
-            fns.parseFileName(QUrl(url).path().toStdString(), md);
-            md["urlSpace"]       = LocalArchSpace;
-            md["procTargetType"] = UA_LOCAL;
-            md["procTarget"]     = cfg.connectivity.ipython.path();
-            analyzeProducts.products.push_back(md);
+            paths << QUrl(url).path();
         }
     }
-
+    
     QString acName = caller->objectName();
     if (acName == "AnalyzeWithIPython") {
-
+        
         // Link products to IPython working directory
-        URLHandler urlh;
-        for (auto & m : analyzeProducts.products) {
-            urlh.setProduct(m);
-            m = urlh.fromLocalArch2ExportLocation();
-        }
+        replicateProducts(paths, cfg.network()["masterNode"].toString(), 
+                          cfg.connectivity()["ipython"].toObject()["path"].toString());
 
         // Launch IPython session
-        IPythonLauncher * ipy = new IPythonLauncher(cfg.connectivity.ipython.cmd(),
-                                                    cfg.connectivity.ipython.path());
+        const QJsonObject & o = cfg.connectivity()["ipython"].toObject();
+        IPythonLauncher * ipy = new IPythonLauncher(o["cmd"].toString(), 
+                                                    o["path"].toString());
         ipy->exec();
 
     } else if (acName == "AnalyzeWithJupyter") {
@@ -462,7 +452,6 @@ void LocalArchiveView::analyzeProduct()
         //ERROR
 
     }
-    */
 }
 
 //----------------------------------------------------------------------
@@ -547,6 +536,30 @@ void LocalArchiveView::exportProduct()
         statusBar()->showMessage(tr("Products stored in VOSpace successfully"), MessageDelay);
     }
     */
+}
+
+//----------------------------------------------------------------------
+// Method: replicateProducts
+// Transfer copy of products to export locations
+//----------------------------------------------------------------------
+void LocalArchiveView::replicateProducts(QStringList lst, QString from, QString to)
+{
+    QString src("");
+    QString cmd("cp");
+    if (!cfg.hostIsMaster) {
+        QString userName(getenv("USER"));
+        src = userName + "@" + from + ":";
+        cmd = "scp";
+    }
+
+    QStringList args;
+    foreach (QString p, lst) { args << src + p; }
+    args << to;
+
+    std::cerr << cmd.toStdString() << " " << args.join(" ").toStdString() << std::endl;
+    
+    QProcess proc;    
+    proc.startDetached(cmd, args);
 }
 
 //----------------------------------------------------------------------

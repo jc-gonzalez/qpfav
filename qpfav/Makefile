@@ -85,7 +85,8 @@ SOURCES       = main.cpp \
 		qjsonmodel.cpp \
 		dlgreproc.cpp \
 		productsviewer.cpp \
-		xmlsyntaxhighlight.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
+		xmlsyntaxhighlight.cpp \
+		launcher.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
 		../build/qpfav.dir/moc/moc_mainwindow.cpp \
 		../build/qpfav.dir/moc/moc_procalertsview.cpp \
 		../build/qpfav.dir/moc/moc_sysalertsview.cpp \
@@ -152,6 +153,7 @@ OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/dlgreproc.o \
 		../build/qpfav.dir/obj/productsviewer.o \
 		../build/qpfav.dir/obj/xmlsyntaxhighlight.o \
+		../build/qpfav.dir/obj/launcher.o \
 		../build/qpfav.dir/obj/qrc_icons_nav.o \
 		../build/qpfav.dir/obj/moc_mainwindow.o \
 		../build/qpfav.dir/obj/moc_procalertsview.o \
@@ -388,7 +390,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		qjsonmodel.h \
 		dlgreproc.h \
 		productsviewer.h \
-		xmlsyntaxhighlight.h main.cpp \
+		xmlsyntaxhighlight.h \
+		launcher.h main.cpp \
 		mainwindow.cpp \
 		darkpalette.cpp \
 		procalertsview.cpp \
@@ -423,7 +426,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		qjsonmodel.cpp \
 		dlgreproc.cpp \
 		productsviewer.cpp \
-		xmlsyntaxhighlight.cpp
+		xmlsyntaxhighlight.cpp \
+		launcher.cpp
 QMAKE_TARGET  = qpfav
 DESTDIR       = ../build/qpfav.dir/
 TARGET        = ../build/qpfav.dir/qpfav
@@ -799,8 +803,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents icons_nav.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h qjsonviewer.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h dlgreproc.h productsviewer.h xmlsyntaxhighlight.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp qjsonviewer.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp dlgreproc.cpp productsviewer.cpp xmlsyntaxhighlight.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h qjsonviewer.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h dlgreproc.h productsviewer.h xmlsyntaxhighlight.h launcher.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp qjsonviewer.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp dlgreproc.cpp productsviewer.cpp xmlsyntaxhighlight.cpp launcher.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui procalertsview.ui sysalertsview.ui tasksview.ui localarchview.ui exttooledit.ui exttoolsdef.ui configtool.ui dbbrowser.ui verbleveldlg.ui browserwidget.ui conthostedit.ui swarmedit.ui ruleedit.ui dlgalert.ui qjsonviewer.ui dlgjsonviewer.ui dlgreproc.ui productsviewer.ui $(DISTDIR)/
 
 
@@ -1516,12 +1520,18 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		hmitypes.h \
 		util.h \
 		../build/qpfav.dir/ui/ui_productsviewer.h \
-		dlgjsonviewer.h \
+		xmlsyntaxhighlight.h \
+		qjsonviewer.h \
+		qjsonmodel.h \
+		qjsonitem.h \
 		config.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/productsviewer.o productsviewer.cpp
 
 ../build/qpfav.dir/obj/xmlsyntaxhighlight.o: xmlsyntaxhighlight.cpp xmlsyntaxhighlight.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/xmlsyntaxhighlight.o xmlsyntaxhighlight.cpp
+
+../build/qpfav.dir/obj/launcher.o: launcher.cpp launcher.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/launcher.o launcher.cpp
 
 ../build/qpfav.dir/obj/qrc_icons_nav.o: ../build/qpfav.dir/rcc/qrc_icons_nav.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/qrc_icons_nav.o ../build/qpfav.dir/rcc/qrc_icons_nav.cpp

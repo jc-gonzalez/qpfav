@@ -54,7 +54,8 @@ SOURCES += \
     qjsonmodel.cpp \
     dlgreproc.cpp \
     productsviewer.cpp \
-    xmlsyntaxhighlight.cpp
+    xmlsyntaxhighlight.cpp \
+    launcher.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -96,7 +97,8 @@ HEADERS  += \
     qjsonmodel.h \
     dlgreproc.h \
     productsviewer.h \
-    xmlsyntaxhighlight.h
+    xmlsyntaxhighlight.h \
+    launcher.h
 
 FORMS    += \
     mainwindow.ui \

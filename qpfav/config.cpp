@@ -30,9 +30,45 @@ bool Config::load(QString fileName)
     QJsonDocument loadDoc(QJsonDocument::fromJson(readData));
     config = loadDoc.object();
 
+    obtainCurrentHostIP();
+
+    PATHBase    = general("workArea").toString();
+
+    PATHProcs   = PATHBase + "/bin";
+    PATHData    = PATHBase + "/data";
+    PATHRun     = PATHBase + "/run";
+    PATHWww     = PATHBase + "/www";    
+    PATHBin     = PATHRun + "/bin";
+
+    storage.inbox    = PATHData + "/inbox";
+    storage.archive  = PATHData + "/archive";
+    storage.gateway  = PATHData + "/gateway";
+    storage.userArea = PATHData + "/user";
+
     storeAgentsAndHosts();
 
     return true;
+}
+
+//----------------------------------------------------------------------
+// Method: obtainCurrentHostIP
+// Obtain current host IP
+//----------------------------------------------------------------------
+void Config::obtainCurrentHostIP()
+{
+    QList<QHostAddress> list = QNetworkInterface::allAddresses();
+    for (int k = 0; k < list.count(); k++) {
+        if (!list[k].isLoopback()) {
+            if (list[k].protocol() == QAbstractSocket::IPv4Protocol) {
+                QString ip = list[k].toString();
+                if (ip.split(".").last() != "1") {
+                    std::cerr << list[k].toString().toStdString() << "\n";
+                    currentHostIP = ip;
+                }
+            }
+        }
+    }
+    hostIsMaster = (currentHostIP == network()["masterNode"].toString());
 }
 
 //----------------------------------------------------------------------
@@ -51,7 +87,7 @@ void Config::storeAgentsAndHosts()
         bool storeInMaps = (agentsInHost.find(pnName) == agentsInHost.end());
 
         QStringList agList;
-        for (unsigned int i = 0; i < numOfTskAgents; ++i) {
+        for (int i = 0; i < numOfTskAgents; ++i) {
             QString nn = QString("TskAgent_%1_%2")
                 .arg(j,2,10,QLatin1Char('0'))
                 .arg(i+1,2,10,QLatin1Char('0'));

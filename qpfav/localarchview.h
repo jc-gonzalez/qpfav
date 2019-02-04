@@ -53,7 +53,8 @@ public slots:
 
 private slots:
     void openLocalArchiveFullPath(QString fullPath);
-    
+    void replicateProducts(QStringList lst, QString from, QString to);
+
 private:
     enum AutoBehavior { AUTO_UPDATE, 
                         AUTO_EXPAND, 
