@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QVector>
 #include <QColor>
+#include <QStatusBar>
 
 #include <QStandardItemModel>
 

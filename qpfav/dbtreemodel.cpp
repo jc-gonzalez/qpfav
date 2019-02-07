@@ -253,7 +253,7 @@ void DBTreeModel::execQuery(QString & qry, QSqlDatabase & db)
     int chld = 0;
 
     rowsFromQuery = 0;
-    uint internal_id;
+    int internal_id;
 
     // Loop over all the results from the query
     while (q.next()) {

@@ -1,8 +1,12 @@
-#-------------------------------------------------
+#----------------------------------------------------------------------
+# QPFAV - QPF Archive Viewer
+#----------------------------------------------------------------------
+# Project file for the compilation of the QPFAV executable
+# using Qt's QMake
 #
-# Project created by QtCreator 2018-10-15T13:43:06
-#
-#-------------------------------------------------
+# Created by J C Gonzalez
+# Copyright (C) 2018-2019 by the Euclid SOC Team at ESAC
+#----------------------------------------------------------------------
 
 TARGET = qpfav
 VERSION = "2.1"
@@ -55,7 +59,12 @@ SOURCES += \
     dlgreproc.cpp \
     productsviewer.cpp \
     xmlsyntaxhighlight.cpp \
-    launcher.cpp
+    launcher.cpp \
+    dlguserpwd.cpp \
+    keyevt.cpp \
+    voshdl.cpp \
+    rwc.cpp \
+    filetools.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -98,34 +107,47 @@ HEADERS  += \
     dlgreproc.h \
     productsviewer.h \
     xmlsyntaxhighlight.h \
-    launcher.h
+    launcher.h \
+    dlguserpwd.h \
+    keyevt.h \
+    rwc.h \
+    voshdl.h \
+    filetools.h \
+    scopeexit.h
 
-FORMS    += \
-    mainwindow.ui \
+MAINGUI  += \
+    mainwindow.ui 
+
+WIDGETS  += \
     procalertsview.ui \
     sysalertsview.ui \
     tasksview.ui \
     localarchview.ui \
-    exttooledit.ui \
-    exttoolsdef.ui \
     configtool.ui \
-    dbbrowser.ui \
-    verbleveldlg.ui \
     browserwidget.ui \
     conthostedit.ui \
     swarmedit.ui \
     ruleedit.ui \
-    dlgalert.ui \
     qjsonviewer.ui \
+    productsviewer.ui 
+
+DIALOGS  += \
+    exttooledit.ui \
+    exttoolsdef.ui \
+    dbbrowser.ui \
+    verbleveldlg.ui \
+    dlgalert.ui \
     dlgjsonviewer.ui \
     dlgreproc.ui \
-    productsviewer.ui 
+    dlguserpwd.ui 
+
+FORMS = $$MAINGUI $$WIDGETS $$DIALOGS
 
 RESOURCES += \
     icons_nav.qrc
 
 DISTFILES +=
 
-INCLUDEPATH += $$PWD/../qslog
-LIBS += -L$$PWD/../build/qslog.dir -lqslog
+INCLUDEPATH += $$PWD/../qslog 
+LIBS += -L$$PWD/../build/qslog.dir -lqslog -lcurl -L/lib64 -lX11
 DEFINES += QSLOG_IS_SHARED_LIBRARY_IMPORT

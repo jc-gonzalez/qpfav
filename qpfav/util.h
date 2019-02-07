@@ -4,8 +4,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
-
-#include <map>
+#include <QMap>
 
 //== Tasks
 
@@ -24,8 +23,8 @@
 enum TaskStatus { TLIST_TASK_STATUS };
 #undef T
 
-extern std::map<TaskStatus, std::string> TaskStatusName;
-extern std::map<std::string, TaskStatus> TaskStatusValue;
+extern QMap<TaskStatus, QString> TaskStatusName;
+extern QMap<QString, TaskStatus> TaskStatusValue;
 
 //== User Areas
 
@@ -40,11 +39,11 @@ extern std::map<std::string, TaskStatus> TaskStatusValue;
 enum UserAreaId { TLISTOF_USER_AREA_TYPES };
 #undef T
 
-#define T(x) std::string( #x )
-extern const std::string UserAreaName[];
+#define T(x) QString( #x )
+extern const QString UserAreaName[];
 #undef T
 
-extern const std::map<std::string, UserAreaId> UserAreaIdx;
+extern const QMap<QString, UserAreaId> UserAreaIdx;
 
 //== Reprocessing flags and locations
 
@@ -69,5 +68,8 @@ QString getFileContent(QFile * file);
 QString getFileContent(QString fileName);
 
 void binaryGetFITSHeader(QString fileName, QString & str);
+
+#define showStatus(x) \
+  mw->statusBar()->showMessage(x, 2000);
 
 #endif // UTIL_H

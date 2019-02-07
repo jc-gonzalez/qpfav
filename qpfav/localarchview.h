@@ -53,7 +53,7 @@ public slots:
 
 private slots:
     void openLocalArchiveFullPath(QString fullPath);
-    void replicateProducts(QStringList lst, QString from, QString to);
+    void copyProducts(QStringList lst, QString from, QString to);
 
 private:
     enum AutoBehavior { AUTO_UPDATE, 
@@ -71,6 +71,8 @@ private:
 
     MainWindow * mw;
     ActionsHandler * aHdl;
+
+    static const int NumOfURLCol;
 };
 
 #endif // LOCALARCHVIEW_H

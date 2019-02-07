@@ -14,7 +14,7 @@ using Configuration::cfg;
 
 #include <iostream>
 
-#define TRC(s) std::cerr << s << std::endl;
+#define TRC(s) std::cerr << (s).toStdString() << std::endl;
 
 #define TASK_NAME_COLUMN    3
 #define TASK_STATUS_COLUMN  6
@@ -156,12 +156,12 @@ void TasksView::doTaskPause()
     QModelIndex idx        = ui->vw->currentIndex();
     QModelIndex statusIdx  = model->index(idx.row(), TASK_STATUS_COLUMN);
     TaskStatus  status     = TaskStatusValue[model->data(statusIdx)
-                                             .toString().toStdString()];
+                                             .toString()];
 
     if (status == TASK_RUNNING) {
         QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
         QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
-        std::string taskId = v["Id"].toString().toStdString();
+        QString taskId = v["Id"].toString();
         // hmiNode->sendProcHdlCmd(PROC_TASK, taskId, PROC_HDL_PAUSE);
     }
 }
@@ -175,12 +175,12 @@ void TasksView::doTaskResume()
     QModelIndex idx        = ui->vw->currentIndex();
     QModelIndex statusIdx  = model->index(idx.row(), TASK_STATUS_COLUMN);
     TaskStatus  status     = TaskStatusValue[model->data(statusIdx)
-                                             .toString().toStdString()];
+                                             .toString()];
 
     if (status == TASK_PAUSED) {
         QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
         QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
-        std::string taskId = v["Id"].toString().toStdString();
+        QString taskId = v["Id"].toString();
         // hmiNode->sendProcHdlCmd(PROC_TASK, taskId, PROC_HDL_RESUME);
     }
 }
@@ -194,12 +194,12 @@ void TasksView::doTaskCancel()
     QModelIndex idx        = ui->vw->currentIndex();
     QModelIndex statusIdx  = model->index(idx.row(), TASK_STATUS_COLUMN);
     TaskStatus  status     = TaskStatusValue[model->data(statusIdx)
-                                             .toString().toStdString()];
+                                             .toString()];
 
     if ((status == TASK_PAUSED) || (status == TASK_RUNNING)) {
         QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
         QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
-        std::string taskId = v["Id"].toString().toStdString();
+        QString taskId = v["Id"].toString();
         // hmiNode->sendProcHdlCmd(PROC_TASK, taskId, PROC_HDL_CANCEL);
     }
 }
@@ -214,16 +214,15 @@ void TasksView::doAgentSuspend()
     QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
-    std::string agentId = v["Info"].toObject()["Agent"].toString().toStdString();
-    QString qagentId = QString::fromStdString(agentId);
-    if (agentProcStatus.find(qagentId) == agentProcStatus.end()) {
-        agentProcStatus[qagentId] = TASK_RUNNING;
+    QString agentId = v["Info"].toObject()["Agent"].toString();
+    if (agentProcStatus.find(agentId) == agentProcStatus.end()) {
+        agentProcStatus[agentId] = TASK_RUNNING;
     }
-    TaskStatus agentStatus = agentProcStatus[qagentId];
+    TaskStatus agentStatus = agentProcStatus[agentId];
     TRC("Agent: " + agentId + " has status " + TaskStatusName[agentStatus]);
     if (agentStatus == TASK_RUNNING) {
         // hmiNode->sendProcHdlCmd(PROC_AGENT, agentId, PROC_HDL_SUSPEND);
-        agentProcStatus[qagentId] = TASK_PAUSED;
+        agentProcStatus[agentId] = TASK_PAUSED;
     }
 }
 
@@ -237,15 +236,14 @@ void TasksView::doAgentStop()
     QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
-    std::string agentId = v["Info"].toObject()["Agent"].toString().toStdString();
-    QString qagentId = QString::fromStdString(agentId);
-    if (agentProcStatus.find(qagentId) == agentProcStatus.end()) {
-        agentProcStatus[qagentId] = TASK_RUNNING;
+    QString agentId = v["Info"].toObject()["Agent"].toString();
+    if (agentProcStatus.find(agentId) == agentProcStatus.end()) {
+        agentProcStatus[agentId] = TASK_RUNNING;
     }
-    TaskStatus agentStatus = agentProcStatus[qagentId];
+    TaskStatus agentStatus = agentProcStatus[agentId];
     if ((agentStatus == TASK_RUNNING) || (agentStatus == TASK_PAUSED)) {
         // hmiNode->sendProcHdlCmd(PROC_AGENT, agentId, PROC_HDL_STOP);
-        agentProcStatus[qagentId] = TASK_PAUSED;
+        agentProcStatus[agentId] = TASK_PAUSED;
     }
 }
 
@@ -259,16 +257,15 @@ void TasksView::doAgentReactivate()
     QModelIndex dataIdx    = model->index(idx.row(), TASK_DATA_COLUMN);
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
-    QString qagentId = v["Info"].toObject()["Agent"].toString();
-    std::string agentId = qagentId.toStdString();
-    if (agentProcStatus.find(qagentId) == agentProcStatus.end()) {
-        agentProcStatus[qagentId] = TASK_RUNNING;
+    QString agentId = v["Info"].toObject()["Agent"].toString();
+    if (agentProcStatus.find(agentId) == agentProcStatus.end()) {
+        agentProcStatus[agentId] = TASK_RUNNING;
         return;
     }
-    TaskStatus agentStatus = agentProcStatus[qagentId];
+    TaskStatus agentStatus = agentProcStatus[agentId];
     if (agentStatus == TASK_PAUSED) {
         // hmiNode->sendProcHdlCmd(PROC_AGENT, agentId, PROC_HDL_REACTIVATE);
-        agentProcStatus[qagentId] = TASK_RUNNING;
+        agentProcStatus[agentId] = TASK_RUNNING;
     }
 }
 
@@ -283,21 +280,20 @@ void TasksView::doHostSuspend()
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
     QString agName = v["Info"].toObject()["Agent"].toString();
-    QString qhostId = cfg.hostForAgent[agName];
-    if (qhostId.isEmpty()) { return; }
-    std::string hostId = qhostId.toStdString();
-    if (hostProcStatus.find(qhostId) == hostProcStatus.end()) {
-        hostProcStatus[qhostId] = TASK_RUNNING;
+    QString hostId = cfg.hostForAgent[agName];
+    if (hostId.isEmpty()) { return; }
+    if (hostProcStatus.find(hostId) == hostProcStatus.end()) {
+        hostProcStatus[hostId] = TASK_RUNNING;
     }
-    TaskStatus hostStatus = hostProcStatus[qhostId];
+    TaskStatus hostStatus = hostProcStatus[hostId];
     if (hostStatus == TASK_RUNNING) {
         // hmiNode->sendProcHdlCmd(PROC_HOST, hostId, PROC_HDL_SUSPEND);
-        hostProcStatus[qhostId] = TASK_PAUSED;
+        hostProcStatus[hostId] = TASK_PAUSED;
     }
     TRC("HOST PROCESSING (Suspend): " +
-        agName.toStdString() + " @ " + qhostId.toStdString() + ": " +
+        agName + " @ " + hostId + ": " +
         TaskStatusName[hostStatus] + " => " +
-        TaskStatusName[hostProcStatus[qhostId]]);
+        TaskStatusName[hostProcStatus[hostId]]);
 }
 
 //----------------------------------------------------------------------
@@ -311,21 +307,20 @@ void TasksView::doHostStop()
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
     QString agName = v["Info"].toObject()["Agent"].toString();
-    QString qhostId = cfg.hostForAgent[agName];
-    if (qhostId.isEmpty()) { return; }
-    std::string hostId = qhostId.toStdString();
-    if (hostProcStatus.find(qhostId) == hostProcStatus.end()) {
-        hostProcStatus[qhostId] = TASK_RUNNING;
+    QString hostId = cfg.hostForAgent[agName];
+    if (hostId.isEmpty()) { return; }
+    if (hostProcStatus.find(hostId) == hostProcStatus.end()) {
+        hostProcStatus[hostId] = TASK_RUNNING;
     }
-    TaskStatus hostStatus = hostProcStatus[qhostId];
+    TaskStatus hostStatus = hostProcStatus[hostId];
     if ((hostStatus == TASK_RUNNING) || (hostStatus == TASK_PAUSED)) {
         // hmiNode->sendProcHdlCmd(PROC_HOST, hostId, PROC_HDL_STOP);
-        hostProcStatus[qhostId] = TASK_STOPPED;
+        hostProcStatus[hostId] = TASK_STOPPED;
     }
     TRC("HOST PROCESSING (Stop   ): " +
-        agName.toStdString() + " @ " + qhostId.toStdString() + ": " +
+        agName + " @ " + hostId + ": " +
         TaskStatusName[hostStatus] + " => " +
-        TaskStatusName[hostProcStatus[qhostId]]);
+        TaskStatusName[hostProcStatus[hostId]]);
 }
 
 //----------------------------------------------------------------------
@@ -339,20 +334,19 @@ void TasksView::doHostReactivate()
     QJsonObject v = qStringToJObj(model->data(dataIdx).toString());
 
     QString agName = v["Info"].toObject()["Agent"].toString();
-    QString qhostId = cfg.hostForAgent[agName];
-    if (qhostId.isEmpty()) { return; }
-    std::string hostId = qhostId.toStdString();
-    if (hostProcStatus.find(qhostId) == hostProcStatus.end()) {
-        hostProcStatus[qhostId] = TASK_RUNNING;
+    QString hostId = cfg.hostForAgent[agName];
+    if (hostId.isEmpty()) { return; }
+    if (hostProcStatus.find(hostId) == hostProcStatus.end()) {
+        hostProcStatus[hostId] = TASK_RUNNING;
         //return;
     }
-    TaskStatus hostStatus = hostProcStatus[qhostId];
+    TaskStatus hostStatus = hostProcStatus[hostId];
     if ((hostStatus == TASK_PAUSED) || (hostStatus == TASK_STOPPED)) {
         // hmiNode->sendProcHdlCmd(PROC_HOST, hostId, PROC_HDL_REACTIVATE);
-        hostProcStatus[qhostId] = TASK_RUNNING;
+        hostProcStatus[hostId] = TASK_RUNNING;
     }
     TRC("HOST PROCESSING (Reactiv): " +
-        agName.toStdString() + " @ " + qhostId.toStdString() + ": " +
+        agName + " @ " + hostId + ": " +
         TaskStatusName[hostStatus] + " => " +
-        TaskStatusName[hostProcStatus[qhostId]]);
+        TaskStatusName[hostProcStatus[hostId]]);
 }

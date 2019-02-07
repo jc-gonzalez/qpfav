@@ -1,0 +1,2757 @@
+
+qpfav/actionshandler.h,2392
+#define ACTIONSHANDLER_H2,25
+class ActionsHandler 12,143
+    explicit ActionsHandler(16,204
+    void processPath(19,270
+    void quitQPFAV(20,294
+    void showLocalArchiveContextMenu(22,317
+    void showTaskMonitContextMenu(23,373
+    void showProcAlertsContextMenu(24,426
+    void showSysAlertsContextMenu(25,480
+    void init(28,543
+    void buildMainMenuActions(30,561
+    void buildMainMenu(31,594
+    void buildLocalArchActions(33,621
+    void buildTasksActions(34,655
+    void buildAlertsActions(35,685
+    void buildProductViewerActions(36,716
+    void buildFilterActions(37,754
+    void buildLocArchViewActions(38,785
+    void buildLogActions(39,821
+    MainWindow * mw;43,894
+    QMenu * fileMenu;46,933
+    QMenu * editMenu;47,955
+    QMenu * viewMenu;48,977
+    QMenu * toolsMenu;49,999
+    QMenu * helpMenu;50,1022
+    QAction * acProcessPath;54,1072
+    QAction * acQuit;55,1101
+    QAction * acCut;58,1141
+    QAction * acCopy;59,1162
+    QAction * acPaste;60,1184
+    QAction * acNavig;63,1225
+    QAction * acConfigTool;66,1267
+    QAction * acBrowseDB;67,1295
+    QAction * acExtTools;68,1321
+    QAction * acVerbosity;69,1347
+    QAction * acAbout;72,1392
+    QAction * acAboutQt;73,1415
+    QAction * acSeparator;75,1441
+    QMenu * acArchiveOpenExt;78,1505
+    QAction * acArchiveShow;79,1535
+    QAction * acDefault;80,1564
+    QAction * acReprocess;81,1589
+    QAction * acAnalyzeIPython;82,1616
+    QAction * acAnalyzeJupyter;83,1648
+    QAction * acExport;84,1680
+    QAction * acWorkDir;90,1829
+    QAction * acShowTaskInfo;91,1854
+    QAction * acTaskPause;96,1947
+    QAction * acTaskResume;97,1974
+    QAction * acTaskCancel;98,2002
+    QAction * acHostSuspend;104,2131
+    QAction * acHostStop;105,2160
+    QAction * acHostReactivate;106,2186
+    QAction * acSysAlertDisplayInfo;109,2260
+    QAction * acProcAlertDisplayInfo;112,2343
+    QAction * acProcAlertLocateInProduct;113,2381
+    QAction * acShowProductView;116,2440
+    QAction * acCreateReportsFilter;119,2496
+    QAction * acEditReportsFilter;120,2533
+    QAction * acShowReportFilter;121,2568
+    QAction * acCreateLocArchView;124,2630
+    QAction * acEditLocArchView;125,2665
+    QAction * acShowLocArchView;126,2698
+    QAction * acShowLog;129,2744
+    QMap<QString,QString132,2788
+    QMap<QString, QAction *> acUserTools;132,2788
+
+qpfav/alert.h,2224
+#define ALERT_H42,801
+#define STR(68,1563
+class Alert 81,1995
+    typedef struct tm                  TimeStampType;Alert::TimeStampType84,2018
+    typedef std::vector<std::string>   Messages;Alert::Messages85,2072
+#define TLIST_GROUP 87,2122
+#define TLIST_SEVERITY 88,2182
+#define TLIST_TYPE 89,2236
+#define TLIST_VARTYPE 90,2319
+#define T(92,2382
+    enum Group Alert::Group93,2397
+    enum Group    { TLIST_GROUP Alert::Group::TLIST_GROUP93,2397
+    enum Severity Alert::Severity94,2432
+    enum Severity { TLIST_SEVERITY Alert::Severity::TLIST_SEVERITY94,2432
+    enum Type Alert::Type95,2470
+    enum Type     { TLIST_TYPE Alert::Type::TLIST_TYPE95,2470
+    enum VarType Alert::VarType96,2505
+    enum VarType  { TLIST_VARTYPE Alert::VarType::TLIST_VARTYPE96,2505
+#undef T97,2542
+    static const char * GroupName Alert::GroupName99,2552
+    static const char * SeverityName Alert::SeverityName100,2590
+    static const char * TypeName Alert::TypeName101,2631
+    static const char * VarTypeName Alert::VarTypeName102,2668
+    static std::map<Alert::std::map104,2709
+    static std::map<std::string, Group>    GroupIdx;Alert::GroupIdx104,2709
+    static std::map<Alert::std::map105,2762
+    static std::map<std::string, Severity> SeverityIdx;Alert::SeverityIdx105,2762
+    static std::map<Alert::std::map106,2818
+    static std::map<std::string, Type>     TypeIdx;Alert::TypeIdx106,2818
+    static std::map<Alert::std::map107,2870
+    static std::map<std::string, VarType>  VarTypeIdx;Alert::VarTypeIdx107,2870
+    union VarValue Alert::VarValue109,2926
+        int i;Alert::VarValue::i110,2947
+        float f;Alert::VarValue::f111,2962
+        double d;Alert::VarValue::d112,2979
+    struct Variable Alert::Variable115,3005
+        Variable(Alert::Variable::Variable116,3027
+        std::string name;Alert::Variable::name117,3088
+        VarValue x;Alert::Variable::x118,3114
+        VarValue ll;Alert::Variable::ll119,3134
+        VarValue ul;Alert::Variable::ul120,3155
+        VarType  type;Alert::Variable::type121,3176
+    typedef Variable * VariableHdl;Alert::VariableHdl124,3207
+    typedef std::string Origin;Alert::Origin126,3244
+
+qpfav/auxtypes.h,751
+#define AUXTYPES_H2,19
+#define O(8,81
+#define E(9,128
+enum LogLevel 11,176
+    TRACE 12,192
+    TRACE = QsLogging::TraceLevel,LogLevel::QsLogging::TraceLevel12,192
+    DEBUG LogLevel::DEBUG13,227
+    DEBUG = QsLogging::DebugLevel,LogLevel::QsLogging::DebugLevel13,227
+    INFO LogLevel::INFO14,262
+    INFO  = QsLogging::InfoLevel,LogLevel::QsLogging::InfoLevel14,262
+    WARN LogLevel::WARN15,296
+    WARN  = QsLogging::WarnLevel,LogLevel::QsLogging::WarnLevel15,296
+    ERROR LogLevel::ERROR16,330
+    ERROR = QsLogging::ErrorLevel,LogLevel::QsLogging::ErrorLevel16,330
+    FATAL LogLevel::FATAL17,365
+    FATAL = QsLogging::FatalLevel,LogLevel::QsLogging::FatalLevel17,365
+const QString LogLevelName[LogLevelName20,404
+
+qpfav/browser.h,1199
+#define BROWSER_H37,1645
+    struct DBConnection Browser::DBConnection53,1986
+        QString driverName;Browser::DBConnection::driverName54,2012
+        QString databaseName;Browser::DBConnection::databaseName55,2040
+        QString userName;Browser::DBConnection::userName56,2070
+        QString password;Browser::DBConnection::password57,2096
+        QString hostName;Browser::DBConnection::hostName58,2122
+        int port;Browser::DBConnection::port59,2148
+    void currentChanged(Browser::currentChanged78,2649
+    void on_insertRowAction_triggered(Browser::on_insertRowAction_triggered81,2715
+    void on_deleteRowAction_triggered(Browser::on_deleteRowAction_triggered83,2776
+    void on_connectionWidget_tableActivated(Browser::on_connectionWidget_tableActivated91,3085
+    void on_connectionWidget_metaDataRequested(Browser::on_connectionWidget_metaDataRequested93,3177
+    void on_submitButton_clicked(Browser::on_submitButton_clicked95,3275
+    void on_clearButton_clicked(Browser::on_clearButton_clicked100,3367
+class CustomModel:CustomModel110,3530
+    explicit CustomModel(CustomModel::CustomModel114,3594
+    QVariant data(CustomModel::data115,3704
+
+qpfav/config.h,1841
+#define CONFIGURATION_H2,24
+#define Sec(12,185
+#define DefGrp(16,320
+#define DefGrpArray(17,396
+#define DefGrpSec(18,479
+class Config20,557
+    QJsonObject & data(Config::data56,1757
+    Config(Config::Config62,1988
+    QJsonObject config;Config::config68,2083
+    bool isActualFile;Config::isActualFile71,2116
+    QString cfgFileName;Config::cfgFileName72,2139
+        QString inbox;Config::inbox75,2178
+        QString archive;Config::archive76,2201
+        QString gateway;Config::gateway77,2226
+        QString userArea;Config::userArea78,2251
+    } storage;Config::storage79,2277
+    QString DBHost;Config::DBHost81,2293
+    QString DBPort;Config::DBPort82,2313
+    QString DBName;Config::DBName83,2333
+    QString DBUser;Config::DBUser84,2353
+    QString DBPwd;Config::DBPwd85,2373
+    QString PATHBase;Config::PATHBase87,2393
+    QString PATHData;Config::PATHData88,2415
+    QString PATHProcs;Config::PATHProcs89,2437
+    QString PATHRun;Config::PATHRun90,2460
+    QString PATHBin;Config::PATHBin91,2481
+    QString PATHSession;Config::PATHSession92,2502
+    QString PATHLog;Config::PATHLog93,2527
+    QString PATHRlog;Config::PATHRlog94,2548
+    QString PATHTmp;Config::PATHTmp95,2570
+    QString PATHTsk;Config::PATHTsk96,2591
+    QString PATHMsg;Config::PATHMsg97,2612
+    QString PATHWww;Config::PATHWww98,2633
+    mode_t PATHMode;Config::PATHMode100,2655
+    QMap<Config::QMap102,2677
+    QMap<QString,QStringList> agentsInHost;Config::agentsInHost102,2677
+    QMap<Config::QMap103,2721
+    QMap<QString,QString>     hostForAgent;Config::hostForAgent103,2721
+    bool hostIsMaster;Config::hostIsMaster105,2766
+    QString currentHostIP;Config::currentHostIP106,2789
+namespace Configuration 110,2821
+    static ::Config & cfg Configuration::cfg111,2847
+
+qpfav/configtool.h,2228
+#define CONFIGTOOL_H42,820
+class StandardItemModel 66,1389
+    StandardItemModel(68,1451
+class StringListModel 76,1818
+    StringListModel(StringListModel::StringListModel78,1876
+class ModelView 86,2195
+    enum Type ModelView::Type89,2251
+    enum Type { List,ModelView::Type::List89,2251
+    enum Type { List, Table ModelView::Type::Table89,2251
+    QAbstractItemModel *  getModel(ModelView::getModel98,2534
+    QAbstractItemView *   getView(ModelView::getView99,2589
+    QItemSelectionModel * getSelectionModel(ModelView::getSelectionModel100,2643
+    QAbstractItemView  *view;ModelView::view112,2936
+    QAbstractItemModel *model;ModelView::model113,2966
+    QItemSelectionModel *selectionModel;ModelView::selectionModel114,2997
+    Type type;ModelView::type115,3038
+class ConfigTool 121,3232
+    enum PageIndex ConfigTool::PageIndex129,3356
+        PageGeneral,ConfigTool::PageIndex::PageGeneral130,3377
+        PageMachines,ConfigTool::PageIndex::PageMachines131,3398
+        PageDatabase,ConfigTool::PageIndex::PageDatabase132,3420
+        PageProdProc,ConfigTool::PageIndex::PageProdProc133,3442
+        PageOrchestration,ConfigTool::PageIndex::PageOrchestration134,3464
+        PageExtTools,ConfigTool::PageIndex::PageExtTools135,3491
+        PageConnectivity,ConfigTool::PageIndex::PageConnectivity136,3513
+        PageFlags,ConfigTool::PageIndex::PageFlags137,3539
+    enum UserWAIndex ConfigTool::UserWAIndex140,3566
+        Nominal,ConfigTool::UserWAIndex::Nominal141,3589
+        LocalDir,ConfigTool::UserWAIndex::LocalDir142,3606
+        VOSpace,ConfigTool::UserWAIndex::VOSpace143,3624
+    struct FlagSt ConfigTool::FlagSt208,5317
+        QString      msgName;ConfigTool::FlagSt::msgName209,5337
+        QCheckBox  * chkDisk;ConfigTool::FlagSt::chkDisk210,5367
+    Ui::ConfigTool *ui;ConfigTool::ui214,5414
+    QString cfgDataBackup;ConfigTool::cfgDataBackup216,5439
+    MapOfUserDefTools userDefTools;ConfigTool::userDefTools218,5467
+    MapOfUserDefTools origDefTools;ConfigTool::origDefTools219,5503
+    QStringList       prodTypes;ConfigTool::prodTypes220,5539
+    static QVector<FlagSt> monitMsgFlags;ConfigTool::monitMsgFlags222,5573
+
+qpfav/connectionwidget.h,229
+#define CONNECTIONWIDGET_H37,1654
+QT_FORWARD_DECLARE_CLASS(41,1702
+class ConnectionWidget:ConnectionWidget46,1854
+    ConnectionWidget(50,1916
+    virtual ~ConnectionWidget(51,1959
+    QSqlDatabase currentDatabase(53,1993
+
+qpfav/conthostedit.h,229
+#define CONTHOSTEDIT_H42,816
+class ContHostEdit 54,938
+    explicit ContHostEdit(59,998
+    ~ContHostEdit(60,1046
+    void setContHost(63,1076
+    void getContHost(64,1136
+    Ui::ContHostEdit *ui;ContHostEdit::ui67,1212
+
+qpfav/darkpalette.h,95
+#define DARKPALETTE_H2,22
+class DarkPalette6,69
+    QMainWindow * mw;DarkPalette::mw16,240
+
+qpfav/dbbrowser.h,96
+#define DBBROWSER_H42,805
+class DBBrowser 50,881
+    Ui::DBBrowser *ui;DBBrowser::ui59,1011
+
+qpfav/dbmng.h,1086
+#define DBMANAGER_H41,825
+class DBManager 47,881
+    ~DBManager(53,986
+    struct DBConnection 56,1013
+        QString driverName;57,1039
+        QString databaseName;58,1067
+        QString userName;59,1097
+        QString password;60,1123
+        QString hostName;61,1149
+        int port;62,1175
+    static QSqlError addConnection(65,1201
+    static void addConnection(68,1457
+    inline static QSqlDatabase & getDB(70,1541
+    static QString getState(72,1598
+    static void setState(73,1629
+    static QMap<QString,QString74,1673
+    static QMap<QString,QString> getCurrentStates(74,1673
+    static int numOfRowsInDbTable(76,1742
+    static void addICommand(78,1797
+    static bool getICommand(79,1839
+    static void removeICommands(80,1905
+    static void close(82,1952
+    void newTaskStatusInfo(87,2068
+    static void checkTaskStatusInfo(90,2108
+    DBManager(91,2147
+    static QSqlDatabase       db;94,2174
+    static QString            activeDb;95,2208
+    static QMap<QString,QString96,2248
+    static QMap<QString, int> connections;96,2248
+
+qpfav/dbtblmodel.h,1032
+#define DBTABLEMODEL_H41,843
+class DBTableModel 49,948
+    struct FgBgColors 55,1017
+        FgBgColors(56,1041
+        QColor fgColor;57,1134
+        QColor bgColor;58,1158
+    typedef QMap<QString,QString61,1190
+    typedef QMap<QString, FgBgColors> ColumnPalette;61,1190
+    typedef QMap<int,int62,1243
+    typedef QMap<int, ColumnPalette>  TablePalette;62,1243
+    explicit DBTableModel(64,1296
+    virtual void refresh(68,1469
+    virtual void defineHeaders(70,1498
+    virtual void defineQuery(71,1547
+    virtual void defineTablePalette(72,1588
+    virtual void setFullUpdate(73,1643
+    virtual void restart(74,1683
+    virtual QVariant data(75,1711
+    virtual void setHeaders(80,1890
+    QString       queryString;82,1939
+    QStringList   headerLabels;83,1970
+    TablePalette  tblPalette;84,2002
+    int           rowsFromQuery;85,2032
+    bool          headerIsSet;86,2065
+    bool          fullUpdate;87,2096
+    QString       initialQuery;89,2127
+    QStringList   initialHeaders;90,2159
+
+qpfav/dbtreemodel.h,1040
+#define DBTREEMODEL_H41,845
+class DBTreeBoldHeaderDelegate 53,1027
+    DBTreeBoldHeaderDelegate(58,1112
+    void paint(59,1171
+class DBTreeModel 67,1401
+    explicit DBTreeModel(72,1472
+    virtual void refresh(75,1582
+    virtual void defineHeaders(77,1611
+    virtual void defineQuery(78,1660
+    virtual void skipColumns(79,1701
+    virtual void setCustomFilter(80,1742
+    virtual void setBoldHeader(81,1784
+    virtual void restart(82,1832
+    virtual void setHeaders(85,1872
+    virtual void execQuery(88,1991
+    QString     queryString;90,2058
+    QStringList headerLabels;91,2087
+    int         rowsFromQuery;92,2117
+    int         lastRetrievedId;93,2148
+    int         skippedColumns;94,2181
+    bool        boldHeader;95,2213
+    QString     initialQuery;96,2241
+    QStringList initialHeaders;97,2271
+    int         initialSkippedColumns;98,2303
+    std::function<QString(QSqlQuery&)> getGroupId;DBTreeModel::getGroupId100,2343
+    bool        isCustomFilter;DBTreeModel::isCustomFilter101,2394
+
+qpfav/dlgalert.h,172
+#define DLGALERT_H42,800
+class DlgAlert 55,932
+    explicit DlgAlert(60,988
+    ~DlgAlert(61,1040
+    void setAlert(63,1058
+    Ui::DlgAlert *ui;DlgAlert::ui66,1102
+
+qpfav/dlgjsonviewer.h,112
+#define DLGJSONVIEWER_H42,825
+class DlgJSONViewer 50,909
+    Ui::DlgJSONViewer *ui;DlgJSONViewer::ui59,1083
+
+qpfav/dlgreproc.h,323
+#define DLGREPROC_H42,805
+class DlgReproc 55,939
+    explicit DlgReproc(60,996
+    ~DlgReproc(61,1041
+    void setLabels(64,1068
+    void setFields(66,1172
+    void getFields(68,1264
+    void selectLocalFolder(72,1395
+    void selectLocalFolderToIPythonWorkDir(73,1425
+    Ui::DlgReproc *ui;DlgReproc::ui76,1485
+
+qpfav/dlguserpwd.h,255
+#define DLGUSERPWD_H42,810
+class DlgUserPwd 54,926
+    explicit DlgUserPwd(59,984
+    ~DlgUserPwd(60,1030
+    void getValues(63,1058
+    void storeValues(64,1104
+    virtual void keyPressEvent(67,1140
+    Ui::DlgUserPwd *ui;DlgUserPwd::ui70,1200
+
+qpfav/exttooledit.h,398
+#define EXTTOOLEDIT_H42,815
+class ExtToolEdit 54,935
+    explicit ExtToolEdit(59,994
+    ~ExtToolEdit(60,1041
+    void setProdTypes(63,1070
+    void editTool(64,1110
+    void getToolInfo(65,1149
+    void showHelp(68,1207
+    void selectApp(69,1228
+    void selectProdTypes(70,1250
+    Ui::ExtToolEdit *ui;ExtToolEdit::ui73,1288
+    QStringList prodTypes;ExtToolEdit::prodTypes74,1313
+
+qpfav/exttoolsdef.h,628
+#define EXTTOOLSDEF_H42,815
+class ExtToolsDef 56,989
+    explicit ExtToolsDef(61,1048
+    ~ExtToolsDef(62,1095
+    void initialize(64,1116
+    void getTools(65,1185
+    void addNewTool(68,1251
+    void editTool(69,1274
+    void editTool(70,1310
+    void editTool(71,1331
+    void removeTool(72,1359
+    void cancelDlg(73,1382
+    void changeToolWithItem(74,1404
+    Ui::ExtToolsDef *ui;ExtToolsDef::ui77,1468
+    MapOfUserDefTools userDefTools;ExtToolsDef::userDefTools78,1493
+    MapOfUserDefTools origDefTools;ExtToolsDef::origDefTools79,1529
+    QStringList       prodTypes;ExtToolsDef::prodTypes80,1565
+
+qpfav/hmipxy.h,188
+#define HMIPXY_H42,810
+class HMIProxy 79,2003
+    std::map<HMIProxy::std::map135,4677
+    bool requestQuit;HMIProxy::requestQuit167,6117
+    void * parent;HMIProxy::parent170,6196
+
+qpfav/hmitypes.h,287
+#define HMITYPES_H42,782
+struct QUserDefTool 49,855
+    QString name;50,877
+    QString desc;51,895
+    QString exe;52,913
+    QString args;53,930
+    QStringList prod_types;54,948
+typedef QMap<QString,QString57,980
+typedef QMap<QString, QUserDefTool> MapOfUserDefTools;57,980
+
+qpfav/launcher.h,285
+#define LAUNCHER_H41,808
+class Launcher 49,1032
+    Launcher(Launcher::Launcher57,1279
+    bool isDefined;Launcher::isDefined73,1824
+    QString app;Launcher::app74,1844
+    QStringList args;Launcher::args75,1861
+class IPythonLauncher 82,2060
+class JupyterLauncher 97,2563
+
+qpfav/localarchview.h,1264
+#define LOCALARCHVIEW_H2,24
+using QPF::MainWindow;11,170
+using QPF::ActionsHandler;12,193
+namespace Ui 14,221
+using QPF::ProductsModel;18,263
+class LocalArchiveView 20,290
+    enum AutoBehavior LocalArchiveView::AutoBehavior59,1201
+    enum AutoBehavior { AUTO_UPDATE,LocalArchiveView::AutoBehavior::AUTO_UPDATE59,1201
+                        AUTO_EXPAND,LocalArchiveView::AutoBehavior::AUTO_EXPAND60,1239
+                        AUTO_RESIZE,LocalArchiveView::AutoBehavior::AUTO_RESIZE61,1277
+                        MULTI_SELECT LocalArchiveView::AutoBehavior::MULTI_SELECT62,1315
+    Ui::LocalArchiveView * ui;LocalArchiveView::ui64,1356
+    ProductsModel * model;LocalArchiveView::model65,1387
+    QStandardItemModel * autoBtnsModel;LocalArchiveView::autoBtnsModel67,1415
+    std::vector<QStandardItem*> autoBtns;LocalArchiveView::autoBtns68,1455
+    bool autoUpdate,LocalArchiveView::autoUpdate70,1498
+    bool autoUpdate, autoExpand,LocalArchiveView::autoExpand70,1498
+    bool autoUpdate, autoExpand, autoResize;LocalArchiveView::autoResize70,1498
+    MainWindow * mw;LocalArchiveView::mw72,1544
+    ActionsHandler * aHdl;LocalArchiveView::aHdl73,1565
+    static const int NumOfURLCol;LocalArchiveView::NumOfURLCol75,1593
+
+qpfav/mainwindow.h,1304
+#define MAINWINDOW_H2,21
+class MainWindow 20,255
+    static const int MessageDelay;25,327
+    static const int ERROR;28,391
+    static const int OFF;29,419
+    static const int INITIALISED;30,445
+    static const int RUNNING;31,479
+    static const int OPERATIONAL;32,509
+    static const std::string ERROR_StateName;MainWindow::ERROR_StateName35,572
+    static const std::string OFF_StateName;MainWindow::OFF_StateName36,618
+    static const std::string INITIALISED_StateName;MainWindow::INITIALISED_StateName37,662
+    static const std::string RUNNING_StateName;MainWindow::RUNNING_StateName38,714
+    static const std::string OPERATIONAL_StateName;MainWindow::OPERATIONAL_StateName39,762
+    static const QString VOSpaceURL;MainWindow::VOSpaceURL42,827
+    Ui::MainWindow *ui;MainWindow::ui91,1832
+    ActionsHandler * aHdl;MainWindow::aHdl93,1857
+    MapOfUserDefTools userDefTools;MainWindow::userDefTools96,1911
+    QStringList       userDefProdTypes;MainWindow::userDefProdTypes97,1947
+    QString styleName;MainWindow::styleName99,1988
+    QStandardItemModel* Model;MainWindow::Model101,2012
+    QStandardItem* Item1;MainWindow::Item1102,2043
+    QStandardItem* Item2;MainWindow::Item2103,2069
+    std::vector<QStandardItem*> Items;MainWindow::Items105,2097
+
+qpfav/procalertmodel.h,135
+#define PROCALERTMODEL_H41,857
+class ProcAlertModel 47,925
+    explicit ProcAlertModel(52,993
+    virtual Alert getAlertAt(54,1025
+
+qpfav/procalertsview.h,371
+#define PROCALERTSVIEW_H2,25
+using QPF::ProcAlertModel;14,192
+using QPF::ActionsHandler;15,219
+using QPF::MainWindow;16,246
+class ProcAlertsView 18,270
+    Ui::ProcAlertsView * ui;ProcAlertsView::ui32,541
+    ProcAlertModel * model;ProcAlertsView::model33,570
+    ActionsHandler * aHdl;ProcAlertsView::aHdl34,598
+    MainWindow * mw;ProcAlertsView::mw35,625
+
+qpfav/productsmodel.h,248
+#define PRODUCTSMODEL_H41,853
+class ProductsModel 47,921
+    explicit ProductsModel(52,987
+    std::string stringWithProductTypes;ProductsModel::stringWithProductTypes56,1076
+    int singleProdTypeLen;ProductsModel::singleProdTypeLen57,1116
+
+qpfav/productsviewer.h,229
+#define PRODUCTSVIEWER_H2,25
+using QPF::MainWindow;12,208
+using QPF::ActionsHandler;13,231
+namespace Ui 15,259
+using QPF::TasksModel;19,299
+class ProductsViewer 21,323
+    Ui::ProductsViewer * ui;ProductsViewer::ui37,626
+
+qpfav/propdef.h,191
+#define PROPDEF_H42,856
+#define SET_NAMED_PROPERTIES55,1341
+# define Property(66,1777
+# define PropertyRef(72,2027
+# define with(78,2282
+# define Property(80,2309
+#  undef with87,2547
+
+qpfav/qjsonitem.h,332
+#define JSONITEM_H42,812
+class QJsonTreeItem47,916
+    QString mKey;QJsonTreeItem::mKey71,1495
+    QString mValue;QJsonTreeItem::mValue72,1513
+    QJsonValue::Type mType;QJsonTreeItem::mType73,1533
+    QList<QJsonTreeItem*> mChilds;QJsonTreeItem::mChilds75,1562
+    QJsonTreeItem * mParent;QJsonTreeItem::mParent76,1597
+
+qpfav/qjsonmodel.h,343
+#define QJSONMODEL_H42,810
+class QJsonModel 51,968
+    QJsonTreeItem * mRootItem;QJsonModel::mRootItem71,1915
+    QJsonDocument mDocument;QJsonModel::mDocument72,1946
+    QStringList mHeaders;QJsonModel::mHeaders73,1975
+    QHash<QJsonModel::QHash74,2001
+    QHash<QJsonValue::Type, QIcon> mTypeIcons;QJsonModel::mTypeIcons74,2001
+
+qpfav/qjsonviewer.h,216
+#define QJSONVIEWER_H42,815
+class QJSONViewer 53,941
+    Ui::QJSONViewer *ui;QJSONViewer::ui77,1458
+    QJsonModel * model;QJSONViewer::model79,1484
+    QPoint pointOfAction;QJSONViewer::pointOfAction80,1508
+
+qpfav/ruleedit.h,197
+#define RULEEDIT_H42,800
+class RuleEdit 54,914
+    explicit RuleEdit(59,970
+    ~RuleEdit(60,1014
+    void setRule(63,1040
+    void getRule(68,1273
+    Ui::RuleEdit *ui;RuleEdit::ui72,1421
+
+qpfav/swarmedit.h,205
+#define SWARMEDIT_H42,805
+class SwarmEdit 54,921
+    explicit SwarmEdit(59,978
+    ~SwarmEdit(60,1023
+    void setSwarm(63,1050
+    void getSwarm(66,1214
+    Ui::SwarmEdit *ui;SwarmEdit::ui71,1404
+
+qpfav/sysalertmodel.h,133
+#define SYSALERTMODEL_H41,853
+class SysAlertModel 48,939
+    explicit SysAlertModel(53,1006
+    virtual Alert getAlertAt(55,1037
+
+qpfav/sysalertsview.h,362
+#define SYSALERTSVIEW_H2,24
+using QPF::SysAlertModel;14,188
+using QPF::ActionsHandler;15,214
+using QPF::MainWindow;16,241
+class SysAlertsView 18,265
+    Ui::SysAlertsView * ui;SysAlertsView::ui31,499
+    SysAlertModel * model;SysAlertsView::model32,527
+    ActionsHandler * aHdl;SysAlertsView::aHdl33,554
+    MainWindow * mw;SysAlertsView::mw34,581
+
+qpfav/tasksmodel.h,85
+#define TASKSMODEL_H41,841
+class TasksModel 47,905
+    explicit TasksModel(52,969
+
+qpfav/tasksview.h,575
+#define TASKSVIEW_H2,20
+using QPF::MainWindow;12,172
+using QPF::ActionsHandler;13,195
+namespace Ui 15,223
+using QPF::TasksModel;19,258
+class TasksView 21,282
+    Ui::TasksView * ui;TasksView::ui47,806
+    TasksModel * model;TasksView::model49,831
+    MainWindow * mw;TasksView::mw50,855
+    ActionsHandler * aHdl;TasksView::aHdl51,876
+    QMap<TasksView::QMap53,904
+    QMap<QString,TaskStatus>  agentProcStatus;TasksView::agentProcStatus53,904
+    QMap<TasksView::QMap54,951
+    QMap<QString,TaskStatus>  hostProcStatus;TasksView::hostProcStatus54,951
+
+qpfav/util.h,928
+#define UTIL_H2,15
+#define TLIST_TASK_STATUS 11,122
+#define T(22,741
+enum TaskStatus 23,771
+enum TaskStatus { TLIST_TASK_STATUS 23,771
+#undef T24,810
+#undef T31,937
+#define TLISTOF_USER_AREA_TYPES 33,947
+#define T(38,1091
+enum UserAreaId 39,1113
+enum UserAreaId { TLISTOF_USER_AREA_TYPES 39,1113
+#undef T40,1158
+#define T(42,1168
+#undef T44,1232
+enum Flags 50,1334
+    NullFlags 51,1347
+    NullFlags      = 0x00,x0051,1347
+    GenIntermProd 52,1374
+    GenIntermProd  = 0x01,x0152,1374
+    OpenIPython 53,1401
+    OpenIPython    = 0x02,x0253,1401
+    OpenJupyterLab 54,1428
+    OpenJupyterLab = 0x04,x0454,1428
+    OpenVOSpace 55,1455
+    OpenVOSpace    = 0x08,x0855,1455
+enum OutputsLocation 58,1486
+    LocalArch 59,1509
+    LocalArch      = 0x100,x10059,1509
+    LocalDir 60,1537
+    LocalDir       = 0x200,x20060,1537
+    VOSpaceFolder 61,1565
+    VOSpaceFolder  = 0x400,x40061,1565
+
+qpfav/verbleveldlg.h,471
+#define VERBLEVELDLG_H42,820
+class VerbLevelDlg 52,919
+    explicit VerbLevelDlg(57,979
+    ~VerbLevelDlg(58,1027
+    QString getVerbosityLevelName(59,1048
+    int getVerbosityLevelIdx(60,1085
+    void setVerbosityLevel(63,1132
+    Ui::VerbLevelDlg *ui;VerbLevelDlg::ui66,1179
+    QStringList verbLevels;VerbLevelDlg::verbLevels67,1205
+    QString currentLevel;VerbLevelDlg::currentLevel68,1233
+    int currentLevelIdx;VerbLevelDlg::currentLevelIdx69,1259
+
+qpfav/version.h,370
+#define VERSION_H44,815
+#define APP_SYS_NAME 47,862
+#define APP_NAME 50,915
+#define APP_RELEASE 53,980
+#define APP_DATE 56,1041
+#define APP_COMPANY 59,1112
+#define APP_DOMAIN 62,1190
+#define APP_DIVISION 65,1257
+#define APP_LONG_NAME 68,1317
+#define APP_PURPOSE 71,1406
+#define APP_TITLE 74,1523
+#define APP_CREATED_BY 77,1577
+#define APP_COPYRIGHT 80,1636
+
+qpfav/xmlsyntaxhighlight.h,1060
+#define BASIC_XML_SYNTAX_HIGHLIGHTER_H42,874
+class XMLBasicSyntaxHighlighter 47,966
+    QTextCharFormat     m_xmlKeywordFormat;XMLBasicSyntaxHighlighter::m_xmlKeywordFormat66,1468
+    QTextCharFormat     m_xmlElementFormat;XMLBasicSyntaxHighlighter::m_xmlElementFormat67,1512
+    QTextCharFormat     m_xmlAttributeFormat;XMLBasicSyntaxHighlighter::m_xmlAttributeFormat68,1556
+    QTextCharFormat     m_xmlValueFormat;XMLBasicSyntaxHighlighter::m_xmlValueFormat69,1602
+    QTextCharFormat     m_xmlCommentFormat;XMLBasicSyntaxHighlighter::m_xmlCommentFormat70,1644
+    QList<QRegExp>      m_xmlKeywordRegexes;XMLBasicSyntaxHighlighter::m_xmlKeywordRegexes72,1689
+    QRegExp             m_xmlElementRegex;XMLBasicSyntaxHighlighter::m_xmlElementRegex73,1734
+    QRegExp             m_xmlAttributeRegex;XMLBasicSyntaxHighlighter::m_xmlAttributeRegex74,1777
+    QRegExp             m_xmlValueRegex;XMLBasicSyntaxHighlighter::m_xmlValueRegex75,1822
+    QRegExp             m_xmlCommentRegex;XMLBasicSyntaxHighlighter::m_xmlCommentRegex76,1863
+
+qpfav/actionshandler.cpp,938
+using Configuration::cfg;12,166
+namespace QPF 14,193
+ActionsHandler::ActionsHandler(QPF::ActionsHandler::ActionsHandler16,210
+void ActionsHandler::init(26,489
+void ActionsHandler::buildMainMenuActions(44,967
+void ActionsHandler::buildMainMenu(122,4744
+void ActionsHandler::buildLocalArchActions(160,5838
+void ActionsHandler::buildTasksActions(189,7126
+void ActionsHandler::buildProductViewerActions(214,8633
+void ActionsHandler::buildFilterActions(223,8886
+void ActionsHandler::buildAlertsActions(232,9132
+void ActionsHandler::buildLocArchViewActions(244,9627
+void ActionsHandler::buildLogActions(253,9872
+void ActionsHandler::processPath(262,10101
+void ActionsHandler::quitQPFAV(271,10322
+void ActionsHandler::showLocalArchiveContextMenu(280,10577
+void ActionsHandler::showTaskMonitContextMenu(340,12661
+void ActionsHandler::showProcAlertsContextMenu(379,13866
+void ActionsHandler::showSysAlertsContextMenu(397,14501
+
+qpfav/alert.cpp,1034
+#define T(54,1095
+const char * Alert::GroupName 55,1111
+const char * Alert::SeverityName 56,1166
+const char * Alert::TypeName 57,1224
+const char * Alert::VarTypeName 58,1278
+#undef T59,1335
+#define __glue__(61,1345
+#define T(63,1377
+std::map<std::string, Alert::Group>    Alert::GroupIdx 64,1415
+std::map<std::string, Alert::Severity> Alert::SeverityIdx 65,1493
+std::map<std::string, Alert::Type>     Alert::TypeIdx 66,1574
+std::map<std::string, Alert::VarType>  Alert::VarTypeIdx 67,1651
+#undef T68,1731
+Alert::Alert(70,1741
+Alert::Alert(74,1770
+Alert::Alert(85,2000
+Alert::VariableHdl Alert::createNewVar(99,2264
+Alert::VariableHdl Alert::createNewVar(109,2469
+Alert::VariableHdl Alert::createNewVar(119,2682
+std::string Alert::what(133,3069
+std::string Alert::varAsTuple(161,3911
+Alert::TimeStampType Alert::now(191,4763
+std::string Alert::here(203,5072
+std::string Alert::timeStampString(214,5402
+std::string Alert::allMessages(225,5743
+std::string Alert::info(238,6137
+std::string Alert::dump(249,6513
+
+qpfav/browser.cpp,750
+#define USE_ACTIONS41,1688
+#undef  USE_ACTIONS42,1708
+Browser::Browser(44,1729
+Browser::~Browser(71,2574
+void Browser::exec(79,2769
+QSqlError Browser::addConnection(97,3364
+void Browser::addConnection(121,4185
+void Browser::showTable(136,4830
+void Browser::showMetaData(159,5795
+void Browser::insertRow(202,7519
+void Browser::deleteRow(220,8093
+void Browser::updateActions(242,8743
+void Browser::about(270,9745
+void Browser::on_fieldStrategyAction_triggered(281,10235
+void Browser::on_rowStrategyAction_triggered(292,10657
+void Browser::on_manualStrategyAction_triggered(303,11081
+void Browser::on_submitAction_triggered(314,11495
+void Browser::on_revertAction_triggered(325,11865
+void Browser::on_selectAction_triggered(336,12235
+
+qpfav/config.cpp,165
+Config & Config::_(9,88
+bool Config::load(20,349
+void Config::obtainCurrentHostIP(57,1389
+void Config::storeAgentsAndHosts(78,2185
+QString Config::str(111,3201
+
+qpfav/configtool.cpp,2679
+using Configuration::cfg;61,1159
+namespace QPF 70,1410
+#undef T72,1427
+#define TLISTOF_USER_AREA_TYPES 74,1437
+#define T(79,1581
+enum UserAreaId QPF::UserAreaId80,1603
+enum UserAreaId { TLISTOF_USER_AREA_TYPES QPF::UserAreaId::TLISTOF_USER_AREA_TYPES80,1603
+#undef T81,1648
+#define T(83,1658
+const QString UserAreaName[QPF::UserAreaName84,1685
+#undef T85,1745
+const std::map<QPF::std::map87,1755
+const std::map<QString, UserAreaId> UserAreaIdx QPF::UserAreaIdx87,1755
+#undef T91,2032
+Qt::ItemFlags StandardItemModel::flags(QPF::StandardItemModel::flags97,2245
+Qt::ItemFlags StringListModel::flags(112,2828
+ModelView::ModelView(126,3363
+ModelView::ModelView(141,3952
+void ModelView::setHeader(156,4517
+void ModelView::setHeaders(165,4812
+void ModelView::setData(176,5177
+void ModelView::setData(190,5684
+ConfigTool::ConfigTool(206,6294
+ConfigTool::~ConfigTool(237,8066
+void ConfigTool::prepare(246,8346
+void ConfigTool::initExtTools(260,8805
+void ConfigTool::getExtTools(293,10525
+void ConfigTool::save(309,11075
+void ConfigTool::saveAs(330,11794
+void ConfigTool::saveAsFilename(345,12300
+void ConfigTool::apply(361,12868
+void ConfigTool::closeDoNothing(383,13659
+void ConfigTool::selectBasePath(392,13906
+void ConfigTool::setWorkingPaths(409,14545
+void ConfigTool::selectUserDefAreaPath(421,15049
+void ConfigTool::defineUserWA(437,15636
+void ConfigTool::selectIPythonCmd(462,16383
+void ConfigTool::selectIPythonWorkingDir(478,16980
+void ConfigTool::addHost(496,17596
+void ConfigTool::removeHost(521,18590
+void ConfigTool::editHost(530,18892
+void ConfigTool::addSwarm(557,20140
+void ConfigTool::removeSwarm(590,21437
+void ConfigTool::editSwarm(599,21744
+void ConfigTool::addProduct(635,23512
+void ConfigTool::removeProduct(645,23886
+void ConfigTool::addProcessor(656,24308
+void ConfigTool::removeProcessor(666,24676
+void ConfigTool::addRule(677,25081
+void ConfigTool::removeRule(712,26412
+void ConfigTool::editRule(721,26714
+void ConfigTool::removeFromTable(760,28486
+void ConfigTool::addNewTool(779,29417
+void ConfigTool::editTool(804,30436
+void ConfigTool::editTool(814,30732
+void ConfigTool::editTool(825,31100
+void ConfigTool::changeToolWithItem(850,32062
+void ConfigTool::removeTool(869,32831
+void ConfigTool::cancelDlg(893,33918
+void ConfigTool::transferCfgToGUI(902,34214
+bool ConfigTool::transferGUIToCfg(1081,40519
+ModelView * ConfigTool::createListModelView(1261,47070
+ModelView * ConfigTool::createTableModelView(1276,47587
+void ConfigTool::transferFlagsFromCfgToGUI(1290,48136
+void ConfigTool::transferFlagsFromGUIToCfg(1320,49403
+QVector<ConfigTool::FlagSt> ConfigTool::monitMsgFlags;1339,50208
+
+qpfav/connectionwidget.cpp,456
+ConnectionWidget::ConnectionWidget(41,1697
+ConnectionWidget::~ConnectionWidget(62,2490
+static QString qDBCaption(66,2533
+void ConnectionWidget::refresh(80,2973
+QSqlDatabase ConnectionWidget::currentDatabase(110,3913
+static void qSetBold(115,4018
+void ConnectionWidget::setActive(126,4342
+void ConnectionWidget::on_tree_itemActivated(144,4920
+void ConnectionWidget::showMetaData(161,5372
+void ConnectionWidget::on_tree_currentItemChanged(174,5807
+
+qpfav/conthostedit.cpp,206
+namespace QPF 50,968
+ContHostEdit::ContHostEdit(QPF::ContHostEdit::ContHostEdit52,985
+ContHostEdit::~ContHostEdit(59,1109
+void ContHostEdit::setContHost(68,1343
+void ContHostEdit::getContHost(80,1761
+
+qpfav/darkpalette.cpp,220
+DarkPalette::DarkPalette(8,97
+void DarkPalette::apply(16,334
+QString DarkPalette::buildQss(39,1356
+    typedef QVector<QColor>        Palette;95,10020
+    typedef QMap<QString, Palette> CatalogueOfPalettes;96,10064
+
+qpfav/dbbrowser.cpp,93
+using Configuration::cfg;45,859
+DBBrowser::DBBrowser(47,886
+DBBrowser::~DBBrowser(64,1479
+
+qpfav/dbmng.cpp,796
+namespace QPF 43,832
+QSqlDatabase       DBManager::db;QPF::DBManager::db45,849
+QString            DBManager::activeDb;QPF::DBManager::activeDb46,883
+QMap<QPF::QMap47,923
+QMap<QString, int> DBManager::connections;QPF::DBManager::connections47,923
+DBManager::DBManager(QPF::DBManager::DBManager49,967
+DBManager::~DBManager(58,1225
+void DBManager::close(67,1439
+void DBManager::checkTaskStatusInfo(82,1847
+QSqlError DBManager::addConnection(87,1891
+void DBManager::addConnection(116,2824
+QString DBManager::getState(127,3315
+void DBManager::setState(141,3729
+QMap<QString,QString> DBManager::getCurrentStates(158,4289
+int DBManager::numOfRowsInDbTable(175,4902
+void DBManager::addICommand(192,5457
+bool DBManager::getICommand(217,6377
+void DBManager::removeICommands(257,7933
+
+qpfav/dbtblmodel.cpp,412
+namespace QPF 45,867
+DBTableModel::DBTableModel(QPF::DBTableModel::DBTableModel47,884
+void DBTableModel::setHeaders(62,1308
+void DBTableModel::defineHeaders(75,1658
+void DBTableModel::defineQuery(85,1982
+void DBTableModel::defineTablePalette(95,2302
+void DBTableModel::restart(104,2575
+QVariant DBTableModel::data(111,2690
+void DBTableModel::setFullUpdate(144,3799
+void DBTableModel::refresh(153,4041
+
+qpfav/dbtreemodel.cpp,682
+namespace QPF 46,907
+DBTreeBoldHeaderDelegate::DBTreeBoldHeaderDelegate(QPF::DBTreeBoldHeaderDelegate::DBTreeBoldHeaderDelegate48,924
+void DBTreeBoldHeaderDelegate::setCustomFilter(58,1252
+void DBTreeBoldHeaderDelegate::paint(68,1509
+DBTreeModel::DBTreeModel(82,1970
+    isCustomFilter(91,2259
+void DBTreeModel::setHeaders(100,2487
+void DBTreeModel::defineHeaders(113,2836
+void DBTreeModel::defineQuery(123,3159
+void DBTreeModel::setBoldHeader(133,3468
+void DBTreeModel::setCustomFilter(141,3705
+void DBTreeModel::restart(150,3952
+void DBTreeModel::skipColumns(162,4290
+void DBTreeModel::refresh(174,4610
+void traverse(188,5016
+void DBTreeModel::execQuery(204,5573
+
+qpfav/dlgalert.cpp,134
+namespace QPF 44,833
+DlgAlert::DlgAlert(QPF::DlgAlert::DlgAlert46,850
+DlgAlert::~DlgAlert(53,960
+void DlgAlert::setAlert(62,1180
+
+qpfav/dlgjsonviewer.cpp,76
+DlgJSONViewer::DlgJSONViewer(47,900
+DlgJSONViewer::~DlgJSONViewer(55,1095
+
+qpfav/dlgreproc.cpp,372
+using Configuration::cfg;51,970
+#define QS(53,997
+namespace QPF 55,1038
+DlgReproc::DlgReproc(QPF::DlgReproc::DlgReproc57,1055
+DlgReproc::~DlgReproc(70,1440
+void DlgReproc::setLabels(79,1664
+void DlgReproc::setFields(92,2134
+void DlgReproc::getFields(117,3330
+void DlgReproc::selectLocalFolder(150,4652
+void DlgReproc::selectLocalFolderToIPythonWorkDir(166,5243
+
+qpfav/dlguserpwd.cpp,261
+using Configuration::cfg;46,866
+namespace QPF 48,893
+DlgUserPwd::DlgUserPwd(QPF::DlgUserPwd::DlgUserPwd50,914
+DlgUserPwd::~DlgUserPwd(60,1252
+void DlgUserPwd::keyPressEvent(65,1298
+void DlgUserPwd::getValues(71,1447
+void DlgUserPwd::storeValues(77,1560
+
+qpfav/exttooledit.cpp,354
+namespace QPF 50,962
+ExtToolEdit::ExtToolEdit(QPF::ExtToolEdit::ExtToolEdit52,979
+ExtToolEdit::~ExtToolEdit(59,1100
+void ExtToolEdit::setProdTypes(68,1334
+void ExtToolEdit::editTool(77,1586
+void ExtToolEdit::getToolInfo(90,2016
+void ExtToolEdit::showHelp(103,2469
+void ExtToolEdit::selectApp(130,3787
+void ExtToolEdit::selectProdTypes(145,4291
+
+qpfav/exttoolsdef.cpp,468
+namespace QPF 47,893
+ExtToolsDef::ExtToolsDef(QPF::ExtToolsDef::ExtToolsDef49,910
+ExtToolsDef::~ExtToolsDef(56,1031
+void ExtToolsDef::initialize(65,1261
+void ExtToolsDef::addNewTool(97,2877
+void ExtToolsDef::editTool(122,3855
+void ExtToolsDef::editTool(132,4126
+void ExtToolsDef::editTool(143,4471
+void ExtToolsDef::changeToolWithItem(168,5424
+void ExtToolsDef::removeTool(187,6170
+void ExtToolsDef::cancelDlg(212,7224
+void ExtToolsDef::getTools(221,7470
+
+qpfav/hmipxy.cpp,623
+using Configuration::cfg;53,975
+HMIProxy::HMIProxy(66,1405
+HMIProxy::HMIProxy(74,1697
+void HMIProxy::runEachIteration(82,2000
+void HMIProxy::processHMICmdMsg(118,3025
+void HMIProxy::processFmkMonMsg(168,4798
+void HMIProxy::log(184,5398
+void HMIProxy::quit(193,5706
+void HMIProxy::sendProcHdlCmd(202,5979
+void HMIProxy::sendReprocCmd(225,6770
+void HMIProxy::sendNewConfig(257,7681
+void HMIProxy::sendCmd(278,8317
+void HMIProxy::sendMinLogLevel(286,8611
+void HMIProxy::sendNewCfgInfo(294,8895
+std::map<std::string, std::string> HMIProxy::getNodeStates(302,9156
+void HMIProxy::declareParentConnection(310,9430
+
+qpfav/launcher.cpp,144
+void Launcher::create(50,1066
+bool Launcher::exec(61,1351
+IPythonLauncher::IPythonLauncher(72,1689
+JupyterLauncher::JupyterLauncher(98,2717
+
+qpfav/localarchview.cpp,1032
+using Configuration::cfg;30,502
+#define TRC(33,549
+const int LocalArchiveView::NumOfURLCol 35,594
+LocalArchiveView::LocalArchiveView(40,802
+LocalArchiveView::~LocalArchiveView(51,1163
+void LocalArchiveView::init(59,1425
+void LocalArchiveView::setAutoButtons(103,3049
+void LocalArchiveView::autoBtnsChanged(113,3397
+void LocalArchiveView::run(143,4411
+void LocalArchiveView::arefresh(160,4964
+void LocalArchiveView::aexpand(173,5398
+void LocalArchiveView::acollapse(182,5662
+void LocalArchiveView::aresize(191,5926
+void LocalArchiveView::setActionsHandler(202,6262
+void LocalArchiveView::openLocation(239,7682
+void LocalArchiveView::openWithDefault(252,8161
+void LocalArchiveView::openWith(262,8556
+void LocalArchiveView::reprocessProduct(360,11942
+void LocalArchiveView::analyzeProduct(418,14201
+void LocalArchiveView::exportProduct(460,15651
+void LocalArchiveView::replicateProducts(583,20531
+void LocalArchiveView::openLocalArchiveElement(607,21254
+void LocalArchiveView::openLocalArchiveFullPath(628,22129
+
+qpfav/main.cpp,251
+#define BUILD_ID 5,40
+#define DEFAULT_INITIAL_PORT 24,289
+#define INFO(26,325
+using QPF::MainWindow;39,657
+using Configuration::cfg;41,681
+void usage(47,935
+void sayHello(72,2145
+void ctrlMsg(97,3088
+void lookedUp(117,3903
+int main(134,4513
+
+qpfav/mainwindow.cpp,2061
+#define TMsg(20,325
+#define DMsg(21,366
+#define IMsg(22,407
+#define WMsg(23,448
+#define EMsg(24,489
+#define FMsg(25,530
+using Configuration::cfg;27,572
+namespace QPF 29,599
+const int MainWindow::MessageDelay QPF::MainWindow::MessageDelay32,630
+const int MainWindow::ERROR QPF::MainWindow::ERROR35,698
+const int MainWindow::OFF QPF::MainWindow::OFF36,739
+const int MainWindow::INITIALISED QPF::MainWindow::INITIALISED37,780
+const int MainWindow::RUNNING QPF::MainWindow::RUNNING38,821
+const int MainWindow::OPERATIONAL QPF::MainWindow::OPERATIONAL39,862
+const int SectionArchive QPF::SectionArchive49,1267
+const int SectionTasks QPF::SectionTasks50,1301
+const int SectionViewer QPF::SectionViewer51,1333
+const int SectionFilter QPF::SectionFilter52,1366
+const int SectionAlerts QPF::SectionAlerts53,1399
+const int SectionMonit QPF::SectionMonit54,1432
+const int SectionLog QPF::SectionLog55,1464
+const int SectionTools QPF::SectionTools56,1494
+const QString MainWindow::VOSpaceURL QPF::MainWindow::VOSpaceURL59,1579
+MainWindow::MainWindow(QPF::MainWindow::MainWindow65,1825
+MainWindow::~MainWindow(81,2236
+void MainWindow::configure(90,2493
+void MainWindow::completeUi(104,2872
+void MainWindow::initPalette(164,5507
+void MainWindow::setDB(174,5838
+void MainWindow::getUserTools(199,7018
+void MainWindow::getUserToolsFromSettings(213,7473
+void MainWindow::putUserToolsToSettings(243,8752
+void MainWindow::getProductTypes(254,9048
+void MainWindow::quitQPFAV(269,9606
+void MainWindow::processPath(278,9890
+void MainWindow::cut(291,10349
+void MainWindow::copy(298,10539
+void MainWindow::paste(305,10731
+void MainWindow::about(314,10959
+#define BUILD_ID 317,11003
+void MainWindow::showConfigTool(337,11639
+void MainWindow::showDBBrowser(359,12349
+void MainWindow::showExtToolsDef(370,12637
+void MainWindow::showVerbLevel(385,13091
+void MainWindow::storeQUTools2Cfg(403,13805
+void MainWindow::setUToolTasks(427,14669
+void MainWindow::addToProdViewersList(443,15257
+void MainWindow::showSection(453,15569
+
+qpfav/procalertmodel.cpp,139
+namespace QPF 43,859
+ProcAlertModel::ProcAlertModel(QPF::ProcAlertModel::ProcAlertModel45,876
+Alert ProcAlertModel::getAlertAt(64,1443
+
+qpfav/procalertsview.cpp,250
+using QPF::DlgAlert;5,82
+ProcAlertsView::ProcAlertsView(7,104
+ProcAlertsView::~ProcAlertsView(22,464
+void ProcAlertsView::setActionsHandler(31,714
+void ProcAlertsView::showProcAlertInfo(48,1355
+void ProcAlertsView::locateAlertInProduct(64,1835
+
+qpfav/productsmodel.cpp,93
+namespace QPF 43,875
+ProductsModel::ProductsModel(QPF::ProductsModel::ProductsModel45,892
+
+qpfav/productsviewer.cpp,329
+using Configuration::cfg;15,266
+#define TRC(19,314
+#define TASK_NAME_COLUMN 21,359
+#define TASK_STATUS_COLUMN 22,389
+#define TASK_DATA_COLUMN 23,419
+ProductsViewer::ProductsViewer(25,450
+ProductsViewer::~ProductsViewer(32,580
+void ProductsViewer::createNewViewer(41,826
+bool ProductsViewer::selectProductViewer(113,3347
+
+qpfav/qjsonitem.cpp,600
+QJsonTreeItem::QJsonTreeItem(22,882
+QJsonTreeItem::~QJsonTreeItem(30,964
+void QJsonTreeItem::appendChild(40,1211
+QJsonTreeItem *QJsonTreeItem::child(QJsonTreeItem::child45,1295
+QJsonTreeItem *QJsonTreeItem::parent(QJsonTreeItem::parent50,1376
+int QJsonTreeItem::childCount(59,1622
+int QJsonTreeItem::row(68,1861
+void QJsonTreeItem::setKey(80,2178
+void QJsonTreeItem::setValue(89,2424
+void QJsonTreeItem::setType(98,2676
+QString QJsonTreeItem::key(103,2757
+QString QJsonTreeItem::value(108,2814
+QJsonValue::Type QJsonTreeItem::type(113,2875
+QJsonTreeItem* QJsonTreeItem::load(118,2943
+
+qpfav/qjsonmodel.cpp,474
+QJsonModel::QJsonModel(29,1020
+bool QJsonModel::load(43,1363
+bool QJsonModel::load(60,1785
+bool QJsonModel::loadJson(69,2049
+QVariant QJsonModel::data(88,2500
+QVariant QJsonModel::headerData(119,3071
+QModelIndex QJsonModel::index(132,3351
+QModelIndex QJsonModel::parent(151,3853
+int QJsonModel::rowCount(169,4417
+int QJsonModel::columnCount(187,4925
+void QJsonModel::setIcon(197,5202
+QModelIndex QJsonModel::find(202,5315
+bool QJsonModel::findSequence(231,6488
+
+qpfav/qjsonviewer.cpp,474
+QJSONViewer::QJSONViewer(47,888
+void QJSONViewer::init(58,1175
+QJSONViewer::~QJSONViewer(79,2048
+void QJSONViewer::showJsonContextMenu(88,2289
+void QJSONViewer::jsontreeExpand(131,4000
+void QJSONViewer::jsontreeExpandSubtree(140,4296
+void QJSONViewer::jsontreeExpandAll(153,4705
+void QJSONViewer::jsontreeCollapse(162,4946
+void QJSONViewer::jsontreeCollapseSubtree(171,5248
+void QJSONViewer::jsontreeCollapseAll(184,5663
+void QJSONViewer::getAllChildren(192,5905
+
+qpfav/ruleedit.cpp,166
+namespace QPF 50,944
+RuleEdit::RuleEdit(QPF::RuleEdit::RuleEdit52,961
+RuleEdit::~RuleEdit(59,1073
+void RuleEdit::setRule(68,1291
+void RuleEdit::getRule(93,2312
+
+qpfav/swarmedit.cpp,176
+namespace QPF 50,950
+SwarmEdit::SwarmEdit(QPF::SwarmEdit::SwarmEdit52,967
+SwarmEdit::~SwarmEdit(59,1082
+void SwarmEdit::setSwarm(68,1304
+void SwarmEdit::getSwarm(86,1950
+
+qpfav/sysalertmodel.cpp,134
+namespace QPF 43,856
+SysAlertModel::SysAlertModel(QPF::SysAlertModel::SysAlertModel45,873
+Alert SysAlertModel::getAlertAt(75,1832
+
+qpfav/sysalertsview.cpp,192
+using QPF::DlgAlert;5,80
+SysAlertsView::SysAlertsView(7,102
+SysAlertsView::~SysAlertsView(22,460
+void SysAlertsView::setActionsHandler(31,708
+void SysAlertsView::showSysAlertInfo(45,1226
+
+qpfav/tasksmodel.cpp,81
+namespace QPF 43,847
+TasksModel::TasksModel(QPF::TasksModel::TasksModel45,864
+
+qpfav/tasksview.cpp,769
+using Configuration::cfg;13,211
+#define TRC(17,259
+#define TASK_NAME_COLUMN 19,318
+#define TASK_STATUS_COLUMN 20,348
+#define TASK_DATA_COLUMN 21,378
+TasksView::TasksView(23,409
+TasksView::~TasksView(38,750
+void TasksView::setActionsHandler(47,990
+void TasksView::showWorkDir(93,2652
+void TasksView::displayTaskInfo(120,3934
+void TasksView::stopTask(138,4620
+void TasksView::restartTask(146,4836
+void TasksView::doTaskPause(154,5055
+void TasksView::doTaskResume(173,5835
+void TasksView::doTaskCancel(192,6616
+void TasksView::doAgentSuspend(211,7431
+void TasksView::doAgentStop(233,8332
+void TasksView::doAgentReactivate(254,9196
+void TasksView::doHostSuspend(276,10047
+void TasksView::doHostStop(303,11115
+void TasksView::doHostReactivate(330,12223
+
+qpfav/util.cpp,469
+#define T(11,152
+QMap<TaskStatus, QString> TaskStatusName 12,187
+#undef T13,253
+#define T(15,263
+QMap<QString, TaskStatus> TaskStatusValue 16,298
+#undef T17,365
+#define T(19,375
+const QString UserAreaName[UserAreaName20,402
+#undef T21,462
+const QMap<QString, UserAreaId> UserAreaIdx 23,472
+QJsonObject qStringToJObj(27,653
+QJsonObject stdStringToJObj(34,878
+QString getFileContent(41,1133
+QString getFileContent(47,1226
+void binaryGetFITSHeader(61,1718
+
+qpfav/verbleveldlg.cpp,273
+namespace QPF 44,857
+VerbLevelDlg::VerbLevelDlg(QPF::VerbLevelDlg::VerbLevelDlg46,874
+void VerbLevelDlg::setVerbosityLevel(71,1597
+QString VerbLevelDlg::getVerbosityLevelName(77,1766
+int VerbLevelDlg::getVerbosityLevelIdx(86,2044
+VerbLevelDlg::~VerbLevelDlg(91,2118
+
+qpfav/xmlsyntaxhighlight.cpp,472
+XMLBasicSyntaxHighlighter::XMLBasicSyntaxHighlighter(43,872
+XMLBasicSyntaxHighlighter::XMLBasicSyntaxHighlighter(50,1017
+XMLBasicSyntaxHighlighter::XMLBasicSyntaxHighlighter(57,1168
+void XMLBasicSyntaxHighlighter::highlightBlock(68,1505
+    typedef QList<QRegExp>::const_iterator const_iterator82,2152
+void XMLBasicSyntaxHighlighter::highlightByRegex(98,2844
+void XMLBasicSyntaxHighlighter::setRegexes(116,3439
+void XMLBasicSyntaxHighlighter::setFormats(132,4147
+
+build/qpfav.dir/ui/ui_browserwidget.h,1334
+#define UI_BROWSERWIDGET_H10,393
+class Ui_Browser30,915
+    QAction *insertRowAction;insertRowAction33,942
+    QAction *deleteRowAction;deleteRowAction34,972
+    QAction *fieldStrategyAction;fieldStrategyAction35,1002
+    QAction *rowStrategyAction;rowStrategyAction36,1036
+    QAction *manualStrategyAction;manualStrategyAction37,1068
+    QAction *submitAction;submitAction38,1103
+    QAction *revertAction;revertAction39,1130
+    QAction *selectAction;selectAction40,1157
+    QVBoxLayout *verticalLayout_3;verticalLayout_341,1184
+    QSplitter *splitter;splitter42,1219
+    QWidget *layoutWidget;layoutWidget43,1244
+    QVBoxLayout *verticalLayout_2;verticalLayout_244,1271
+    QSplitter *splitter_2;splitter_245,1306
+    ConnectionWidget *connectionWidget;connectionWidget46,1333
+    QTableView *table;table47,1373
+    QGroupBox *gboxSQL;gboxSQL48,1396
+    QVBoxLayout *verticalLayout;verticalLayout49,1420
+    QTextEdit *sqlEdit;sqlEdit50,1453
+    QHBoxLayout *hboxLayout;hboxLayout51,1477
+    QSpacerItem *spacerItem;spacerItem52,1506
+    QPushButton *clearButton;clearButton53,1535
+    QPushButton *submitButton;submitButton54,1565
+    void setupUi(56,1597
+    void retranslateUi(Ui_Browser::retranslateUi184,7683
+namespace Ui 226,10141
+    class Browser:Ui::Browser227,10156
+
+build/qpfav.dir/ui/ui_configtool.h,16848
+#define UI_CONFIGTOOL_H10,387
+class Ui_ConfigTool41,1248
+    QVBoxLayout *verticalLayout_2;verticalLayout_244,1278
+    QHBoxLayout *horizontalLayout_35;horizontalLayout_3545,1313
+    QLabel *label;label46,1351
+    QLabel *lblConfigName;lblConfigName47,1370
+    QToolBox *toolBox;toolBox48,1397
+    QWidget *qpf;qpf49,1420
+    QVBoxLayout *verticalLayout_3;verticalLayout_350,1438
+    QLabel *label_19;label_1951,1473
+    QSpacerItem *verticalSpacer_13;verticalSpacer_1352,1495
+    QHBoxLayout *horizontalLayout_7;horizontalLayout_753,1531
+    QSpacerItem *horizontalSpacer_28;horizontalSpacer_2854,1568
+    QLabel *label_20;label_2055,1606
+    QSpacerItem *horizontalSpacer_29;horizontalSpacer_2956,1628
+    QSpacerItem *verticalSpacer_12;verticalSpacer_1257,1666
+    QWidget *qtbxGeneral;qtbxGeneral58,1702
+    QHBoxLayout *horizontalLayout_27;horizontalLayout_2759,1728
+    QVBoxLayout *verticalLayout;verticalLayout60,1766
+    QLabel *label_11;label_1161,1799
+    QSpacerItem *verticalSpacer_7;verticalSpacer_762,1821
+    QFrame *line_3;line_363,1856
+    QFrame *frame;frame64,1876
+    QVBoxLayout *verticalLayout_39;verticalLayout_3965,1895
+    QGroupBox *groupBox;groupBox66,1931
+    QVBoxLayout *verticalLayout_4;verticalLayout_467,1956
+    QHBoxLayout *horizontalLayout_3;horizontalLayout_368,1991
+    QLabel *applicationNameLabel;applicationNameLabel69,2028
+    QLineEdit *edAppName;edAppName70,2062
+    QLabel *applicationVersionLabel;applicationVersionLabel71,2088
+    QLineEdit *edAppVersion;edAppVersion72,2125
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_373,2154
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_574,2191
+    QLabel *lastAccessLabel;lastAccessLabel75,2228
+    QLineEdit *edLastAccess;edLastAccess76,2257
+    QSpacerItem *horizontalSpacer_5;horizontalSpacer_577,2286
+    QGroupBox *groupBox_7;groupBox_778,2323
+    QVBoxLayout *verticalLayout_26;verticalLayout_2679,2350
+    QGridLayout *gridLayout_2;gridLayout_280,2386
+    QLineEdit *nedOutbox;nedOutbox81,2417
+    QLabel *label_35;label_3582,2443
+    QLabel *label_36;label_3683,2465
+    QLabel *label_34;label_3484,2487
+    QLineEdit *nedLocalArchiveFolder;nedLocalArchiveFolder85,2509
+    QLineEdit *nedInbox;nedInbox86,2547
+    QLineEdit *nedTargetReprocDir;nedTargetReprocDir87,2572
+    QLineEdit *edBasePath;edBasePath88,2607
+    QLabel *label_33;label_3389,2634
+    QLabel *label_37;label_3790,2656
+    QLineEdit *nedRunFolder;nedRunFolder91,2678
+    QLabel *label_32;label_3292,2707
+    QFrame *line_2;line_293,2729
+    QToolButton *tbtnSetBasePath;tbtnSetBasePath94,2749
+    QHBoxLayout *horizontalLayout_13;horizontalLayout_1395,2783
+    QRadioButton *rbtnNominal;rbtnNominal96,2821
+    QRadioButton *rbtnLocalDir;rbtnLocalDir97,2852
+    QRadioButton *rbtnVOSpace;rbtnVOSpace98,2884
+    QSpacerItem *horizontalSpacer_22;horizontalSpacer_2299,2915
+    QToolButton *tbtnUserDefAreaPath;tbtnUserDefAreaPath100,2953
+    QGroupBox *groupBox_10;groupBox_10101,2991
+    QVBoxLayout *verticalLayout_29;verticalLayout_29102,3019
+    QHBoxLayout *horizontalLayout_33;horizontalLayout_33103,3055
+    QLabel *lblUser;lblUser104,3093
+    QLineEdit *edUser;edUser105,3114
+    QLabel *lblUser_2;lblUser_2106,3137
+    QLineEdit *edHost;edHost107,3160
+    QSpacerItem *horizontalSpacer_14;horizontalSpacer_14108,3183
+    QFrame *line;line109,3221
+    QHBoxLayout *horizontalLayout_36;horizontalLayout_36110,3239
+    QLabel *lblExec;lblExec111,3277
+    QLineEdit *edExec;edExec112,3298
+    QSpacerItem *horizontalSpacer_17;horizontalSpacer_17113,3321
+    QHBoxLayout *horizontalLayout_37;horizontalLayout_37114,3359
+    QLabel *lblPATH;lblPATH115,3397
+    QLineEdit *edPATH;edPATH116,3418
+    QSpacerItem *horizontalSpacer_18;horizontalSpacer_18117,3441
+    QHBoxLayout *horizontalLayout_38;horizontalLayout_38118,3479
+    QLabel *lblLDPATH;lblLDPATH119,3517
+    QLineEdit *edLDPATH;edLDPATH120,3540
+    QSpacerItem *horizontalSpacer_19;horizontalSpacer_19121,3565
+    QSpacerItem *verticalSpacer;verticalSpacer122,3603
+    QWidget *qtbxMachines;qtbxMachines123,3636
+    QHBoxLayout *horizontalLayout_41;horizontalLayout_41124,3663
+    QVBoxLayout *verticalLayout_28;verticalLayout_28125,3701
+    QLabel *label_15;label_15126,3737
+    QSpacerItem *verticalSpacer_8;verticalSpacer_8127,3759
+    QFrame *line_4;line_4128,3794
+    QFrame *frame_2;frame_2129,3814
+    QVBoxLayout *verticalLayout_40;verticalLayout_40130,3835
+    QGroupBox *gpboxHosts;gpboxHosts131,3871
+    QVBoxLayout *verticalLayout_8;verticalLayout_8132,3898
+    QSplitter *splitter;splitter133,3933
+    QWidget *layoutWidget;layoutWidget134,3958
+    QVBoxLayout *verticalLayout_5;verticalLayout_5135,3985
+    QLabel *label_2;label_2136,4020
+    QTableView *tblviewHosts;tblviewHosts137,4041
+    QHBoxLayout *horizontalLayout_18;horizontalLayout_18138,4071
+    QPushButton *btnAddHost;btnAddHost139,4109
+    QPushButton *btnRemoveHost;btnRemoveHost140,4138
+    QSpacerItem *horizontalSpacer_9;horizontalSpacer_9141,4170
+    QWidget *layoutWidget_1;layoutWidget_1142,4207
+    QVBoxLayout *verticalLayout_6;verticalLayout_6143,4236
+    QLabel *label_3;label_3144,4271
+    QTableView *tblviewSwarms;tblviewSwarms145,4292
+    QHBoxLayout *horizontalLayout_19;horizontalLayout_19146,4323
+    QPushButton *btnAddSwarm;btnAddSwarm147,4361
+    QPushButton *btnRemoveSwarm;btnRemoveSwarm148,4391
+    QSpacerItem *horizontalSpacer_11;horizontalSpacer_11149,4424
+    QHBoxLayout *horizontalLayout_4;horizontalLayout_4150,4462
+    QLabel *label_4;label_4151,4499
+    QSpinBox *spboxStartingPort;spboxStartingPort152,4520
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_4153,4553
+    QWidget *qtbxDatabase;qtbxDatabase154,4590
+    QHBoxLayout *horizontalLayout_40;horizontalLayout_40155,4617
+    QVBoxLayout *verticalLayout_30;verticalLayout_30156,4655
+    QLabel *label_16;label_16157,4691
+    QSpacerItem *verticalSpacer_9;verticalSpacer_9158,4713
+    QFrame *line_5;line_5159,4748
+    QFrame *frame_3;frame_3160,4768
+    QVBoxLayout *verticalLayout_41;verticalLayout_41161,4789
+    QGroupBox *groupBox_2;groupBox_2162,4825
+    QVBoxLayout *verticalLayout_11;verticalLayout_11163,4852
+    QHBoxLayout *horizontalLayout_6;horizontalLayout_6164,4888
+    QLabel *applicationNameLabel_2;applicationNameLabel_2165,4925
+    QLineEdit *edDBHost;edDBHost166,4961
+    QSpacerItem *horizontalSpacer_6;horizontalSpacer_6167,4986
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_8168,5023
+    QLabel *lastAccessLabel_2;lastAccessLabel_2169,5060
+    QLineEdit *edDBPort;edDBPort170,5091
+    QSpacerItem *horizontalSpacer_7;horizontalSpacer_7171,5116
+    QHBoxLayout *horizontalLayout_9;horizontalLayout_9172,5153
+    QLabel *lastAccessLabel_3;lastAccessLabel_3173,5190
+    QLineEdit *edDBName;edDBName174,5221
+    QSpacerItem *horizontalSpacer_8;horizontalSpacer_8175,5246
+    QHBoxLayout *horizontalLayout_10;horizontalLayout_10176,5283
+    QLabel *lastAccessLabel_4;lastAccessLabel_4177,5321
+    QLineEdit *edDBUser;edDBUser178,5352
+    QSpacerItem *horizontalSpacer_13;horizontalSpacer_13179,5377
+    QHBoxLayout *horizontalLayout_11;horizontalLayout_11180,5415
+    QLabel *lastAccessLabel_5;lastAccessLabel_5181,5453
+    QLineEdit *edDBPwd;edDBPwd182,5484
+    QSpacerItem *horizontalSpacer_15;horizontalSpacer_15183,5508
+    QSpacerItem *verticalSpacer_2;verticalSpacer_2184,5546
+    QWidget *qtbxProdsProcs;qtbxProdsProcs185,5581
+    QHBoxLayout *horizontalLayout_39;horizontalLayout_39186,5610
+    QVBoxLayout *verticalLayout_31;verticalLayout_31187,5648
+    QLabel *label_17;label_17188,5684
+    QSpacerItem *verticalSpacer_10;verticalSpacer_10189,5706
+    QFrame *line_6;line_6190,5742
+    QFrame *frame_4;frame_4191,5762
+    QHBoxLayout *horizontalLayout_42;horizontalLayout_42192,5783
+    QGroupBox *gpboxPT;gpboxPT193,5821
+    QVBoxLayout *verticalLayout_9;verticalLayout_9194,5845
+    QListView *listProductTypes;listProductTypes195,5880
+    QHBoxLayout *horizontalLayout_31;horizontalLayout_31196,5913
+    QPushButton *btnAddProduct;btnAddProduct197,5951
+    QPushButton *btnRemoveProduct;btnRemoveProduct198,5983
+    QSpacerItem *horizontalSpacer_12;horizontalSpacer_12199,6018
+    QGroupBox *groupBox_5;groupBox_5200,6056
+    QVBoxLayout *verticalLayout_22;verticalLayout_22201,6083
+    QListView *listProcs;listProcs202,6119
+    QHBoxLayout *horizontalLayout_30;horizontalLayout_30203,6145
+    QPushButton *btnAddProcessor;btnAddProcessor204,6183
+    QPushButton *btnRemoveProcessor;btnRemoveProcessor205,6217
+    QSpacerItem *horizontalSpacer_16;horizontalSpacer_16206,6254
+    QWidget *qtbxOrchestration;qtbxOrchestration207,6292
+    QHBoxLayout *horizontalLayout_34;horizontalLayout_34208,6324
+    QVBoxLayout *verticalLayout_32;verticalLayout_32209,6362
+    QLabel *label_18;label_18210,6398
+    QSpacerItem *verticalSpacer_11;verticalSpacer_11211,6420
+    QFrame *line_7;line_7212,6456
+    QFrame *frame_5;frame_5213,6476
+    QVBoxLayout *verticalLayout_42;verticalLayout_42214,6497
+    QGroupBox *gpboxRules;gpboxRules215,6533
+    QVBoxLayout *verticalLayout_7;verticalLayout_7216,6560
+    QTableView *tblviewRules;tblviewRules217,6595
+    QHBoxLayout *horizontalLayout_17;horizontalLayout_17218,6625
+    QPushButton *btnAddRule;btnAddRule219,6663
+    QPushButton *btnRemoveRule;btnRemoveRule220,6692
+    QSpacerItem *horizontalSpacer_10;horizontalSpacer_10221,6724
+    QWidget *qtbxExtTools;qtbxExtTools222,6762
+    QHBoxLayout *horizontalLayout_32;horizontalLayout_32223,6789
+    QVBoxLayout *verticalLayout_36;verticalLayout_36224,6827
+    QLabel *label_22;label_22225,6863
+    QSpacerItem *verticalSpacer_15;verticalSpacer_15226,6885
+    QFrame *line_8;line_8227,6921
+    QFrame *frame_6;frame_6228,6941
+    QVBoxLayout *verticalLayout_43;verticalLayout_43229,6962
+    QGroupBox *gpboxNet_2;gpboxNet_2230,6998
+    QVBoxLayout *verticalLayout_12;verticalLayout_12231,7025
+    QTableWidget *tblwdgUserDefTools;tblwdgUserDefTools232,7061
+    QHBoxLayout *horizontalLayout_14;horizontalLayout_14233,7099
+    QPushButton *btnAddNewUdefTool;btnAddNewUdefTool234,7137
+    QPushButton *btnRemoveUdefTool;btnRemoveUdefTool235,7173
+    QSpacerItem *horizontalSpacer_21;horizontalSpacer_21236,7209
+    QPushButton *btnEditUdefTool;btnEditUdefTool237,7247
+    QSpacerItem *horizontalSpacer_20;horizontalSpacer_20238,7281
+    QSpacerItem *verticalSpacer_6;verticalSpacer_6239,7319
+    QWidget *qtbxConnectivity;qtbxConnectivity240,7354
+    QHBoxLayout *horizontalLayout_29;horizontalLayout_29241,7385
+    QVBoxLayout *verticalLayout_37;verticalLayout_37242,7423
+    QLabel *label_23;label_23243,7459
+    QSpacerItem *verticalSpacer_16;verticalSpacer_16244,7481
+    QFrame *line_9;line_9245,7517
+    QFrame *frame_7;frame_7246,7537
+    QVBoxLayout *verticalLayout_44;verticalLayout_44247,7558
+    QGroupBox *groupBox_11;groupBox_11248,7594
+    QHBoxLayout *horizontalLayout_16;horizontalLayout_16249,7622
+    QGridLayout *gridLayout_3;gridLayout_3250,7660
+    QLabel *label_8;label_8251,7691
+    QLineEdit *edVOSpaceURL;edVOSpaceURL252,7712
+    QLabel *label_5;label_5253,7741
+    QHBoxLayout *horizontalLayout_20;horizontalLayout_20254,7762
+    QLineEdit *edVOSpaceUser;edVOSpaceUser255,7800
+    QSpacerItem *horizontalSpacer_23;horizontalSpacer_23256,7830
+    QLabel *label_6;label_6257,7868
+    QHBoxLayout *horizontalLayout_21;horizontalLayout_21258,7889
+    QLineEdit *edVOSpacePwd;edVOSpacePwd259,7927
+    QSpacerItem *horizontalSpacer_24;horizontalSpacer_24260,7956
+    QLabel *label_7;label_7261,7994
+    QLineEdit *edVOSpaceFolder;edVOSpaceFolder262,8015
+    QGroupBox *groupBox_12;groupBox_12263,8047
+    QHBoxLayout *horizontalLayout_22;horizontalLayout_22264,8075
+    QGridLayout *gridLayout;gridLayout265,8113
+    QLabel *label_14;label_14266,8142
+    QLineEdit *edJupyterLabHost;edJupyterLabHost267,8164
+    QLabel *label_9;label_9268,8197
+    QHBoxLayout *horizontalLayout_25;horizontalLayout_25269,8218
+    QLineEdit *edJupyterLabHostUser;edJupyterLabHostUser270,8256
+    QSpacerItem *horizontalSpacer_25;horizontalSpacer_25271,8293
+    QLabel *label_10;label_10272,8331
+    QHBoxLayout *horizontalLayout_26;horizontalLayout_26273,8353
+    QLineEdit *edJupyterLabHostPwd;edJupyterLabHostPwd274,8391
+    QSpacerItem *horizontalSpacer_26;horizontalSpacer_26275,8427
+    QLabel *label_12;label_12276,8465
+    QLineEdit *edJupyterLabURL;edJupyterLabURL277,8487
+    QGroupBox *groupBox_13;groupBox_13278,8519
+    QHBoxLayout *horizontalLayout_23;horizontalLayout_23279,8547
+    QGridLayout *gridLayout_5;gridLayout_5280,8585
+    QLabel *label_27;label_27281,8616
+    QLabel *label_13;label_13282,8638
+    QHBoxLayout *horizontalLayout_24;horizontalLayout_24283,8660
+    QLineEdit *edIPythonCmd;edIPythonCmd284,8698
+    QToolButton *tbtnIPythonCmd;tbtnIPythonCmd285,8727
+    QHBoxLayout *horizontalLayout_43;horizontalLayout_43286,8760
+    QLineEdit *edIPythonPath;edIPythonPath287,8798
+    QToolButton *tbtnIPythonWorkdir;tbtnIPythonWorkdir288,8828
+    QSpacerItem *verticalSpacer_4;verticalSpacer_4289,8865
+    QWidget *qtbxFlags;qtbxFlags290,8900
+    QHBoxLayout *horizontalLayout_28;horizontalLayout_28291,8924
+    QVBoxLayout *verticalLayout_38;verticalLayout_38292,8962
+    QLabel *label_24;label_24293,8998
+    QSpacerItem *verticalSpacer_17;verticalSpacer_17294,9020
+    QFrame *line_10;line_10295,9056
+    QFrame *frame_8;frame_8296,9077
+    QVBoxLayout *verticalLayout_45;verticalLayout_45297,9098
+    QGroupBox *groupBox_3;groupBox_3298,9134
+    QHBoxLayout *horizontalLayout_15;horizontalLayout_15299,9161
+    QVBoxLayout *verticalLayout_17;verticalLayout_17300,9199
+    QGroupBox *grpboxWriteMsgsDisk;grpboxWriteMsgsDisk301,9235
+    QVBoxLayout *verticalLayout_15;verticalLayout_15302,9271
+    QCheckBox *chkCmd;chkCmd303,9307
+    QCheckBox *chkEvtMngCmd;chkEvtMngCmd304,9330
+    QCheckBox *chkHmiCmd;chkHmiCmd305,9359
+    QCheckBox *chkInData;chkInData306,9385
+    QCheckBox *chkTskSched;chkTskSched307,9411
+    QCheckBox *chkTskReg;chkTskReg308,9439
+    QCheckBox *chkTskRqst;chkTskRqst309,9465
+    QCheckBox *chkTskProc;chkTskProc310,9492
+    QCheckBox *chkTskRep;chkTskRep311,9519
+    QCheckBox *chkFmkMon;chkFmkMon312,9545
+    QCheckBox *chkHostMon;chkHostMon313,9571
+    QVBoxLayout *verticalLayout_18;verticalLayout_18314,9598
+    QGroupBox *grpboxWriteMsgsDisk_2;grpboxWriteMsgsDisk_2315,9634
+    QVBoxLayout *verticalLayout_16;verticalLayout_16316,9672
+    QCheckBox *chkMsgsIncommingInLog;chkMsgsIncommingInLog317,9708
+    QGroupBox *groupBox_4;groupBox_4318,9746
+    QVBoxLayout *verticalLayout_13;verticalLayout_13319,9773
+    QCheckBox *chkAllowReproc;chkAllowReproc320,9809
+    QCheckBox *chkGenerateIntermedProd;chkGenerateIntermedProd321,9840
+    QGroupBox *groupBox_6;groupBox_6322,9880
+    QVBoxLayout *verticalLayout_19;verticalLayout_19323,9907
+    QCheckBox *chkSendOutputsToArchive;chkSendOutputsToArchive324,9943
+    QGroupBox *groupBox_8;groupBox_8325,9983
+    QVBoxLayout *verticalLayout_20;verticalLayout_20326,10010
+    QCheckBox *chkGroupTskAgentLogs;chkGroupTskAgentLogs327,10046
+    QGroupBox *groupBox_9;groupBox_9328,10083
+    QVBoxLayout *verticalLayout_25;verticalLayout_25329,10110
+    QLineEdit *edProgressString;edProgressString330,10146
+    QGroupBox *groupBox_14;groupBox_14331,10179
+    QHBoxLayout *horizontalLayout;horizontalLayout332,10207
+    QComboBox *cboxMinLogLevel;cboxMinLogLevel333,10242
+    QSpacerItem *horizontalSpacer_27;horizontalSpacer_27334,10274
+    QSpacerItem *verticalSpacer_3;verticalSpacer_3335,10312
+    QSpacerItem *verticalSpacer_5;verticalSpacer_5336,10347
+    QHBoxLayout *horizontalLayout_12;horizontalLayout_12337,10382
+    QLabel *label_25;label_25338,10420
+    QLabel *lblDisclaimer;lblDisclaimer339,10442
+    QHBoxLayout *horizontalLayout_2;horizontalLayout_2340,10469
+    QSpacerItem *horizontalSpacer_2;horizontalSpacer_2341,10506
+    QPushButton *btnDiscard;btnDiscard342,10543
+    QSpacerItem *horizontalSpacer;horizontalSpacer343,10572
+    QPushButton *btnSaveAs;btnSaveAs344,10607
+    QPushButton *btnSave;btnSave345,10635
+    QPushButton *btnApply;btnApply346,10661
+    QButtonGroup *btngrpUserWA;btngrpUserWA347,10688
+    void setupUi(349,10721
+    void retranslateUi(Ui_ConfigTool::retranslateUi2154,86752
+namespace Ui 2320,100982
+    class ConfigTool:Ui::ConfigTool2321,100997
+
+build/qpfav.dir/ui/ui_conthostedit.h,1331
+#define UI_CONTHOSTEDIT_H10,391
+class Ui_ContHostEdit31,944
+    QVBoxLayout *verticalLayout;verticalLayout34,976
+    QGroupBox *gpboxTool;gpboxTool35,1009
+    QFormLayout *formLayout;formLayout36,1035
+    QLabel *label_5;label_537,1064
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_538,1085
+    QLineEdit *edHostIP;edHostIP39,1122
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_340,1147
+    QLabel *label_6;label_641,1184
+    QHBoxLayout *horizontalLayout_9;horizontalLayout_942,1205
+    QRadioButton *rbtnMaster;rbtnMaster43,1242
+    QRadioButton *rbtnProcessing;rbtnProcessing44,1272
+    QSpacerItem *horizontalSpacer_5;horizontalSpacer_545,1306
+    QLabel *label_7;label_746,1343
+    QHBoxLayout *horizontalLayout_10;horizontalLayout_1047,1364
+    QSpinBox *spbxNumAgents;spbxNumAgents48,1402
+    QSpacerItem *horizontalSpacer_6;horizontalSpacer_649,1431
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_850,1468
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_451,1505
+    QPushButton *btnOK;btnOK52,1542
+    QPushButton *btnCancel;btnCancel53,1566
+    QButtonGroup *buttonGroup;buttonGroup54,1594
+    void setupUi(56,1626
+    void retranslateUi(Ui_ContHostEdit::retranslateUi167,5994
+namespace Ui 182,6925
+    class ContHostEdit:Ui::ContHostEdit183,6940
+
+build/qpfav.dir/ui/ui_dbbrowser.h,302
+#define UI_DBBROWSER_H10,385
+class Ui_DBBrowser23,670
+    QVBoxLayout *verticalLayout_3;verticalLayout_326,699
+    Browser *browser;browser27,734
+    void setupUi(29,757
+    void retranslateUi(Ui_DBBrowser::retranslateUi49,1441
+namespace Ui 56,1631
+    class DBBrowser:Ui::DBBrowser57,1646
+
+build/qpfav.dir/ui/ui_dlgalert.h,821
+#define UI_DLGALERT_H10,383
+class Ui_DlgAlert27,800
+    QVBoxLayout *verticalLayout_2;verticalLayout_230,828
+    QGroupBox *groupBox;groupBox31,863
+    QVBoxLayout *verticalLayout;verticalLayout32,888
+    QGridLayout *gridLayout;gridLayout33,921
+    QLabel *label_5;label_534,950
+    QLabel *label_2;label_235,971
+    QLabel *label_3;label_336,992
+    QLabel *label_4;label_437,1013
+    QLabel *label;label38,1034
+    QLineEdit *edTimestamp;edTimestamp39,1053
+    QLineEdit *edSeverity;edSeverity40,1081
+    QLineEdit *edID;edID41,1108
+    QLineEdit *edComponent;edComponent42,1129
+    QTextEdit *textedDescription;textedDescription43,1157
+    void setupUi(45,1192
+    void retranslateUi(Ui_DlgAlert::retranslateUi132,4329
+namespace Ui 145,5048
+    class DlgAlert:Ui::DlgAlert146,5063
+
+build/qpfav.dir/ui/ui_dlgjsonviewer.h,318
+#define UI_DLGJSONVIEWER_H10,393
+class Ui_DlgJSONViewer23,686
+    QVBoxLayout *verticalLayout_2;verticalLayout_226,719
+    QJSONViewer *wdg;wdg27,754
+    void setupUi(29,777
+    void retranslateUi(Ui_DlgJSONViewer::retranslateUi48,1440
+namespace Ui 55,1623
+    class DlgJSONViewer:Ui::DlgJSONViewer56,1638
+
+build/qpfav.dir/ui/ui_dlgreproc.h,1647
+#define UI_DLGREPROC_H10,385
+class Ui_DlgReproc34,1030
+    QVBoxLayout *verticalLayout_2;verticalLayout_237,1059
+    QLabel *lblDesc;lblDesc38,1094
+    QListWidget *lstInputProducts;lstInputProducts39,1115
+    QGroupBox *grpboxOptions;grpboxOptions40,1150
+    QVBoxLayout *verticalLayout;verticalLayout41,1180
+    QLabel *label_3;label_342,1213
+    QGridLayout *gridLayout_2;gridLayout_243,1234
+    QRadioButton *rbtnLocalDir;rbtnLocalDir44,1265
+    QRadioButton *rbtnVOSpace;rbtnVOSpace45,1297
+    QLineEdit *edVOSpace;edVOSpace46,1328
+    QLineEdit *edLocalArch;edLocalArch47,1354
+    QLineEdit *edLocalDir;edLocalDir48,1382
+    QRadioButton *rbtnLocalArch;rbtnLocalArch49,1409
+    QToolButton *tbtnLocal;tbtnLocal50,1442
+    QSpacerItem *horizontalSpacer;horizontalSpacer51,1470
+    QFrame *frmAdditionalOpts;frmAdditionalOpts52,1505
+    QVBoxLayout *verticalLayout_3;verticalLayout_353,1536
+    QCheckBox *chkGenIntermProd;chkGenIntermProd54,1571
+    QCheckBox *chkIPython;chkIPython55,1604
+    QCheckBox *chkJupLab;chkJupLab56,1631
+    QCheckBox *chkBrowserVOSpace;chkBrowserVOSpace57,1657
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_858,1691
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_459,1728
+    QPushButton *btnOK;btnOK60,1765
+    QPushButton *btnCancel;btnCancel61,1789
+    QButtonGroup *btngrpOutputsLocation;btngrpOutputsLocation62,1817
+    QButtonGroup *btngrpAnalyzeSession;btngrpAnalyzeSession63,1858
+    void setupUi(65,1899
+    void retranslateUi(Ui_DlgReproc::retranslateUi217,8250
+namespace Ui 267,12506
+    class DlgReproc:Ui::DlgReproc268,12521
+
+build/qpfav.dir/ui/ui_dlguserpwd.h,628
+#define UI_DLGUSERPWD_H10,387
+class Ui_DlgUserPwd27,810
+    QVBoxLayout *verticalLayout;verticalLayout30,840
+    QGridLayout *gridLayout;gridLayout31,873
+    QLineEdit *edPwd;edPwd32,902
+    QLabel *label_3;label_333,924
+    QLabel *label;label34,945
+    QLineEdit *edUser;edUser35,964
+    QLabel *label_2;label_236,987
+    QLabel *lblCapsLockIcon;lblCapsLockIcon37,1008
+    QFrame *line;line38,1037
+    QDialogButtonBox *buttonBox;buttonBox39,1055
+    void setupUi(41,1089
+    void retranslateUi(Ui_DlgUserPwd::retranslateUi111,3659
+namespace Ui 124,4169
+    class DlgUserPwd:Ui::DlgUserPwd125,4184
+
+build/qpfav.dir/ui/ui_exttooledit.h,1379
+#define UI_EXTTOOLEDIT_H10,389
+class Ui_ExtToolEdit30,910
+    QVBoxLayout *verticalLayout;verticalLayout33,941
+    QGroupBox *gpboxTool;gpboxTool34,974
+    QFormLayout *formLayout;formLayout35,1000
+    QLabel *label_5;label_536,1029
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_537,1050
+    QLineEdit *edName;edName38,1087
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_339,1110
+    QLabel *label_6;label_640,1147
+    QLineEdit *edDesc;edDesc41,1168
+    QLabel *label_7;label_742,1191
+    QHBoxLayout *horizontalLayout_7;horizontalLayout_743,1212
+    QLineEdit *edExe;edExe44,1249
+    QToolButton *tbtnSelectExe;tbtnSelectExe45,1271
+    QLabel *label_9;label_946,1303
+    QLineEdit *edArgs;edArgs47,1324
+    QLabel *label_8;label_848,1347
+    QHBoxLayout *horizontalLayout_6;horizontalLayout_649,1368
+    QLineEdit *edProdTypes;edProdTypes50,1405
+    QToolButton *tbtnSelectProdTypes;tbtnSelectProdTypes51,1433
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_852,1471
+    QPushButton *btnHelp;btnHelp53,1508
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_454,1534
+    QPushButton *btnOK;btnOK55,1571
+    QPushButton *btnCancel;btnCancel56,1595
+    void setupUi(58,1624
+    void retranslateUi(Ui_ExtToolEdit::retranslateUi193,6914
+namespace Ui 211,8101
+    class ExtToolEdit:Ui::ExtToolEdit212,8116
+
+build/qpfav.dir/ui/ui_exttoolsdef.h,853
+#define UI_EXTTOOLSDEF_H10,389
+class Ui_ExtToolsDef26,788
+    QVBoxLayout *verticalLayout_2;verticalLayout_229,819
+    QHBoxLayout *horizontalLayout;horizontalLayout30,854
+    QTableWidget *tblwdgUserDefTools;tblwdgUserDefTools31,889
+    QVBoxLayout *verticalLayout;verticalLayout32,927
+    QPushButton *btnAddNew;btnAddNew33,960
+    QPushButton *btnEdit;btnEdit34,988
+    QPushButton *btnRemove;btnRemove35,1014
+    QSpacerItem *verticalSpacer;verticalSpacer36,1042
+    QHBoxLayout *horizontalLayout_2;horizontalLayout_237,1075
+    QSpacerItem *horizontalSpacer;horizontalSpacer38,1112
+    QPushButton *btnOK;btnOK39,1147
+    QPushButton *btnCancel;btnCancel40,1171
+    void setupUi(42,1200
+    void retranslateUi(Ui_ExtToolsDef::retranslateUi132,5290
+namespace Ui 154,6912
+    class ExtToolsDef:Ui::ExtToolsDef155,6927
+
+build/qpfav.dir/ui/ui_localarchview.h,322
+#define UI_LOCALARCHVIEW_H10,393
+class Ui_LocalArchiveView23,692
+    QVBoxLayout *verticalLayout;verticalLayout26,728
+    QTreeView *vw;vw27,761
+    void setupUi(29,781
+    void retranslateUi(Ui_LocalArchiveView::retranslateUi48,1455
+namespace Ui 55,1645
+    class LocalArchiveView:Ui::LocalArchiveView56,1660
+
+build/qpfav.dir/ui/ui_mainwindow.h,5254
+#define UI_MAINWINDOW_H10,387
+class Ui_MainWindow44,1327
+    QWidget *centralwidget;centralwidget47,1357
+    QVBoxLayout *verticalLayout_11;verticalLayout_1148,1385
+    QStackedWidget *stckMain;stckMain49,1421
+    QWidget *pgLocalArch;pgLocalArch50,1451
+    QVBoxLayout *verticalLayout_2;verticalLayout_251,1477
+    QHBoxLayout *horizontalLayout_4;horizontalLayout_452,1512
+    QLabel *lblLocalArch;lblLocalArch53,1549
+    QComboBox *cboxLocalArchAuto;cboxLocalArchAuto54,1575
+    QToolButton *tbtnRefresh;tbtnRefresh55,1609
+    QToolButton *tbtnExpand;tbtnExpand56,1639
+    QToolButton *tbtnCollapse;tbtnCollapse57,1668
+    QToolButton *tbtnResize;tbtnResize58,1699
+    LocalArchiveView *localArchView;localArchView59,1728
+    QWidget *pgProcTasks;pgProcTasks60,1765
+    QVBoxLayout *verticalLayout;verticalLayout61,1791
+    QLabel *lblProcTasks;lblProcTasks62,1824
+    TasksView *tasksView;tasksView63,1850
+    QWidget *pgProdView;pgProdView64,1876
+    QVBoxLayout *verticalLayout_4;verticalLayout_465,1901
+    QLabel *lblProdView;lblProdView66,1936
+    ProductsViewer *prodsViewer;prodsViewer67,1961
+    QWidget *pgFilters;pgFilters68,1994
+    QVBoxLayout *verticalLayout_16;verticalLayout_1669,2018
+    QLabel *lblFilters;lblFilters70,2054
+    QTabWidget *tabwdgFilters;tabwdgFilters71,2078
+    QWidget *pgAlerts;pgAlerts72,2109
+    QVBoxLayout *verticalLayout_14;verticalLayout_1473,2132
+    QLabel *lblAlerts;lblAlerts74,2168
+    QTabWidget *tabwdgAlerts;tabwdgAlerts75,2191
+    QWidget *tabProcAlerts;tabProcAlerts76,2221
+    QVBoxLayout *verticalLayout_12;verticalLayout_1277,2249
+    ProcAlertsView *procAlertsView;procAlertsView78,2285
+    QWidget *tabSysAlerts;tabSysAlerts79,2321
+    QVBoxLayout *verticalLayout_13;verticalLayout_1380,2348
+    SysAlertsView *sysAlertsView;sysAlertsView81,2384
+    QWidget *pgMonit;pgMonit82,2418
+    QVBoxLayout *verticalLayout_7;verticalLayout_783,2440
+    QLabel *lblMonit;lblMonit84,2475
+    QFrame *frmMonit;frmMonit85,2497
+    QWidget *pgLog;pgLog86,2519
+    QVBoxLayout *verticalLayout_3;verticalLayout_387,2539
+    QHBoxLayout *horizontalLayout_2;horizontalLayout_288,2574
+    QLabel *lblLog;lblLog89,2611
+    QComboBox *cboxLog;cboxLog90,2631
+    QSpacerItem *horizontalSpacer;horizontalSpacer91,2655
+    QStackedWidget *stckLogs;stckLogs92,2690
+    QWidget *page;page93,2720
+    QWidget *page_2;page_294,2739
+    QWidget *pgTools;pgTools95,2760
+    QVBoxLayout *verticalLayout_15;verticalLayout_1596,2782
+    QLabel *lblTools;lblTools97,2818
+    QHBoxLayout *horizontalLayout_3;horizontalLayout_398,2840
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_399,2877
+    QFrame *frame;frame100,2914
+    QGridLayout *gridLayout;gridLayout101,2933
+    QPushButton *btnCfgTool_txt;btnCfgTool_txt102,2962
+    QPushButton *btnVerbosity_txt;btnVerbosity_txt103,2995
+    QPushButton *btnUserDefTools_txt;btnUserDefTools_txt104,3030
+    QPushButton *btnDBBrowser_txt;btnDBBrowser_txt105,3068
+    QPushButton *btnCfgTool;btnCfgTool106,3103
+    QPushButton *btnDBBrowser;btnDBBrowser107,3132
+    QPushButton *btnVerbosity;btnVerbosity108,3163
+    QPushButton *btnUserDefTools;btnUserDefTools109,3194
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_4110,3228
+    QSpacerItem *verticalSpacer_2;verticalSpacer_2111,3265
+    QMenuBar *menubar;menubar112,3300
+    QStatusBar *statusbar;statusbar113,3323
+    QDockWidget *dckNavigator;dckNavigator114,3350
+    QWidget *dckNavigatorContents;dckNavigatorContents115,3381
+    QVBoxLayout *verticalLayout_5;verticalLayout_5116,3416
+    QHBoxLayout *horizontalLayout;horizontalLayout117,3451
+    QToolButton *tbtnArchive;tbtnArchive118,3486
+    QToolButton *tbtnTasks;tbtnTasks119,3516
+    QToolButton *tbtnViewer;tbtnViewer120,3544
+    QToolButton *tbtnFilter;tbtnFilter121,3573
+    QToolButton *tbtnAlerts;tbtnAlerts122,3602
+    QToolButton *tbtnMonit;tbtnMonit123,3631
+    QToolButton *tbtnLog;tbtnLog124,3659
+    QToolButton *tbtnTools;tbtnTools125,3685
+    QSpacerItem *horizontalSpacer_2;horizontalSpacer_2126,3713
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_5127,3750
+    QLabel *lblVerbosity;lblVerbosity128,3787
+    QSpacerItem *horizontalSpacer_5;horizontalSpacer_5129,3813
+    QToolBox *tboxNavigator;tboxNavigator130,3850
+    QWidget *navpgProducts;navpgProducts131,3879
+    QVBoxLayout *verticalLayout_8;verticalLayout_8132,3907
+    QListWidget *lstvwProducts;lstvwProducts133,3942
+    QWidget *navpgFilters;navpgFilters134,3974
+    QVBoxLayout *verticalLayout_9;verticalLayout_9135,4001
+    QListView *lstvwFilters;lstvwFilters136,4036
+    QWidget *navpgViews;navpgViews137,4065
+    QVBoxLayout *verticalLayout_10;verticalLayout_10138,4090
+    QListView *lstvwViews;lstvwViews139,4126
+    QWidget *navpgLogs;navpgLogs140,4153
+    QVBoxLayout *verticalLayout_6;verticalLayout_6141,4177
+    QListView *lstvwLogs;lstvwLogs142,4212
+    QButtonGroup *btngrpNavigator;btngrpNavigator143,4238
+    void setupUi(145,4274
+    void retranslateUi(Ui_MainWindow::retranslateUi675,27073
+namespace Ui 781,34874
+    class MainWindow:Ui::MainWindow782,34889
+
+build/qpfav.dir/ui/ui_procalertsview.h,316
+#define UI_PROCALERTSVIEW_H10,395
+class Ui_ProcAlertsView23,696
+    QVBoxLayout *verticalLayout;verticalLayout26,730
+    QTableView *vw;vw27,763
+    void setupUi(29,784
+    void retranslateUi(Ui_ProcAlertsView::retranslateUi48,1441
+namespace Ui 55,1625
+    class ProcAlertsView:Ui::ProcAlertsView56,1640
+
+build/qpfav.dir/ui/ui_productsviewer.h,320
+#define UI_PRODUCTSVIEWER_H10,395
+class Ui_ProductsViewer23,696
+    QVBoxLayout *verticalLayout;verticalLayout26,730
+    QTabWidget *tabs;tabs27,763
+    void setupUi(29,786
+    void retranslateUi(Ui_ProductsViewer::retranslateUi52,1527
+namespace Ui 59,1711
+    class ProductsViewer:Ui::ProductsViewer60,1726
+
+build/qpfav.dir/ui/ui_qjsonviewer.h,408
+#define UI_QJSONVIEWER_H10,389
+class Ui_QJSONViewer24,717
+    QVBoxLayout *verticalLayout_2;verticalLayout_227,748
+    QGroupBox *grpboxViewer;grpboxViewer28,783
+    QVBoxLayout *verticalLayout;verticalLayout29,812
+    QTreeView *vw;vw30,845
+    void setupUi(32,865
+    void retranslateUi(Ui_QJSONViewer::retranslateUi59,1861
+namespace Ui 67,2131
+    class QJSONViewer:Ui::QJSONViewer68,2146
+
+build/qpfav.dir/ui/ui_ruleedit.h,1595
+#define UI_RULEEDIT_H10,383
+class Ui_RuleEdit31,927
+    QVBoxLayout *verticalLayout_4;verticalLayout_434,955
+    QGroupBox *gpboxTool;gpboxTool35,990
+    QVBoxLayout *verticalLayout_3;verticalLayout_336,1016
+    QHBoxLayout *horizontalLayout_4;horizontalLayout_437,1051
+    QLabel *label_5;label_538,1088
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_539,1109
+    QLineEdit *edName;edName40,1146
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_341,1169
+    QFrame *line;line42,1206
+    QHBoxLayout *horizontalLayout_2;horizontalLayout_243,1224
+    QVBoxLayout *verticalLayout;verticalLayout44,1261
+    QLabel *label_6;label_645,1294
+    QListWidget *lstwdgInputs;lstwdgInputs46,1315
+    QVBoxLayout *verticalLayout_2;verticalLayout_247,1346
+    QLabel *label_8;label_848,1381
+    QListWidget *lstwdgOutputs;lstwdgOutputs49,1402
+    QLabel *label_7;label_750,1434
+    QLineEdit *edCondition;edCondition51,1455
+    QHBoxLayout *horizontalLayout_3;horizontalLayout_352,1483
+    QLabel *label_9;label_953,1520
+    QHBoxLayout *horizontalLayout;horizontalLayout54,1541
+    QComboBox *cboxProcessor;cboxProcessor55,1576
+    QSpacerItem *horizontalSpacer;horizontalSpacer56,1606
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_857,1641
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_458,1678
+    QPushButton *btnOK;btnOK59,1715
+    QPushButton *btnCancel;btnCancel60,1739
+    void setupUi(62,1768
+    void retranslateUi(Ui_RuleEdit::retranslateUi215,7514
+namespace Ui 230,8402
+    class RuleEdit:Ui::RuleEdit231,8417
+
+build/qpfav.dir/ui/ui_swarmedit.h,1724
+#define UI_SWARMEDIT_H10,385
+class Ui_SwarmEdit30,901
+    QVBoxLayout *verticalLayout;verticalLayout33,930
+    QGroupBox *gpboxTool;gpboxTool34,963
+    QGridLayout *gridLayout;gridLayout35,989
+    QLabel *label_5;label_536,1018
+    QHBoxLayout *horizontalLayout_5;horizontalLayout_537,1039
+    QLineEdit *edSwarmId;edSwarmId38,1076
+    QSpacerItem *horizontalSpacer_3;horizontalSpacer_339,1102
+    QLineEdit *edManagerIP;edManagerIP40,1139
+    QLabel *label_10;label_1041,1167
+    QLabel *label_6;label_642,1189
+    QLabel *label_9;label_943,1210
+    QLabel *label_8;label_844,1231
+    QLabel *label_11;label_1145,1252
+    QHBoxLayout *horizontalLayout_9;horizontalLayout_946,1274
+    QSpinBox *spbxScale;spbxScale47,1311
+    QSpacerItem *horizontalSpacer_5;horizontalSpacer_548,1336
+    QLabel *label_7;label_749,1373
+    QHBoxLayout *horizontalLayout_10;horizontalLayout_1050,1394
+    QLineEdit *edImage;edImage51,1432
+    QSpacerItem *horizontalSpacer_6;horizontalSpacer_652,1456
+    QLineEdit *edWorkerIPs;edWorkerIPs53,1493
+    QLineEdit *edArgs;edArgs54,1521
+    QLineEdit *edExe;edExe55,1544
+    QHBoxLayout *horizontalLayout_6;horizontalLayout_656,1566
+    QLineEdit *edSrvName;edSrvName57,1603
+    QSpacerItem *horizontalSpacer_7;horizontalSpacer_758,1629
+    QLabel *label_12;label_1259,1666
+    QHBoxLayout *horizontalLayout_8;horizontalLayout_860,1688
+    QSpacerItem *horizontalSpacer_4;horizontalSpacer_461,1725
+    QPushButton *btnOK;btnOK62,1762
+    QPushButton *btnCancel;btnCancel63,1786
+    void setupUi(65,1815
+    void retranslateUi(Ui_SwarmEdit::retranslateUi234,8092
+namespace Ui 252,9250
+    class SwarmEdit:Ui::SwarmEdit253,9265
+
+build/qpfav.dir/ui/ui_sysalertsview.h,311
+#define UI_SYSALERTSVIEW_H10,393
+class Ui_SysAlertsView23,693
+    QVBoxLayout *verticalLayout;verticalLayout26,726
+    QTableView *vw;vw27,759
+    void setupUi(29,780
+    void retranslateUi(Ui_SysAlertsView::retranslateUi48,1428
+namespace Ui 55,1609
+    class SysAlertsView:Ui::SysAlertsView56,1624
+
+build/qpfav.dir/ui/ui_tasksview.h,291
+#define UI_TASKSVIEW_H10,385
+class Ui_TasksView23,681
+    QVBoxLayout *verticalLayout;verticalLayout26,710
+    QTableView *vw;vw27,743
+    void setupUi(29,764
+    void retranslateUi(Ui_TasksView::retranslateUi48,1376
+namespace Ui 55,1545
+    class TasksView:Ui::TasksView56,1560
+
+build/qpfav.dir/ui/ui_verbleveldlg.h,405
+#define UI_VERBLEVELDLG_H10,391
+class Ui_VerbLevelDlg25,757
+    QVBoxLayout *verticalLayout;verticalLayout28,789
+    QLabel *label;label29,822
+    QListWidget *listWidget;listWidget30,841
+    QDialogButtonBox *buttonBox;buttonBox31,870
+    void setupUi(33,904
+    void retranslateUi(Ui_VerbLevelDlg::retranslateUi66,2173
+namespace Ui 74,2474
+    class VerbLevelDlg:Ui::VerbLevelDlg75,2489
+
+build/qpfav.dir/rcc/qrc_icons_nav.cpp,907
+static const unsigned char qt_resource_data[qt_resource_data9,302
+static const unsigned char qt_resource_name[qt_resource_name84570,6908351
+static const unsigned char qt_resource_struct[qt_resource_struct84902,6918382
+#  define QT_RCC_PREPEND_NAMESPACE(85105,6926467
+#  define QT_RCC_MANGLE_NAMESPACE0(85106,6926529
+#  define QT_RCC_MANGLE_NAMESPACE1(85107,6926569
+#  define QT_RCC_MANGLE_NAMESPACE2(85108,6926618
+#  define QT_RCC_MANGLE_NAMESPACE(85109,6926689
+#   define QT_RCC_PREPEND_NAMESPACE(85112,6926843
+#   define QT_RCC_MANGLE_NAMESPACE(85113,6926890
+namespace QT_NAMESPACE 85117,6926964
+int QT_RCC_MANGLE_NAMESPACE(85129,6927292
+int QT_RCC_MANGLE_NAMESPACE(85137,6927550
+   struct initializer ::initializer85145,6927764
+       initializer(::initializer::initializer85146,6927788
+       ~initializer(::initializer::~initializer85147,6927866
+   } dummy;::dummy85148,6927948
+
+build/qpfav.dir/moc/moc_actionshandler.cpp,816
+struct qt_meta_stringdata_QPF__ActionsHandler_t 23,843
+    QByteArrayData data[qt_meta_stringdata_QPF__ActionsHandler_t::data24,893
+    char stringdata0[qt_meta_stringdata_QPF__ActionsHandler_t::stringdata025,921
+#define QT_MOC_LITERAL(27,951
+static const qt_meta_stringdata_QPF__ActionsHandler_t qt_meta_stringdata_QPF__ActionsHandler 32,1191
+#undef QT_MOC_LITERAL51,1929
+static const uint qt_meta_data_QPF__ActionsHandler[qt_meta_data_QPF__ActionsHandler53,1952
+void QPF::ActionsHandler::qt_static_metacall(85,2890
+const QMetaObject QPF::ActionsHandler::staticMetaObject 102,3667
+const QMetaObject *QPF::ActionsHandler::metaObject(QPF::ActionsHandler::metaObject108,3890
+void *QPF::ActionsHandler::qt_metacast(QPF::ActionsHandler::qt_metacast113,4051
+int QPF::ActionsHandler::qt_metacall(121,4311
+
+build/qpfav.dir/moc/moc_browser.cpp,1455
+struct qt_meta_stringdata_Browser_t 23,822
+    QByteArrayData data[qt_meta_stringdata_Browser_t::data24,860
+    char stringdata0[qt_meta_stringdata_Browser_t::stringdata025,889
+#define QT_MOC_LITERAL(27,919
+static const qt_meta_stringdata_Browser_t qt_meta_stringdata_Browser 32,1147
+#undef QT_MOC_LITERAL76,3113
+static const uint qt_meta_data_Browser[qt_meta_data_Browser78,3136
+void Browser::qt_static_metacall(140,5072
+            typedef void (Browser:Browser171,6782
+const QMetaObject Browser::staticMetaObject 180,7020
+const QMetaObject *Browser::metaObject(Browser::metaObject186,7207
+void *Browser::qt_metacast(Browser::qt_metacast191,7356
+int Browser::qt_metacall(199,7592
+void Browser::statusMessage(217,8077
+struct qt_meta_stringdata_CustomModel_t 222,8275
+    QByteArrayData data[qt_meta_stringdata_CustomModel_t::data223,8317
+    char stringdata0[qt_meta_stringdata_CustomModel_t::stringdata0224,8345
+#define QT_MOC_LITERAL(226,8374
+static const qt_meta_stringdata_CustomModel_t qt_meta_stringdata_CustomModel 231,8606
+#undef QT_MOC_LITERAL238,8764
+static const uint qt_meta_data_CustomModel[qt_meta_data_CustomModel240,8787
+void CustomModel::qt_static_metacall(256,9139
+const QMetaObject CustomModel::staticMetaObject 264,9309
+const QMetaObject *CustomModel::metaObject(CustomModel::metaObject270,9515
+void *CustomModel::qt_metacast(CustomModel::qt_metacast275,9668
+int CustomModel::qt_metacall(283,9919
+
+build/qpfav.dir/moc/moc_configtool.cpp,1513
+struct qt_meta_stringdata_QPF__ModelView_t 23,831
+    QByteArrayData data[qt_meta_stringdata_QPF__ModelView_t::data24,876
+    char stringdata0[qt_meta_stringdata_QPF__ModelView_t::stringdata025,904
+#define QT_MOC_LITERAL(27,933
+static const qt_meta_stringdata_QPF__ModelView_t qt_meta_stringdata_QPF__ModelView 32,1168
+#undef QT_MOC_LITERAL39,1338
+static const uint qt_meta_data_QPF__ModelView[qt_meta_data_QPF__ModelView41,1361
+void QPF::ModelView::qt_static_metacall(57,1716
+const QMetaObject QPF::ModelView::staticMetaObject 65,1889
+const QMetaObject *QPF::ModelView::metaObject(QPF::ModelView::metaObject71,2097
+void *QPF::ModelView::qt_metacast(QPF::ModelView::qt_metacast76,2253
+int QPF::ModelView::qt_metacall(84,2503
+struct qt_meta_stringdata_QPF__ConfigTool_t 89,2642
+    QByteArrayData data[qt_meta_stringdata_QPF__ConfigTool_t::data90,2688
+    char stringdata0[qt_meta_stringdata_QPF__ConfigTool_t::stringdata091,2717
+#define QT_MOC_LITERAL(93,2747
+static const qt_meta_stringdata_QPF__ConfigTool_t qt_meta_stringdata_QPF__ConfigTool 98,2983
+#undef QT_MOC_LITERAL158,5544
+static const uint qt_meta_data_QPF__ConfigTool[qt_meta_data_QPF__ConfigTool160,5567
+void QPF::ConfigTool::qt_static_metacall(244,8476
+const QMetaObject QPF::ConfigTool::staticMetaObject 298,11040
+const QMetaObject *QPF::ConfigTool::metaObject(QPF::ConfigTool::metaObject304,11251
+void *QPF::ConfigTool::qt_metacast(QPF::ConfigTool::qt_metacast309,11408
+int QPF::ConfigTool::qt_metacall(317,11660
+
+build/qpfav.dir/moc/moc_connectionwidget.cpp,1013
+struct qt_meta_stringdata_ConnectionWidget_t 23,849
+    QByteArrayData data[qt_meta_stringdata_ConnectionWidget_t::data24,896
+    char stringdata0[qt_meta_stringdata_ConnectionWidget_t::stringdata025,925
+#define QT_MOC_LITERAL(27,955
+static const qt_meta_stringdata_ConnectionWidget_t qt_meta_stringdata_ConnectionWidget 32,1192
+#undef QT_MOC_LITERAL58,2202
+static const uint qt_meta_data_ConnectionWidget[qt_meta_data_ConnectionWidget60,2225
+void ConnectionWidget::qt_static_metacall(96,3274
+            typedef void (ConnectionWidget:ConnectionWidget114,4286
+            typedef void (ConnectionWidget:ConnectionWidget121,4544
+const QMetaObject ConnectionWidget::staticMetaObject 130,4804
+const QMetaObject *ConnectionWidget::metaObject(ConnectionWidget::metaObject136,5018
+void *ConnectionWidget::qt_metacast(ConnectionWidget::qt_metacast141,5176
+int ConnectionWidget::qt_metacall(149,5430
+void ConnectionWidget::tableActivated(167,5920
+void ConnectionWidget::metaDataRequested(174,6141
+
+build/qpfav.dir/moc/moc_conthostedit.cpp,784
+struct qt_meta_stringdata_QPF__ContHostEdit_t 23,837
+    QByteArrayData data[qt_meta_stringdata_QPF__ContHostEdit_t::data24,885
+    char stringdata0[qt_meta_stringdata_QPF__ContHostEdit_t::stringdata025,913
+#define QT_MOC_LITERAL(27,942
+static const qt_meta_stringdata_QPF__ContHostEdit_t qt_meta_stringdata_QPF__ContHostEdit 32,1180
+#undef QT_MOC_LITERAL39,1362
+static const uint qt_meta_data_QPF__ContHostEdit[qt_meta_data_QPF__ContHostEdit41,1385
+void QPF::ContHostEdit::qt_static_metacall(57,1743
+const QMetaObject QPF::ContHostEdit::staticMetaObject 65,1919
+const QMetaObject *QPF::ContHostEdit::metaObject(QPF::ContHostEdit::metaObject71,2136
+void *QPF::ContHostEdit::qt_metacast(QPF::ContHostEdit::qt_metacast76,2295
+int QPF::ContHostEdit::qt_metacall(84,2551
+
+build/qpfav.dir/moc/moc_dbbrowser.cpp,672
+struct qt_meta_stringdata_DBBrowser_t 23,828
+    QByteArrayData data[qt_meta_stringdata_DBBrowser_t::data24,868
+    char stringdata0[qt_meta_stringdata_DBBrowser_t::stringdata025,896
+#define QT_MOC_LITERAL(27,925
+static const qt_meta_stringdata_DBBrowser_t qt_meta_stringdata_DBBrowser 32,1155
+#undef QT_MOC_LITERAL39,1304
+static const uint qt_meta_data_DBBrowser[qt_meta_data_DBBrowser41,1327
+void DBBrowser::qt_static_metacall(57,1677
+const QMetaObject DBBrowser::staticMetaObject 65,1845
+const QMetaObject *DBBrowser::metaObject(DBBrowser::metaObject71,2038
+void *DBBrowser::qt_metacast(DBBrowser::qt_metacast76,2189
+int DBBrowser::qt_metacall(84,2429
+
+build/qpfav.dir/moc/moc_dbmng.cpp,847
+struct qt_meta_stringdata_QPF__DBManager_t 23,816
+    QByteArrayData data[qt_meta_stringdata_QPF__DBManager_t::data24,861
+    char stringdata0[qt_meta_stringdata_QPF__DBManager_t::stringdata025,889
+#define QT_MOC_LITERAL(27,918
+static const qt_meta_stringdata_QPF__DBManager_t qt_meta_stringdata_QPF__DBManager 32,1153
+#undef QT_MOC_LITERAL41,1426
+static const uint qt_meta_data_QPF__DBManager[qt_meta_data_QPF__DBManager43,1449
+void QPF::DBManager::qt_static_metacall(65,1946
+            typedef void (DBManager:DBManager78,2436
+const QMetaObject QPF::DBManager::staticMetaObject 88,2684
+const QMetaObject *QPF::DBManager::metaObject(QPF::DBManager::metaObject94,2892
+void *QPF::DBManager::qt_metacast(QPF::DBManager::qt_metacast99,3048
+int QPF::DBManager::qt_metacall(107,3298
+void QPF::DBManager::newTaskStatusInfo(125,3786
+
+build/qpfav.dir/moc/moc_dbtblmodel.cpp,784
+struct qt_meta_stringdata_QPF__DBTableModel_t 23,831
+    QByteArrayData data[qt_meta_stringdata_QPF__DBTableModel_t::data24,879
+    char stringdata0[qt_meta_stringdata_QPF__DBTableModel_t::stringdata025,907
+#define QT_MOC_LITERAL(27,936
+static const qt_meta_stringdata_QPF__DBTableModel_t qt_meta_stringdata_QPF__DBTableModel 32,1174
+#undef QT_MOC_LITERAL39,1356
+static const uint qt_meta_data_QPF__DBTableModel[qt_meta_data_QPF__DBTableModel41,1379
+void QPF::DBTableModel::qt_static_metacall(57,1737
+const QMetaObject QPF::DBTableModel::staticMetaObject 65,1913
+const QMetaObject *QPF::DBTableModel::metaObject(QPF::DBTableModel::metaObject71,2137
+void *QPF::DBTableModel::qt_metacast(QPF::DBTableModel::qt_metacast76,2296
+int QPF::DBTableModel::qt_metacall(84,2559
+
+build/qpfav.dir/moc/moc_dbtreemodel.cpp,1733
+struct qt_meta_stringdata_QPF__DBTreeBoldHeaderDelegate_t 23,834
+    QByteArrayData data[qt_meta_stringdata_QPF__DBTreeBoldHeaderDelegate_t::data24,894
+    char stringdata0[qt_meta_stringdata_QPF__DBTreeBoldHeaderDelegate_t::stringdata025,922
+#define QT_MOC_LITERAL(27,951
+static const qt_meta_stringdata_QPF__DBTreeBoldHeaderDelegate_t qt_meta_stringdata_QPF__DBTreeBoldHeaderDelegate 32,1201
+#undef QT_MOC_LITERAL39,1431
+static const uint qt_meta_data_QPF__DBTreeBoldHeaderDelegate[qt_meta_data_QPF__DBTreeBoldHeaderDelegate41,1454
+void QPF::DBTreeBoldHeaderDelegate::qt_static_metacall(57,1824
+const QMetaObject QPF::DBTreeBoldHeaderDelegate::staticMetaObject 65,2012
+const QMetaObject *QPF::DBTreeBoldHeaderDelegate::metaObject(QPF::DBTreeBoldHeaderDelegate::metaObject71,2277
+void *QPF::DBTreeBoldHeaderDelegate::qt_metacast(QPF::DBTreeBoldHeaderDelegate::qt_metacast76,2448
+int QPF::DBTreeBoldHeaderDelegate::qt_metacall(84,2740
+struct qt_meta_stringdata_QPF__DBTreeModel_t 89,2906
+    QByteArrayData data[qt_meta_stringdata_QPF__DBTreeModel_t::data90,2953
+    char stringdata0[qt_meta_stringdata_QPF__DBTreeModel_t::stringdata091,2981
+#define QT_MOC_LITERAL(93,3010
+static const qt_meta_stringdata_QPF__DBTreeModel_t qt_meta_stringdata_QPF__DBTreeModel 98,3247
+#undef QT_MOC_LITERAL105,3425
+static const uint qt_meta_data_QPF__DBTreeModel[qt_meta_data_QPF__DBTreeModel107,3448
+void QPF::DBTreeModel::qt_static_metacall(123,3805
+const QMetaObject QPF::DBTreeModel::staticMetaObject 131,3980
+const QMetaObject *QPF::DBTreeModel::metaObject(QPF::DBTreeModel::metaObject137,4205
+void *QPF::DBTreeModel::qt_metacast(QPF::DBTreeModel::qt_metacast142,4363
+int QPF::DBTreeModel::qt_metacall(150,4628
+
+build/qpfav.dir/moc/moc_dlgalert.cpp,728
+struct qt_meta_stringdata_QPF__DlgAlert_t 23,825
+    QByteArrayData data[qt_meta_stringdata_QPF__DlgAlert_t::data24,869
+    char stringdata0[qt_meta_stringdata_QPF__DlgAlert_t::stringdata025,897
+#define QT_MOC_LITERAL(27,926
+static const qt_meta_stringdata_QPF__DlgAlert_t qt_meta_stringdata_QPF__DlgAlert 32,1160
+#undef QT_MOC_LITERAL39,1326
+static const uint qt_meta_data_QPF__DlgAlert[qt_meta_data_QPF__DlgAlert41,1349
+void QPF::DlgAlert::qt_static_metacall(57,1703
+const QMetaObject QPF::DlgAlert::staticMetaObject 65,1875
+const QMetaObject *QPF::DlgAlert::metaObject(QPF::DlgAlert::metaObject71,2080
+void *QPF::DlgAlert::qt_metacast(QPF::DlgAlert::qt_metacast76,2235
+int QPF::DlgAlert::qt_metacall(84,2483
+
+build/qpfav.dir/moc/moc_dlgjsonviewer.cpp,728
+struct qt_meta_stringdata_DlgJSONViewer_t 23,840
+    QByteArrayData data[qt_meta_stringdata_DlgJSONViewer_t::data24,884
+    char stringdata0[qt_meta_stringdata_DlgJSONViewer_t::stringdata025,912
+#define QT_MOC_LITERAL(27,941
+static const qt_meta_stringdata_DlgJSONViewer_t qt_meta_stringdata_DlgJSONViewer 32,1175
+#undef QT_MOC_LITERAL39,1341
+static const uint qt_meta_data_DlgJSONViewer[qt_meta_data_DlgJSONViewer41,1364
+void DlgJSONViewer::qt_static_metacall(57,1718
+const QMetaObject DlgJSONViewer::staticMetaObject 65,1890
+const QMetaObject *DlgJSONViewer::metaObject(DlgJSONViewer::metaObject71,2095
+void *DlgJSONViewer::qt_metacast(DlgJSONViewer::qt_metacast76,2250
+int DlgJSONViewer::qt_metacall(84,2498
+
+build/qpfav.dir/moc/moc_dlgreproc.cpp,743
+struct qt_meta_stringdata_QPF__DlgReproc_t 23,828
+    QByteArrayData data[qt_meta_stringdata_QPF__DlgReproc_t::data24,873
+    char stringdata0[qt_meta_stringdata_QPF__DlgReproc_t::stringdata025,901
+#define QT_MOC_LITERAL(27,930
+static const qt_meta_stringdata_QPF__DlgReproc_t qt_meta_stringdata_QPF__DlgReproc 32,1165
+#undef QT_MOC_LITERAL43,1545
+static const uint qt_meta_data_QPF__DlgReproc[qt_meta_data_QPF__DlgReproc45,1568
+void QPF::DlgReproc::qt_static_metacall(69,2152
+const QMetaObject QPF::DlgReproc::staticMetaObject 82,2580
+const QMetaObject *QPF::DlgReproc::metaObject(QPF::DlgReproc::metaObject88,2788
+void *QPF::DlgReproc::qt_metacast(QPF::DlgReproc::qt_metacast93,2944
+int QPF::DlgReproc::qt_metacall(101,3194
+
+build/qpfav.dir/moc/moc_exttooledit.cpp,771
+struct qt_meta_stringdata_QPF__ExtToolEdit_t 23,834
+    QByteArrayData data[qt_meta_stringdata_QPF__ExtToolEdit_t::data24,881
+    char stringdata0[qt_meta_stringdata_QPF__ExtToolEdit_t::stringdata025,909
+#define QT_MOC_LITERAL(27,938
+static const qt_meta_stringdata_QPF__ExtToolEdit_t qt_meta_stringdata_QPF__ExtToolEdit 32,1175
+#undef QT_MOC_LITERAL44,1561
+static const uint qt_meta_data_QPF__ExtToolEdit[qt_meta_data_QPF__ExtToolEdit46,1584
+void QPF::ExtToolEdit::qt_static_metacall(72,2218
+const QMetaObject QPF::ExtToolEdit::staticMetaObject 87,2647
+const QMetaObject *QPF::ExtToolEdit::metaObject(QPF::ExtToolEdit::metaObject93,2861
+void *QPF::ExtToolEdit::qt_metacast(QPF::ExtToolEdit::qt_metacast98,3019
+int QPF::ExtToolEdit::qt_metacall(106,3273
+
+build/qpfav.dir/moc/moc_exttoolsdef.cpp,774
+struct qt_meta_stringdata_QPF__ExtToolsDef_t 23,834
+    QByteArrayData data[qt_meta_stringdata_QPF__ExtToolsDef_t::data24,881
+    char stringdata0[qt_meta_stringdata_QPF__ExtToolsDef_t::stringdata025,910
+#define QT_MOC_LITERAL(27,940
+static const qt_meta_stringdata_QPF__ExtToolsDef_t qt_meta_stringdata_QPF__ExtToolsDef 32,1177
+#undef QT_MOC_LITERAL52,1886
+static const uint qt_meta_data_QPF__ExtToolsDef[qt_meta_data_QPF__ExtToolsDef54,1909
+void QPF::ExtToolsDef::qt_static_metacall(88,2893
+const QMetaObject QPF::ExtToolsDef::staticMetaObject 106,3594
+const QMetaObject *QPF::ExtToolsDef::metaObject(QPF::ExtToolsDef::metaObject112,3808
+void *QPF::ExtToolsDef::qt_metacast(QPF::ExtToolsDef::qt_metacast117,3966
+int QPF::ExtToolsDef::qt_metacall(125,4220
+
+build/qpfav.dir/moc/moc_localarchview.cpp,898
+struct qt_meta_stringdata_LocalArchiveView_t 23,840
+    QByteArrayData data[qt_meta_stringdata_LocalArchiveView_t::data24,887
+    char stringdata0[qt_meta_stringdata_LocalArchiveView_t::stringdata025,916
+#define QT_MOC_LITERAL(27,946
+static const qt_meta_stringdata_LocalArchiveView_t qt_meta_stringdata_LocalArchiveView 32,1183
+#undef QT_MOC_LITERAL75,2953
+static const uint qt_meta_data_LocalArchiveView[qt_meta_data_LocalArchiveView77,2976
+void LocalArchiveView::qt_static_metacall(135,4882
+            typedef void (LocalArchiveView:LocalArchiveView175,6937
+const QMetaObject LocalArchiveView::staticMetaObject 184,7191
+const QMetaObject *LocalArchiveView::metaObject(LocalArchiveView::metaObject190,7405
+void *LocalArchiveView::qt_metacast(LocalArchiveView::qt_metacast195,7563
+int LocalArchiveView::qt_metacall(203,7817
+void LocalArchiveView::openProductInViewer(221,8313
+
+build/qpfav.dir/moc/moc_mainwindow.cpp,761
+struct qt_meta_stringdata_QPF__MainWindow_t 23,831
+    QByteArrayData data[qt_meta_stringdata_QPF__MainWindow_t::data24,877
+    char stringdata0[qt_meta_stringdata_QPF__MainWindow_t::stringdata025,906
+#define QT_MOC_LITERAL(27,936
+static const qt_meta_stringdata_QPF__MainWindow_t qt_meta_stringdata_QPF__MainWindow 32,1172
+#undef QT_MOC_LITERAL58,2189
+static const uint qt_meta_data_QPF__MainWindow[qt_meta_data_QPF__MainWindow60,2212
+void QPF::MainWindow::qt_static_metacall(104,3503
+const QMetaObject QPF::MainWindow::staticMetaObject 127,4372
+const QMetaObject *QPF::MainWindow::metaObject(QPF::MainWindow::metaObject133,4587
+void *QPF::MainWindow::qt_metacast(QPF::MainWindow::qt_metacast138,4744
+int QPF::MainWindow::qt_metacall(146,5000
+
+build/qpfav.dir/moc/moc_predefs.h,8592
+#define __DBL_MIN_EXP__ 1,0
+#define __UINT_LEAST16_MAX__ 2,32
+#define __ATOMIC_ACQUIRE 3,67
+#define __FLT_MIN__ 4,94
+#define __UINT_LEAST8_TYPE__ 5,142
+#define __INTMAX_C(6,185
+#define __CHAR_BIT__ 7,214
+#define __UINT8_MAX__ 8,237
+#define __WINT_MAX__ 9,263
+#define __ORDER_LITTLE_ENDIAN__ 10,296
+#define __SIZE_MAX__ 11,333
+#define __WCHAR_MAX__ 12,377
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 13,410
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 14,455
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 15,500
+#define __DBL_DENORM_MIN__ 16,545
+#define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 17,609
+#define __GCC_ATOMIC_CHAR_LOCK_FREE 18,654
+#define __FLT_EVAL_METHOD__ 19,692
+#define __unix__ 20,722
+#define __GCC_ATOMIC_CHAR32_T_LOCK_FREE 21,741
+#define __x86_64 22,783
+#define __UINT_FAST64_MAX__ 23,802
+#define __SIG_ATOMIC_TYPE__ 24,853
+#define __DBL_MIN_10_EXP__ 25,885
+#define __FINITE_MATH_ONLY__ 26,919
+#define __GNUC_PATCHLEVEL__ 27,950
+#define __UINT_FAST8_MAX__ 28,980
+#define __DEC64_MAX_EXP__ 29,1011
+#define __INT8_C(30,1041
+#define __UINT_LEAST64_MAX__ 31,1063
+#define __SHRT_MAX__ 32,1115
+#define __LDBL_MAX__ 33,1142
+#define __UINT_LEAST8_MAX__ 34,1193
+#define __GCC_ATOMIC_BOOL_LOCK_FREE 35,1225
+#define __UINTMAX_TYPE__ 36,1263
+#define __linux 37,1306
+#define __DEC32_EPSILON__ 38,1324
+#define __unix 39,1357
+#define __UINT32_MAX__ 40,1374
+#define __GXX_EXPERIMENTAL_CXX0X__ 41,1409
+#define __LDBL_MAX_EXP__ 42,1446
+#define __WINT_MIN__ 43,1477
+#define __linux__ 44,1501
+#define __SCHAR_MAX__ 45,1521
+#define __WCHAR_MIN__ 46,1547
+#define __INT64_C(47,1590
+#define __DBL_DIG__ 48,1618
+#define __GCC_ATOMIC_POINTER_LOCK_FREE 49,1641
+#define __SIZEOF_INT__ 50,1682
+#define __SIZEOF_POINTER__ 51,1707
+#define __GCC_ATOMIC_CHAR16_T_LOCK_FREE 52,1736
+#define __USER_LABEL_PREFIX__ 53,1778
+#define __STDC_HOSTED__ 54,1809
+#define __LDBL_HAS_INFINITY__ 55,1835
+#define __FLT_EPSILON__ 56,1867
+#define __GXX_WEAK__ 57,1918
+#define __LDBL_MIN__ 58,1941
+#define __DEC32_MAX__ 59,1992
+#define __INT32_MAX__ 60,2028
+#define __SIZEOF_LONG__ 61,2061
+#define __STDC_IEC_559__ 62,2087
+#define __STDC_ISO_10646__ 63,2114
+#define __UINT16_C(64,2149
+#define __DECIMAL_DIG__ 65,2173
+#define __gnu_linux__ 66,2200
+#define __LDBL_HAS_QUIET_NAN__ 67,2224
+#define __GNUC__ 68,2257
+#define __GXX_RTTI 69,2276
+#define __MMX__ 70,2297
+#define __FLT_HAS_DENORM__ 71,2315
+#define __SIZEOF_LONG_DOUBLE__ 72,2344
+#define __BIGGEST_ALIGNMENT__ 73,2378
+#define __DBL_MAX__ 74,2411
+#define __INT_FAST32_MAX__ 75,2468
+#define __DBL_HAS_INFINITY__ 76,2516
+#define __INT64_MAX__ 77,2547
+#define __DEC32_MIN_EXP__ 78,2590
+#define __INT_FAST16_TYPE__ 79,2622
+#define __LDBL_HAS_DENORM__ 80,2659
+#define __cplusplus 81,2689
+#define __DEC128_MAX__ 82,2717
+#define __INT_LEAST32_MAX__ 83,2783
+#define __DEC32_MIN__ 84,2822
+#define __DEPRECATED 85,2852
+#define __DBL_MAX_EXP__ 86,2875
+#define __DEC128_EPSILON__ 87,2904
+#define __SSE2_MATH__ 88,2939
+#define __ATOMIC_HLE_RELEASE 89,2963
+#define __PTRDIFF_MAX__ 90,2999
+#define __amd64 91,3044
+#define __STDC_NO_THREADS__ 92,3062
+#define __ATOMIC_HLE_ACQUIRE 93,3092
+#define __GNUG__ 94,3127
+#define __LONG_LONG_MAX__ 95,3146
+#define __SIZEOF_SIZE_T__ 96,3194
+#define __SIZEOF_WINT_T__ 97,3222
+#define __GCC_HAVE_DWARF2_CFI_ASM 98,3250
+#define __GXX_ABI_VERSION 99,3286
+#define __FLT_MIN_EXP__ 100,3317
+#define __INT_FAST64_TYPE__ 101,3348
+#define __DBL_MIN__ 102,3385
+#define __LP64__ 103,3442
+#define __DECIMAL_BID_FORMAT__ 104,3461
+#define __DEC128_MIN__ 105,3494
+#define __REGISTER_PREFIX__ 106,3527
+#define __UINT16_MAX__ 107,3556
+#define __DBL_HAS_DENORM__ 108,3585
+#define __UINT8_TYPE__ 109,3614
+#define __NO_INLINE__ 110,3651
+#define __FLT_MANT_DIG__ 111,3675
+#define __VERSION__ 112,3703
+#define __UINT64_C(113,3758
+#define _STDC_PREDEF_H 114,3788
+#define __GCC_ATOMIC_INT_LOCK_FREE 115,3813
+#define __FLOAT_WORD_ORDER__ 116,3850
+#define __STDC_IEC_559_COMPLEX__ 117,3903
+#define __INT32_C(118,3938
+#define __DEC64_EPSILON__ 119,3961
+#define __ORDER_PDP_ENDIAN__ 120,3995
+#define __DEC128_MIN_EXP__ 121,4029
+#define __INT_FAST32_TYPE__ 122,4064
+#define __UINT_LEAST16_TYPE__ 123,4101
+#define unix 124,4150
+#define __INT16_MAX__ 125,4165
+#define __SIZE_TYPE__ 126,4193
+#define __UINT64_MAX__ 127,4233
+#define __INT8_TYPE__ 128,4279
+#define __ELF__ 129,4313
+#define __FLT_RADIX__ 130,4331
+#define __INT_LEAST16_TYPE__ 131,4355
+#define __LDBL_EPSILON__ 132,4394
+#define __UINTMAX_C(133,4447
+#define __GNUC_RH_RELEASE__ 134,4478
+#define __k8 135,4508
+#define __SIG_ATOMIC_MAX__ 136,4523
+#define __GCC_ATOMIC_WCHAR_T_LOCK_FREE 137,4561
+#define __SIZEOF_PTRDIFF_T__ 138,4602
+#define __x86_64__ 139,4633
+#define __DEC32_SUBNORMAL_MIN__ 140,4654
+#define __INT_FAST16_MAX__ 141,4701
+#define __UINT_FAST32_MAX__ 142,4749
+#define __UINT_LEAST64_TYPE__ 143,4800
+#define __FLT_HAS_QUIET_NAN__ 144,4848
+#define __FLT_MAX_10_EXP__ 145,4880
+#define __LONG_MAX__ 146,4910
+#define __DEC128_SUBNORMAL_MIN__ 147,4952
+#define __FLT_HAS_INFINITY__ 148,5029
+#define __UINT_FAST16_TYPE__ 149,5060
+#define __DEC64_MAX__ 150,5107
+#define __CHAR16_TYPE__ 151,5153
+#define __PRAGMA_REDEFINE_EXTNAME 152,5196
+#define __INT_LEAST16_MAX__ 153,5232
+#define __DEC64_MANT_DIG__ 154,5266
+#define __UINT_LEAST32_MAX__ 155,5296
+#define __GCC_ATOMIC_LONG_LOCK_FREE 156,5337
+#define __INT_LEAST64_TYPE__ 157,5375
+#define __INT16_TYPE__ 158,5413
+#define __INT_LEAST8_TYPE__ 159,5446
+#define __DEC32_MAX_EXP__ 160,5486
+#define __INT_FAST8_MAX__ 161,5515
+#define __INTPTR_MAX__ 162,5545
+#define linux 163,5589
+#define __SSE2__ 164,5605
+#define __EXCEPTIONS 165,5624
+#define __LDBL_MANT_DIG__ 166,5647
+#define __DBL_HAS_QUIET_NAN__ 167,5676
+#define __SIG_ATOMIC_MIN__ 168,5708
+#define __code_model_small__ 169,5761
+#define __k8__ 170,5792
+#define __INTPTR_TYPE__ 171,5809
+#define __UINT16_TYPE__ 172,5842
+#define __WCHAR_TYPE__ 173,5885
+#define __SIZEOF_FLOAT__ 174,5912
+#define __UINTPTR_MAX__ 175,5939
+#define __DEC64_MIN_EXP__ 176,5986
+#define __INT_FAST64_MAX__ 177,6019
+#define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 178,6067
+#define __FLT_DIG__ 179,6111
+#define __UINT_FAST64_TYPE__ 180,6133
+#define __INT_MAX__ 181,6180
+#define __amd64__ 182,6211
+#define __INT64_TYPE__ 183,6231
+#define __FLT_MAX_EXP__ 184,6263
+#define __ORDER_BIG_ENDIAN__ 185,6291
+#define __DBL_MANT_DIG__ 186,6325
+#define __INT_LEAST64_MAX__ 187,6353
+#define __DEC64_MIN__ 188,6402
+#define __WINT_TYPE__ 189,6433
+#define __UINT_LEAST32_TYPE__ 190,6468
+#define __SIZEOF_SHORT__ 191,6511
+#define __SSE__ 192,6538
+#define __LDBL_MIN_EXP__ 193,6556
+#define __INT_LEAST8_MAX__ 194,6590
+#define __SIZEOF_INT128__ 195,6621
+#define __LDBL_MAX_10_EXP__ 196,6650
+#define __ATOMIC_RELAXED 197,6683
+#define __DBL_EPSILON__ 198,6710
+#define _LP64 199,6770
+#define __UINT8_C(200,6786
+#define __INT_LEAST32_TYPE__ 201,6809
+#define __SIZEOF_WCHAR_T__ 202,6842
+#define __UINT64_TYPE__ 203,6871
+#define __INT_FAST8_TYPE__ 204,6913
+#define __GNUC_STDC_INLINE__ 205,6952
+#define __DBL_DECIMAL_DIG__ 206,6983
+#define __FXSR__ 207,7014
+#define __DEC_EVAL_METHOD__ 208,7033
+#define __UINT32_C(209,7063
+#define __INTMAX_MAX__ 210,7092
+#define __BYTE_ORDER__ 211,7136
+#define __FLT_DENORM_MIN__ 212,7183
+#define __INT8_MAX__ 213,7238
+#define __UINT_FAST32_TYPE__ 214,7263
+#define __CHAR32_TYPE__ 215,7310
+#define __FLT_MAX__ 216,7347
+#define __INT32_TYPE__ 217,7395
+#define __SIZEOF_DOUBLE__ 218,7422
+#define __INTMAX_TYPE__ 219,7450
+#define __DEC128_MAX_EXP__ 220,7483
+#define __ATOMIC_CONSUME 221,7515
+#define __GNUC_MINOR__ 222,7542
+#define __UINTMAX_MAX__ 223,7567
+#define __DEC32_MANT_DIG__ 224,7614
+#define __DBL_MAX_10_EXP__ 225,7643
+#define __LDBL_DENORM_MIN__ 226,7674
+#define __INT16_C(227,7732
+#define __STDC__ 228,7755
+#define __PTRDIFF_TYPE__ 229,7774
+#define __ATOMIC_SEQ_CST 230,7808
+#define __UINT32_TYPE__ 231,7835
+#define __UINTPTR_TYPE__ 232,7872
+#define __DEC64_SUBNORMAL_MIN__ 233,7915
+#define __DEC128_MANT_DIG__ 234,7972
+#define __LDBL_MIN_10_EXP__ 235,8003
+#define __SSE_MATH__ 236,8039
+#define __SIZEOF_LONG_LONG__ 237,8062
+#define __GCC_ATOMIC_LLONG_LOCK_FREE 238,8093
+#define __LDBL_DIG__ 239,8132
+#define __FLT_DECIMAL_DIG__ 240,8156
+#define __UINT_FAST16_MAX__ 241,8186
+#define __FLT_MIN_10_EXP__ 242,8237
+#define __GCC_ATOMIC_SHORT_LOCK_FREE 243,8270
+#define __UINT_FAST8_TYPE__ 244,8309
+#define _GNU_SOURCE 245,8351
+#define __ATOMIC_ACQ_REL 246,8373
+#define __ATOMIC_RELEASE 247,8400
+
+build/qpfav.dir/moc/moc_procalertmodel.cpp,812
+struct qt_meta_stringdata_QPF__ProcAlertModel_t 23,843
+    QByteArrayData data[qt_meta_stringdata_QPF__ProcAlertModel_t::data24,893
+    char stringdata0[qt_meta_stringdata_QPF__ProcAlertModel_t::stringdata025,921
+#define QT_MOC_LITERAL(27,950
+static const qt_meta_stringdata_QPF__ProcAlertModel_t qt_meta_stringdata_QPF__ProcAlertModel 32,1190
+#undef QT_MOC_LITERAL39,1380
+static const uint qt_meta_data_QPF__ProcAlertModel[qt_meta_data_QPF__ProcAlertModel41,1403
+void QPF::ProcAlertModel::qt_static_metacall(57,1763
+const QMetaObject QPF::ProcAlertModel::staticMetaObject 65,1941
+const QMetaObject *QPF::ProcAlertModel::metaObject(QPF::ProcAlertModel::metaObject71,2169
+void *QPF::ProcAlertModel::qt_metacast(QPF::ProcAlertModel::qt_metacast76,2330
+int QPF::ProcAlertModel::qt_metacall(84,2595
+
+build/qpfav.dir/moc/moc_procalertsview.cpp,746
+struct qt_meta_stringdata_ProcAlertsView_t 23,843
+    QByteArrayData data[qt_meta_stringdata_ProcAlertsView_t::data24,888
+    char stringdata0[qt_meta_stringdata_ProcAlertsView_t::stringdata025,916
+#define QT_MOC_LITERAL(27,945
+static const qt_meta_stringdata_ProcAlertsView_t qt_meta_stringdata_ProcAlertsView 32,1180
+#undef QT_MOC_LITERAL47,1712
+static const uint qt_meta_data_ProcAlertsView[qt_meta_data_ProcAlertsView49,1735
+void ProcAlertsView::qt_static_metacall(75,2386
+const QMetaObject ProcAlertsView::staticMetaObject 100,3316
+const QMetaObject *ProcAlertsView::metaObject(ProcAlertsView::metaObject106,3524
+void *ProcAlertsView::qt_metacast(ProcAlertsView::qt_metacast111,3680
+int ProcAlertsView::qt_metacall(119,3930
+
+build/qpfav.dir/moc/moc_productsmodel.cpp,798
+struct qt_meta_stringdata_QPF__ProductsModel_t 23,840
+    QByteArrayData data[qt_meta_stringdata_QPF__ProductsModel_t::data24,889
+    char stringdata0[qt_meta_stringdata_QPF__ProductsModel_t::stringdata025,917
+#define QT_MOC_LITERAL(27,946
+static const qt_meta_stringdata_QPF__ProductsModel_t qt_meta_stringdata_QPF__ProductsModel 32,1185
+#undef QT_MOC_LITERAL39,1371
+static const uint qt_meta_data_QPF__ProductsModel[qt_meta_data_QPF__ProductsModel41,1394
+void QPF::ProductsModel::qt_static_metacall(57,1753
+const QMetaObject QPF::ProductsModel::staticMetaObject 65,1930
+const QMetaObject *QPF::ProductsModel::metaObject(QPF::ProductsModel::metaObject71,2154
+void *QPF::ProductsModel::qt_metacast(QPF::ProductsModel::qt_metacast76,2314
+int QPF::ProductsModel::qt_metacall(84,2576
+
+build/qpfav.dir/moc/moc_productsviewer.cpp,868
+struct qt_meta_stringdata_ProductsViewer_t 23,843
+    QByteArrayData data[qt_meta_stringdata_ProductsViewer_t::data24,888
+    char stringdata0[qt_meta_stringdata_ProductsViewer_t::stringdata025,916
+#define QT_MOC_LITERAL(27,945
+static const qt_meta_stringdata_ProductsViewer_t qt_meta_stringdata_ProductsViewer 32,1180
+#undef QT_MOC_LITERAL47,1713
+static const uint qt_meta_data_ProductsViewer[qt_meta_data_ProductsViewer49,1736
+void ProductsViewer::qt_static_metacall(79,2517
+            typedef void (ProductsViewer:ProductsViewer95,3326
+const QMetaObject ProductsViewer::staticMetaObject 104,3582
+const QMetaObject *ProductsViewer::metaObject(ProductsViewer::metaObject110,3790
+void *ProductsViewer::qt_metacast(ProductsViewer::qt_metacast115,3946
+int ProductsViewer::qt_metacall(123,4196
+void ProductsViewer::newProductViewerAvailable(141,4684
+
+build/qpfav.dir/moc/moc_qjsonmodel.cpp,686
+struct qt_meta_stringdata_QJsonModel_t 23,831
+    QByteArrayData data[qt_meta_stringdata_QJsonModel_t::data24,872
+    char stringdata0[qt_meta_stringdata_QJsonModel_t::stringdata025,900
+#define QT_MOC_LITERAL(27,929
+static const qt_meta_stringdata_QJsonModel_t qt_meta_stringdata_QJsonModel 32,1160
+#undef QT_MOC_LITERAL39,1314
+static const uint qt_meta_data_QJsonModel[qt_meta_data_QJsonModel41,1337
+void QJsonModel::qt_static_metacall(57,1688
+const QMetaObject QJsonModel::staticMetaObject 65,1857
+const QMetaObject *QJsonModel::metaObject(QJsonModel::metaObject71,2064
+void *QJsonModel::qt_metacast(QJsonModel::qt_metacast76,2216
+int QJsonModel::qt_metacall(84,2469
+
+build/qpfav.dir/moc/moc_qjsonviewer.cpp,704
+struct qt_meta_stringdata_QJSONViewer_t 23,834
+    QByteArrayData data[qt_meta_stringdata_QJSONViewer_t::data24,876
+    char stringdata0[qt_meta_stringdata_QJSONViewer_t::stringdata025,905
+#define QT_MOC_LITERAL(27,935
+static const qt_meta_stringdata_QJSONViewer_t qt_meta_stringdata_QJSONViewer 32,1167
+#undef QT_MOC_LITERAL57,2165
+static const uint qt_meta_data_QJSONViewer[qt_meta_data_QJSONViewer59,2188
+void QJSONViewer::qt_static_metacall(95,3240
+const QMetaObject QJSONViewer::staticMetaObject 114,4047
+const QMetaObject *QJSONViewer::metaObject(QJSONViewer::metaObject120,4246
+void *QJSONViewer::qt_metacast(QJSONViewer::qt_metacast125,4399
+int QJSONViewer::qt_metacall(133,4643
+
+build/qpfav.dir/moc/moc_ruleedit.cpp,728
+struct qt_meta_stringdata_QPF__RuleEdit_t 23,825
+    QByteArrayData data[qt_meta_stringdata_QPF__RuleEdit_t::data24,869
+    char stringdata0[qt_meta_stringdata_QPF__RuleEdit_t::stringdata025,897
+#define QT_MOC_LITERAL(27,926
+static const qt_meta_stringdata_QPF__RuleEdit_t qt_meta_stringdata_QPF__RuleEdit 32,1160
+#undef QT_MOC_LITERAL39,1326
+static const uint qt_meta_data_QPF__RuleEdit[qt_meta_data_QPF__RuleEdit41,1349
+void QPF::RuleEdit::qt_static_metacall(57,1703
+const QMetaObject QPF::RuleEdit::staticMetaObject 65,1875
+const QMetaObject *QPF::RuleEdit::metaObject(QPF::RuleEdit::metaObject71,2080
+void *QPF::RuleEdit::qt_metacast(QPF::RuleEdit::qt_metacast76,2235
+int QPF::RuleEdit::qt_metacall(84,2483
+
+build/qpfav.dir/moc/moc_swarmedit.cpp,742
+struct qt_meta_stringdata_QPF__SwarmEdit_t 23,828
+    QByteArrayData data[qt_meta_stringdata_QPF__SwarmEdit_t::data24,873
+    char stringdata0[qt_meta_stringdata_QPF__SwarmEdit_t::stringdata025,901
+#define QT_MOC_LITERAL(27,930
+static const qt_meta_stringdata_QPF__SwarmEdit_t qt_meta_stringdata_QPF__SwarmEdit 32,1165
+#undef QT_MOC_LITERAL39,1335
+static const uint qt_meta_data_QPF__SwarmEdit[qt_meta_data_QPF__SwarmEdit41,1358
+void QPF::SwarmEdit::qt_static_metacall(57,1713
+const QMetaObject QPF::SwarmEdit::staticMetaObject 65,1886
+const QMetaObject *QPF::SwarmEdit::metaObject(QPF::SwarmEdit::metaObject71,2094
+void *QPF::SwarmEdit::qt_metacast(QPF::SwarmEdit::qt_metacast76,2250
+int QPF::SwarmEdit::qt_metacall(84,2500
+
+build/qpfav.dir/moc/moc_sysalertmodel.cpp,798
+struct qt_meta_stringdata_QPF__SysAlertModel_t 23,840
+    QByteArrayData data[qt_meta_stringdata_QPF__SysAlertModel_t::data24,889
+    char stringdata0[qt_meta_stringdata_QPF__SysAlertModel_t::stringdata025,917
+#define QT_MOC_LITERAL(27,946
+static const qt_meta_stringdata_QPF__SysAlertModel_t qt_meta_stringdata_QPF__SysAlertModel 32,1185
+#undef QT_MOC_LITERAL39,1371
+static const uint qt_meta_data_QPF__SysAlertModel[qt_meta_data_QPF__SysAlertModel41,1394
+void QPF::SysAlertModel::qt_static_metacall(57,1753
+const QMetaObject QPF::SysAlertModel::staticMetaObject 65,1930
+const QMetaObject *QPF::SysAlertModel::metaObject(QPF::SysAlertModel::metaObject71,2155
+void *QPF::SysAlertModel::qt_metacast(QPF::SysAlertModel::qt_metacast76,2315
+int QPF::SysAlertModel::qt_metacall(84,2578
+
+build/qpfav.dir/moc/moc_sysalertsview.cpp,731
+struct qt_meta_stringdata_SysAlertsView_t 23,840
+    QByteArrayData data[qt_meta_stringdata_SysAlertsView_t::data24,884
+    char stringdata0[qt_meta_stringdata_SysAlertsView_t::stringdata025,912
+#define QT_MOC_LITERAL(27,941
+static const qt_meta_stringdata_SysAlertsView_t qt_meta_stringdata_SysAlertsView 32,1175
+#undef QT_MOC_LITERAL45,1619
+static const uint qt_meta_data_SysAlertsView[qt_meta_data_SysAlertsView47,1642
+void SysAlertsView::qt_static_metacall(71,2224
+const QMetaObject SysAlertsView::staticMetaObject 95,3099
+const QMetaObject *SysAlertsView::metaObject(SysAlertsView::metaObject101,3304
+void *SysAlertsView::qt_metacast(SysAlertsView::qt_metacast106,3459
+int SysAlertsView::qt_metacall(114,3707
+
+build/qpfav.dir/moc/moc_tasksmodel.cpp,756
+struct qt_meta_stringdata_QPF__TasksModel_t 23,831
+    QByteArrayData data[qt_meta_stringdata_QPF__TasksModel_t::data24,877
+    char stringdata0[qt_meta_stringdata_QPF__TasksModel_t::stringdata025,905
+#define QT_MOC_LITERAL(27,934
+static const qt_meta_stringdata_QPF__TasksModel_t qt_meta_stringdata_QPF__TasksModel 32,1170
+#undef QT_MOC_LITERAL39,1344
+static const uint qt_meta_data_QPF__TasksModel[qt_meta_data_QPF__TasksModel41,1367
+void QPF::TasksModel::qt_static_metacall(57,1723
+const QMetaObject QPF::TasksModel::staticMetaObject 65,1897
+const QMetaObject *QPF::TasksModel::metaObject(QPF::TasksModel::metaObject71,2113
+void *QPF::TasksModel::qt_metacast(QPF::TasksModel::qt_metacast76,2270
+int QPF::TasksModel::qt_metacall(84,2527
+
+build/qpfav.dir/moc/moc_tasksview.cpp,677
+struct qt_meta_stringdata_TasksView_t 23,828
+    QByteArrayData data[qt_meta_stringdata_TasksView_t::data24,868
+    char stringdata0[qt_meta_stringdata_TasksView_t::stringdata025,897
+#define QT_MOC_LITERAL(27,927
+static const qt_meta_stringdata_TasksView_t qt_meta_stringdata_TasksView 32,1157
+#undef QT_MOC_LITERAL61,2337
+static const uint qt_meta_data_TasksView[qt_meta_data_TasksView63,2360
+void TasksView::qt_static_metacall(111,3754
+const QMetaObject TasksView::staticMetaObject 147,5138
+const QMetaObject *TasksView::metaObject(TasksView::metaObject153,5331
+void *TasksView::qt_metacast(TasksView::qt_metacast158,5482
+int TasksView::qt_metacall(166,5722
+
+build/qpfav.dir/moc/moc_verbleveldlg.cpp,784
+struct qt_meta_stringdata_QPF__VerbLevelDlg_t 23,837
+    QByteArrayData data[qt_meta_stringdata_QPF__VerbLevelDlg_t::data24,885
+    char stringdata0[qt_meta_stringdata_QPF__VerbLevelDlg_t::stringdata025,913
+#define QT_MOC_LITERAL(27,942
+static const qt_meta_stringdata_QPF__VerbLevelDlg_t qt_meta_stringdata_QPF__VerbLevelDlg 32,1180
+#undef QT_MOC_LITERAL43,1512
+static const uint qt_meta_data_QPF__VerbLevelDlg[qt_meta_data_QPF__VerbLevelDlg45,1535
+void QPF::VerbLevelDlg::qt_static_metacall(67,2053
+const QMetaObject QPF::VerbLevelDlg::staticMetaObject 79,2425
+const QMetaObject *QPF::VerbLevelDlg::metaObject(QPF::VerbLevelDlg::metaObject85,2642
+void *QPF::VerbLevelDlg::qt_metacast(QPF::VerbLevelDlg::qt_metacast90,2801
+int QPF::VerbLevelDlg::qt_metacall(98,3057
+
+build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp,896
+struct qt_meta_stringdata_XMLBasicSyntaxHighlighter_t 23,855
+    QByteArrayData data[qt_meta_stringdata_XMLBasicSyntaxHighlighter_t::data24,911
+    char stringdata0[qt_meta_stringdata_XMLBasicSyntaxHighlighter_t::stringdata025,939
+#define QT_MOC_LITERAL(27,968
+static const qt_meta_stringdata_XMLBasicSyntaxHighlighter_t qt_meta_stringdata_XMLBasicSyntaxHighlighter 32,1214
+#undef QT_MOC_LITERAL39,1428
+static const uint qt_meta_data_XMLBasicSyntaxHighlighter[qt_meta_data_XMLBasicSyntaxHighlighter41,1451
+void XMLBasicSyntaxHighlighter::qt_static_metacall(57,1817
+const QMetaObject XMLBasicSyntaxHighlighter::staticMetaObject 65,2001
+const QMetaObject *XMLBasicSyntaxHighlighter::metaObject(XMLBasicSyntaxHighlighter::metaObject71,2253
+void *XMLBasicSyntaxHighlighter::qt_metacast(XMLBasicSyntaxHighlighter::qt_metacast76,2420
+int XMLBasicSyntaxHighlighter::qt_metacall(84,2703

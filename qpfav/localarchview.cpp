@@ -17,22 +17,30 @@
 #include <QPushButton>
 #include <QProcess>
 
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include <iostream>
 
 #include "hmitypes.h"
 #include "config.h"
 #include "util.h"
-#include "dlgreproc.h"
 #include "launcher.h"
+#include "voshdl.h"
+
+#include "dlgreproc.h"
+#include "dlguserpwd.h"
 
 using namespace QPF;
 
 using Configuration::cfg;
 
 #include <iostream>
+
+#define S(s)  (s).toStdString()
 #define TRC(s) std::cerr << s << std::endl;
 
-static const int NumOfURLCol = 12;
+const int LocalArchiveView::NumOfURLCol = 12;
 
 //----------------------------------------------------------------------
 // Constructor
@@ -267,7 +275,7 @@ void LocalArchiveView::openWith()
     MapOfUserDefTools userDefTools;
     mw->getUserTools(userDefTools);
 
-    std::cerr << userDefTools.size() << " - " << key.toStdString() << std::endl;
+    //std::cerr << userDefTools.size() << " - " << S(key) << std::endl;
     const QUserDefTool & udt = userDefTools.value(key);
 
     QModelIndex m = ui->vw->currentIndex();
@@ -288,12 +296,9 @@ void LocalArchiveView::openWith()
     args.replace("%F", fileName);
     args.replace("%p", fs.absolutePath());
     args.replace("%x", fs.suffix());
-
-    std::cerr << fileName.toStdString() << ", "
-              << udt.exe.toStdString() << ", "
-              << args.toStdString() << ", "
-              << std::endl;
-
+    /*
+    std::cerr << S(fileName) << ", " << S(udt.exe) << ", " << S(args) << "\n";
+    */
     // Count how many %n placeholders are
     int nph = 0;
     for (int i = 1; i < 10; ++i) {
@@ -347,8 +352,6 @@ void LocalArchiveView::openWith()
     //  Build command line and run the tool
     QString cmd(QString("%1 %2").arg(udt.exe).arg(args));
 
-    std::cerr << cmd.toStdString() << std::endl;
-
     QProcess tool;
     tool.startDetached(cmd);
 }
@@ -359,7 +362,7 @@ void LocalArchiveView::openWith()
 //----------------------------------------------------------------------
 void LocalArchiveView::reprocessProduct()
 {
-    QPoint p = aHdl->acReprocess->property("clickedItem").toPoint();
+    //QPoint p = aHdl->acReprocess->property("clickedItem").toPoint();
     //QModelIndex m = ui->vw->indexAt(p);
 
     QStringList inProds;
@@ -370,16 +373,16 @@ void LocalArchiveView::reprocessProduct()
                                           m.parent()).data().toString();
             QUrl archUrl(url);
             QString fileName = archUrl.path();
-            TRC("Request of reprocessing: " + fileName.toStdString());
+            TRC("Request of reprocessing: " + S(fileName));
             inProds << fileName;
         }
     }
     
-    std::string userWAType = cfg.general("userAreaType").toString().toUpper().toStdString();
+    QString userWAType = cfg.general("userAreaType").toString().toUpper();
     OutputsLocation out = ((userWAType == UserAreaName[UA_NOMINAL]) ?
                            LocalArch : ((userWAType == UserAreaName[UA_LOCAL]) ?
                                         LocalDir : VOSpaceFolder));
-    int flags = (cfg.flags("intermediateProducts").toBool() ?
+    int flags = (cfg.flags()["intermediateProducts"].toBool() ?
                  GenIntermProd : NullFlags);
 
     DlgReproc dlg;
@@ -389,8 +392,6 @@ void LocalArchiveView::reprocessProduct()
     QString outLocation;
     dlg.getFields(inProds, out, outLocation, flags);
 
-    TRC(userWAType + ' ' + std::to_string((int)(out)) + " : " +
-        std::to_string(flags) + " - " + outLocation.toStdString());
 /*
     ProductList reprocProducts;
     FileNameSpec fns;
@@ -419,8 +420,7 @@ void LocalArchiveView::analyzeProduct()
 {
     // Create product list
     QAction * caller = qobject_cast<QAction*>(sender());
-    QPoint p = caller->property("clickedItem").toPoint();
-
+    //QPoint p = caller->property("clickedItem").toPoint();
     QModelIndexList list = ui->vw->selectionModel()->selectedIndexes();
     QStringList paths;
     foreach (QModelIndex m, list) {
@@ -434,7 +434,7 @@ void LocalArchiveView::analyzeProduct()
     if (acName == "AnalyzeWithIPython") {
         
         // Link products to IPython working directory
-        replicateProducts(paths, cfg.network()["masterNode"].toString(), 
+        copyProducts(paths, cfg.network()["masterNode"].toString(), 
                           cfg.connectivity()["ipython"].toObject()["path"].toString());
 
         // Launch IPython session
@@ -460,89 +460,85 @@ void LocalArchiveView::analyzeProduct()
 //----------------------------------------------------------------------
 void LocalArchiveView::exportProduct()
 {
-    /*
-    QPoint p = aHdl->acReprocess->property("clickedItem").toPoint();
-    //QModelIndex m = ui->vw->indexAt(p);
-
-    QStringList inProds;
     QModelIndexList list = ui->vw->selectionModel()->selectedIndexes();
+    QStringList paths;
     foreach (QModelIndex m, list) {
         if (m.column() == NumOfURLCol) {
-            QString url = model->index(m.row(), NumOfURLCol,
-                                          m.parent()).data().toString();
-            QUrl archUrl(url);
-            QString fileName = archUrl.path();
-            TRC("Request of reprocessing: " + fileName.toStdString());
-            inProds << fileName;
+            QString url = model->index(m.row(), NumOfURLCol, m.parent()).data().toString();
+            QString p = QUrl(url).path();
+	    paths << p;
         }
     }
 
-    std::string userWAType = cfg.general("userAreaType").toString().toUpper().toStdString();
+    
+    QString userWAType = cfg.general()["userAreaType"].toString().toUpper();
     OutputsLocation out = ((userWAType == UserAreaName[UA_NOMINAL]) ?
                            LocalArch : ((userWAType == UserAreaName[UA_LOCAL]) ?
                                         LocalDir : VOSpaceFolder));
-    int flags = (cfg.flags("intermediateProducts").toBool() ?
+    int flags = (cfg.flags()["intermediateProducts"].toBool() ?
                  GenIntermProd : NullFlags);
 
+    mw->statusBar()->showMessage(tr("Trying to export products . . ."), 2000);
+    // showStatus(tr("Trying to export products . . ."));
+
+    // Prepare the dialog and show it
     DlgReproc dlg;
     dlg.setLabels("Export products", "The following products will be exported",
                   "Export products to:", false);
-    dlg.setFields(inProds, out, flags);
+    dlg.setFields(paths, out, flags);
     if (!dlg.exec()) { return; }
 
+    // Get the final information from the dialog
     QString outLocation;
-    dlg.getFields(inProds, out, outLocation, flags);
+    dlg.getFields(paths, out, outLocation, flags);
 
-    TRC(userWAType + " " + std::to_string((int)(out)) + " : " +
-        std::to_string(flags) + " - " + outLocation.toStdString());
+    UserAreaId procTargetType = ((out == LocalArch) ? UA_NOMINAL :
+				 ((out == VOSpaceFolder) ? UA_VOSPACE : UA_LOCAL));
 
-    ProductList exportProducts;
-    FileNameSpec fns;
-    ProductMetadata md;
-    foreach (QString fileName, inProds) {
-        fns.parseFileName(fileName.toStdString(), md);
-        md["urlSpace"]       = LocalArchSpace;
-        md["procTargetType"] = ((out == LocalArch) ? UA_NOMINAL :
-                                ((out == VOSpaceFolder) ? UA_VOSPACE : UA_LOCAL));
-        md["procTarget"]     = outLocation.toStdString();
-        exportProducts.products.push_back(md);
-    }
-
-    TRC(md.urlSpace() + " " + std::to_string(md.procTargetType()) +
-        " " + md.procTarget());
-
-    if ((md["procTargetType"] == UA_VOSPACE) &&
-        (cfg.connectivity.vospace.user().empty() ||
-         cfg.connectivity.vospace.pwd().empty())) {
+    QJsonObject vospace = cfg.connectivity()["vospace"].toObject();
+    if ((procTargetType == UA_VOSPACE) &&
+        (vospace["user"].toString().isEmpty() || 
+	 vospace["pwd"].toString().isEmpty())) {
         DlgUserPwd up;
         if (up.exec()) { up.storeValues(); }
     }
 
-    statusBar()->showMessage(tr("Trying to export products . . ."), MessageDelay);
+    if (procTargetType == UA_VOSPACE) {
+	VOSpaceHandler vos(new RWC, vospace["url"].toString().toStdString());
+	std::string us = vospace["user"].toString().toStdString();
+	std::string pw = vospace["pwd"].toString().toStdString();
+	QString tgtFolder(outLocation.isEmpty() ?
+			  vospace["url"].toString() : outLocation); 
 
-    // Copy products to export location
-    URLHandler urlh;
-    std::string expLoc;
-    for (auto & m : exportProducts.products) {
-        urlh.setProduct(m);
-        statusBar()->showMessage(tr("Exporting %1 . . .")
-                                .arg(QString::fromStdString(m.baseName())),
-                                MessageDelay);
-        m = urlh.fromLocalArch2ExportLocation();
-        expLoc = m.urlSpace();
+	vos.setAuth(us, pw);
+	foreach (QString p, paths) {
+	    if (!vos.uploadFile(tgtFolder.toStdString(), p.toStdString())) {
+		TRC("ERROR! Cannot upload " << S(p) << " to " << S(tgtFolder));
+		return;
+	    }
+	    showStatus(tr("Product %1 stored in VOSpace . . .").arg(p));	   
+	}
+
+	showStatus(tr("Products stored in VOSpace successfully"));
+	return;
+    }    
+
+    // Ensure local folder exists
+    if ((mkdir(S(outLocation).c_str(), cfg.PATHMode) != 0) && (errno != EEXIST)) {
+	TRC("ERROR! Cannot create export folder " << S(outLocation));
+        return;
     }
 
-    if ((md["procTargetType"] == UA_VOSPACE) && (expLoc == ReprocessingVOSpace)) {
-        statusBar()->showMessage(tr("Products stored in VOSpace successfully"), MessageDelay);
-    }
-    */
+    copyProducts(paths, cfg.currentHostIP, outLocation);
+
+    showStatus(tr("Products exported successfully"));
 }
 
 //----------------------------------------------------------------------
-// Method: replicateProducts
+// Method: copyProducts
 // Transfer copy of products to export locations
 //----------------------------------------------------------------------
-void LocalArchiveView::replicateProducts(QStringList lst, QString from, QString to)
+void LocalArchiveView::copyProducts(QStringList lst, QString from, QString to)
 {
     QString src("");
     QString cmd("cp");
@@ -556,8 +552,6 @@ void LocalArchiveView::replicateProducts(QStringList lst, QString from, QString 
     foreach (QString p, lst) { args << src + p; }
     args << to;
 
-    std::cerr << cmd.toStdString() << " " << args.join(" ").toStdString() << std::endl;
-    
     QProcess proc;    
     proc.startDetached(cmd, args);
 }
@@ -569,7 +563,7 @@ void LocalArchiveView::replicateProducts(QStringList lst, QString from, QString 
 void LocalArchiveView::openLocalArchiveElement(QModelIndex idx)
 {
     int row = idx.row();
-    TRC(QString("(%1,%2)").arg(row).arg(idx.column()).toStdString());
+    TRC(S(QString("(%1,%2)").arg(row).arg(idx.column())));
     const QAbstractItemModel * model = idx.model();
     QModelIndex urlIdx  = model->index(row, NumOfURLCol, idx.parent());
 
