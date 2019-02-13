@@ -91,7 +91,9 @@ SOURCES       = main.cpp \
 		keyevt.cpp \
 		voshdl.cpp \
 		rwc.cpp \
-		filetools.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
+		filetools.cpp \
+		statelbl.cpp ../build/qpfav.dir/rcc/qrc_icons_nav.cpp \
+		../build/qpfav.dir/rcc/qrc_states.cpp \
 		../build/qpfav.dir/moc/moc_mainwindow.cpp \
 		../build/qpfav.dir/moc/moc_procalertsview.cpp \
 		../build/qpfav.dir/moc/moc_sysalertsview.cpp \
@@ -122,7 +124,8 @@ SOURCES       = main.cpp \
 		../build/qpfav.dir/moc/moc_dlgreproc.cpp \
 		../build/qpfav.dir/moc/moc_productsviewer.cpp \
 		../build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp \
-		../build/qpfav.dir/moc/moc_dlguserpwd.cpp
+		../build/qpfav.dir/moc/moc_dlguserpwd.cpp \
+		../build/qpfav.dir/moc/moc_statelbl.cpp
 OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/mainwindow.o \
 		../build/qpfav.dir/obj/darkpalette.o \
@@ -165,7 +168,9 @@ OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/voshdl.o \
 		../build/qpfav.dir/obj/rwc.o \
 		../build/qpfav.dir/obj/filetools.o \
+		../build/qpfav.dir/obj/statelbl.o \
 		../build/qpfav.dir/obj/qrc_icons_nav.o \
+		../build/qpfav.dir/obj/qrc_states.o \
 		../build/qpfav.dir/obj/moc_mainwindow.o \
 		../build/qpfav.dir/obj/moc_procalertsview.o \
 		../build/qpfav.dir/obj/moc_sysalertsview.o \
@@ -196,7 +201,8 @@ OBJECTS       = ../build/qpfav.dir/obj/main.o \
 		../build/qpfav.dir/obj/moc_dlgreproc.o \
 		../build/qpfav.dir/obj/moc_productsviewer.o \
 		../build/qpfav.dir/obj/moc_xmlsyntaxhighlight.o \
-		../build/qpfav.dir/obj/moc_dlguserpwd.o
+		../build/qpfav.dir/obj/moc_dlguserpwd.o \
+		../build/qpfav.dir/obj/moc_statelbl.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
 		/usr/lib64/qt5/mkspecs/common/linux.conf \
@@ -409,7 +415,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		rwc.h \
 		voshdl.h \
 		filetools.h \
-		scopeexit.h main.cpp \
+		scopeexit.h \
+		statelbl.h main.cpp \
 		mainwindow.cpp \
 		darkpalette.cpp \
 		procalertsview.cpp \
@@ -450,7 +457,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		keyevt.cpp \
 		voshdl.cpp \
 		rwc.cpp \
-		filetools.cpp
+		filetools.cpp \
+		statelbl.cpp
 QMAKE_TARGET  = qpfav
 DESTDIR       = ../build/qpfav.dir/
 TARGET        = ../build/qpfav.dir/qpfav
@@ -459,7 +467,7 @@ TARGET        = ../build/qpfav.dir/qpfav
 first: all
 ####### Build rules
 
-$(TARGET): ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h $(OBJECTS)  
+$(TARGET): ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_statelbl.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h $(OBJECTS)  
 	@test -d ../build/qpfav.dir/ || mkdir -p ../build/qpfav.dir/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -631,6 +639,7 @@ Makefile: qpfav.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/m
 		/usr/lib64/qt5/mkspecs/features/lex.prf \
 		qpfav.pro \
 		icons_nav.qrc \
+		states.qrc \
 		/lib64/libQt5Widgets.prl \
 		/lib64/libQt5Gui.prl \
 		/lib64/libQt5Sql.prl \
@@ -805,6 +814,7 @@ Makefile: qpfav.pro /usr/lib64/qt5/mkspecs/linux-g++/qmake.conf /usr/lib64/qt5/m
 /usr/lib64/qt5/mkspecs/features/lex.prf:
 qpfav.pro:
 icons_nav.qrc:
+states.qrc:
 /lib64/libQt5Widgets.prl:
 /lib64/libQt5Gui.prl:
 /lib64/libQt5Sql.prl:
@@ -824,11 +834,11 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents icons_nav.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents icons_nav.qrc states.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h qjsonviewer.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h dlgreproc.h productsviewer.h xmlsyntaxhighlight.h launcher.h dlguserpwd.h keyevt.h rwc.h voshdl.h filetools.h scopeexit.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp qjsonviewer.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp dlgreproc.cpp productsviewer.cpp xmlsyntaxhighlight.cpp launcher.cpp dlguserpwd.cpp keyevt.cpp voshdl.cpp rwc.cpp filetools.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.ui procalertsview.ui sysalertsview.ui tasksview.ui localarchview.ui configtool.ui browserwidget.ui conthostedit.ui swarmedit.ui ruleedit.ui qjsonviewer.ui productsviewer.ui exttooledit.ui exttoolsdef.ui dbbrowser.ui verbleveldlg.ui dlgalert.ui dlgjsonviewer.ui dlgreproc.ui dlguserpwd.ui $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.h darkpalette.h procalertsview.h sysalertsview.h tasksview.h localarchview.h dbtblmodel.h dbtreemodel.h procalertmodel.h productsmodel.h sysalertmodel.h tasksmodel.h dbmng.h propdef.h auxtypes.h config.h version.h alert.h propdef.h actionshandler.h exttooledit.h exttoolsdef.h configtool.h dbbrowser.h verbleveldlg.h hmitypes.h browser.h conthostedit.h swarmedit.h ruleedit.h connectionwidget.h dlgalert.h util.h qjsonviewer.h dlgjsonviewer.h qjsonitem.h qjsonmodel.h dlgreproc.h productsviewer.h xmlsyntaxhighlight.h launcher.h dlguserpwd.h keyevt.h rwc.h voshdl.h filetools.h scopeexit.h statelbl.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp mainwindow.cpp darkpalette.cpp procalertsview.cpp sysalertsview.cpp tasksview.cpp localarchview.cpp dbtblmodel.cpp dbtreemodel.cpp procalertmodel.cpp productsmodel.cpp sysalertmodel.cpp tasksmodel.cpp dbmng.cpp config.cpp alert.cpp actionshandler.cpp exttooledit.cpp exttoolsdef.cpp configtool.cpp dbbrowser.cpp verbleveldlg.cpp browser.cpp conthostedit.cpp swarmedit.cpp ruleedit.cpp connectionwidget.cpp dlgalert.cpp util.cpp qjsonviewer.cpp dlgjsonviewer.cpp qjsonitem.cpp qjsonmodel.cpp dlgreproc.cpp productsviewer.cpp xmlsyntaxhighlight.cpp launcher.cpp dlguserpwd.cpp keyevt.cpp voshdl.cpp rwc.cpp filetools.cpp statelbl.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents mainwindow.ui procalertsview.ui sysalertsview.ui tasksview.ui localarchview.ui configtool.ui browserwidget.ui conthostedit.ui swarmedit.ui ruleedit.ui qjsonviewer.ui productsviewer.ui statelbl.ui exttooledit.ui exttoolsdef.ui dbbrowser.ui verbleveldlg.ui dlgalert.ui dlgjsonviewer.ui dlgreproc.ui dlguserpwd.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -851,9 +861,9 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: ../build/qpfav.dir/rcc/qrc_icons_nav.cpp
+compiler_rcc_make_all: ../build/qpfav.dir/rcc/qrc_icons_nav.cpp ../build/qpfav.dir/rcc/qrc_states.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) ../build/qpfav.dir/rcc/qrc_icons_nav.cpp
+	-$(DEL_FILE) ../build/qpfav.dir/rcc/qrc_icons_nav.cpp ../build/qpfav.dir/rcc/qrc_states.cpp
 ../build/qpfav.dir/rcc/qrc_icons_nav.cpp: icons_nav.qrc \
 		/usr/lib64/qt5/bin/rcc \
 		img/capslock.png \
@@ -922,15 +932,24 @@ compiler_rcc_clean:
 		img/txlarrow.png
 	/usr/lib64/qt5/bin/rcc -name icons_nav icons_nav.qrc -o ../build/qpfav.dir/rcc/qrc_icons_nav.cpp
 
+../build/qpfav.dir/rcc/qrc_states.cpp: states.qrc \
+		/usr/lib64/qt5/bin/rcc \
+		img/initialised.png \
+		img/operational.png \
+		img/error.png \
+		img/running.png \
+		img/off.png
+	/usr/lib64/qt5/bin/rcc -name states states.qrc -o ../build/qpfav.dir/rcc/qrc_states.cpp
+
 compiler_moc_predefs_make_all: ../build/qpfav.dir/moc/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) ../build/qpfav.dir/moc/moc_predefs.h
 ../build/qpfav.dir/moc/moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o ../build/qpfav.dir/moc/moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_qjsonviewer.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp ../build/qpfav.dir/moc/moc_productsviewer.cpp ../build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp ../build/qpfav.dir/moc/moc_dlguserpwd.cpp
+compiler_moc_header_make_all: ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_qjsonviewer.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp ../build/qpfav.dir/moc/moc_productsviewer.cpp ../build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp ../build/qpfav.dir/moc/moc_dlguserpwd.cpp ../build/qpfav.dir/moc/moc_statelbl.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_qjsonviewer.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp ../build/qpfav.dir/moc/moc_productsviewer.cpp ../build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp ../build/qpfav.dir/moc/moc_dlguserpwd.cpp
+	-$(DEL_FILE) ../build/qpfav.dir/moc/moc_mainwindow.cpp ../build/qpfav.dir/moc/moc_procalertsview.cpp ../build/qpfav.dir/moc/moc_sysalertsview.cpp ../build/qpfav.dir/moc/moc_tasksview.cpp ../build/qpfav.dir/moc/moc_localarchview.cpp ../build/qpfav.dir/moc/moc_dbtblmodel.cpp ../build/qpfav.dir/moc/moc_dbtreemodel.cpp ../build/qpfav.dir/moc/moc_procalertmodel.cpp ../build/qpfav.dir/moc/moc_productsmodel.cpp ../build/qpfav.dir/moc/moc_sysalertmodel.cpp ../build/qpfav.dir/moc/moc_tasksmodel.cpp ../build/qpfav.dir/moc/moc_dbmng.cpp ../build/qpfav.dir/moc/moc_actionshandler.cpp ../build/qpfav.dir/moc/moc_exttooledit.cpp ../build/qpfav.dir/moc/moc_exttoolsdef.cpp ../build/qpfav.dir/moc/moc_configtool.cpp ../build/qpfav.dir/moc/moc_dbbrowser.cpp ../build/qpfav.dir/moc/moc_verbleveldlg.cpp ../build/qpfav.dir/moc/moc_browser.cpp ../build/qpfav.dir/moc/moc_conthostedit.cpp ../build/qpfav.dir/moc/moc_swarmedit.cpp ../build/qpfav.dir/moc/moc_ruleedit.cpp ../build/qpfav.dir/moc/moc_connectionwidget.cpp ../build/qpfav.dir/moc/moc_dlgalert.cpp ../build/qpfav.dir/moc/moc_qjsonviewer.cpp ../build/qpfav.dir/moc/moc_dlgjsonviewer.cpp ../build/qpfav.dir/moc/moc_qjsonmodel.cpp ../build/qpfav.dir/moc/moc_dlgreproc.cpp ../build/qpfav.dir/moc/moc_productsviewer.cpp ../build/qpfav.dir/moc/moc_xmlsyntaxhighlight.cpp ../build/qpfav.dir/moc/moc_dlguserpwd.cpp ../build/qpfav.dir/moc/moc_statelbl.cpp
 ../build/qpfav.dir/moc/moc_mainwindow.cpp: actionshandler.h \
 		hmitypes.h \
 		mainwindow.h \
@@ -1153,11 +1172,16 @@ compiler_moc_header_clean:
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/eucops/Work/Euclid/QPF/qpfav/qpfav/../build/qpfav.dir/moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/eucops/Work/Euclid/QPF/qpfav/qpfav -I/home/eucops/Work/Euclid/QPF/qpfav/qslog -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include dlguserpwd.h -o ../build/qpfav.dir/moc/moc_dlguserpwd.cpp
 
+../build/qpfav.dir/moc/moc_statelbl.cpp: statelbl.h \
+		../build/qpfav.dir/moc/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/eucops/Work/Euclid/QPF/qpfav/qpfav/../build/qpfav.dir/moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/eucops/Work/Euclid/QPF/qpfav/qpfav -I/home/eucops/Work/Euclid/QPF/qpfav/qslog -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include statelbl.h -o ../build/qpfav.dir/moc/moc_statelbl.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h
+compiler_uic_make_all: ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_statelbl.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h
 compiler_uic_clean:
-	-$(DEL_FILE) ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h
+	-$(DEL_FILE) ../build/qpfav.dir/ui/ui_mainwindow.h ../build/qpfav.dir/ui/ui_procalertsview.h ../build/qpfav.dir/ui/ui_sysalertsview.h ../build/qpfav.dir/ui/ui_tasksview.h ../build/qpfav.dir/ui/ui_localarchview.h ../build/qpfav.dir/ui/ui_configtool.h ../build/qpfav.dir/ui/ui_browserwidget.h ../build/qpfav.dir/ui/ui_conthostedit.h ../build/qpfav.dir/ui/ui_swarmedit.h ../build/qpfav.dir/ui/ui_ruleedit.h ../build/qpfav.dir/ui/ui_qjsonviewer.h ../build/qpfav.dir/ui/ui_productsviewer.h ../build/qpfav.dir/ui/ui_statelbl.h ../build/qpfav.dir/ui/ui_exttooledit.h ../build/qpfav.dir/ui/ui_exttoolsdef.h ../build/qpfav.dir/ui/ui_dbbrowser.h ../build/qpfav.dir/ui/ui_verbleveldlg.h ../build/qpfav.dir/ui/ui_dlgalert.h ../build/qpfav.dir/ui/ui_dlgjsonviewer.h ../build/qpfav.dir/ui/ui_dlgreproc.h ../build/qpfav.dir/ui/ui_dlguserpwd.h
 ../build/qpfav.dir/ui/ui_mainwindow.h: mainwindow.ui \
 		/usr/lib64/qt5/bin/uic \
 		tasksview.h \
@@ -1165,6 +1189,7 @@ compiler_uic_clean:
 		sysalertsview.h \
 		procalertsview.h \
 		productsviewer.h \
+		statelbl.h \
 		tasksmodel.h \
 		dbtblmodel.h \
 		alert.h \
@@ -1247,6 +1272,10 @@ compiler_uic_clean:
 		/usr/lib64/qt5/bin/uic
 	/usr/lib64/qt5/bin/uic productsviewer.ui -o ../build/qpfav.dir/ui/ui_productsviewer.h
 
+../build/qpfav.dir/ui/ui_statelbl.h: statelbl.ui \
+		/usr/lib64/qt5/bin/uic
+	/usr/lib64/qt5/bin/uic statelbl.ui -o ../build/qpfav.dir/ui/ui_statelbl.h
+
 ../build/qpfav.dir/ui/ui_exttooledit.h: exttooledit.ui \
 		/usr/lib64/qt5/bin/uic
 	/usr/lib64/qt5/bin/uic exttooledit.ui -o ../build/qpfav.dir/ui/ui_exttooledit.h
@@ -1317,6 +1346,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		productsviewer.h \
 		tasksmodel.h \
 		util.h \
+		statelbl.h \
 		sysalertsview.h \
 		sysalertmodel.h \
 		tasksview.h \
@@ -1447,6 +1477,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		productsviewer.h \
 		tasksmodel.h \
 		util.h \
+		statelbl.h \
 		sysalertsview.h \
 		sysalertmodel.h \
 		tasksview.h \
@@ -1593,8 +1624,17 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ../build/qpfav.dir/obj/filetools.o: filetools.cpp filetools.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/filetools.o filetools.cpp
 
+../build/qpfav.dir/obj/statelbl.o: statelbl.cpp statelbl.h \
+		../build/qpfav.dir/ui/ui_statelbl.h \
+		config.h \
+		util.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/statelbl.o statelbl.cpp
+
 ../build/qpfav.dir/obj/qrc_icons_nav.o: ../build/qpfav.dir/rcc/qrc_icons_nav.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/qrc_icons_nav.o ../build/qpfav.dir/rcc/qrc_icons_nav.cpp
+
+../build/qpfav.dir/obj/qrc_states.o: ../build/qpfav.dir/rcc/qrc_states.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/qrc_states.o ../build/qpfav.dir/rcc/qrc_states.cpp
 
 ../build/qpfav.dir/obj/moc_mainwindow.o: ../build/qpfav.dir/moc/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/moc_mainwindow.o ../build/qpfav.dir/moc/moc_mainwindow.cpp
@@ -1688,6 +1728,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ../build/qpfav.dir/obj/moc_dlguserpwd.o: ../build/qpfav.dir/moc/moc_dlguserpwd.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/moc_dlguserpwd.o ../build/qpfav.dir/moc/moc_dlguserpwd.cpp
+
+../build/qpfav.dir/obj/moc_statelbl.o: ../build/qpfav.dir/moc/moc_statelbl.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/qpfav.dir/obj/moc_statelbl.o ../build/qpfav.dir/moc/moc_statelbl.cpp
 
 ####### Install
 

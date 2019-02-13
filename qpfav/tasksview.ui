@@ -33,4 +33,7 @@
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>toggleAutoUpdate(bool)</slot>
+ </slots>
 </ui>

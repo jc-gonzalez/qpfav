@@ -15,6 +15,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTimer>
 
 // Basic log macros
 #define TMsg(s)  std::cerr << s << '\n';
@@ -73,6 +74,12 @@ MainWindow::MainWindow(QWidget *parent, QString & cfgFile, QString s) :
     // Set UI
     ui->setupUi(this);
     completeUi();
+
+    // Launch run thread
+    //std::thread(&LocalArchiveView::run, this).detach();
+    QTimer * refreshTimer = new QTimer(this);
+    connect(refreshTimer, SIGNAL(timeout()), this, SLOT(run()));
+    refreshTimer->start(1000);
 }
 
 //----------------------------------------------------------------------
@@ -117,6 +124,10 @@ void MainWindow::completeUi()
                        ui->tbtnLog, ui->tbtnTools}) {
         ui->btngrpNavigator->setId(tbtn, i++);
     }
+
+    // Set verbosity level
+    QString cfgLogLevel = cfg.general("logLevel").toString();
+    ui->lblVerbosity->setText(cfgLogLevel);
 
     // Local Archive panel
     ui->localArchView->init(this);
@@ -389,7 +400,9 @@ void MainWindow::showVerbLevel()
     if (dlg.exec()) {
         //int minLvl = dlg.getVerbosityLevelIdx();
         //Log::setMinLogLevel((Log::LogLevel)(minLvl));
-        ui->lblVerbosity->setText(dlg.getVerbosityLevelName());
+	QString newLogLevel = dlg.getVerbosityLevelName();
+        ui->lblVerbosity->setText(newLogLevel);
+	cfg.general()["logLevel"] = newLogLevel;
         //hmiNode->sendMinLogLevel(dlg.getVerbosityLevelName().toStdString());
         statusBar()->showMessage(tr("Setting Verbosity level to ") +
                                 dlg.getVerbosityLevelName(), 2 * MessageDelay);
@@ -453,6 +466,25 @@ void MainWindow::addToProdViewersList(QString name)
 void MainWindow::showSection(int sec)
 {
     ui->stckMain->setCurrentIndex(sec);
+}
+
+//----------------------------------------------------------------------
+// Method: run()
+// Run loop
+//----------------------------------------------------------------------
+void MainWindow::run()
+{
+    // Get state
+    static QString qryStr("select node_state from node_states "
+			  "where node_name='master'");
+    QSqlQuery qry(qryStr, DBManager::getDB());
+    if (qry.next()) {
+        QString newStateName = qry.value(0).toString();
+	if (newStateName != stateName) {
+	    stateName = newStateName;
+	    ui->lblState->setState(stateName);
+	}
+    }   
 }
 
 }

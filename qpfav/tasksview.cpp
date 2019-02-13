@@ -5,6 +5,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QUrl>
+#include <QTimer>
 
 #include "tasksmodel.h"
 #include "dlgjsonviewer.h"
@@ -22,7 +23,8 @@ using Configuration::cfg;
 
 TasksView::TasksView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::TasksView)
+    ui(new Ui::TasksView),
+    autoUpdate(true)
 {
     ui->setupUi(this);
     ui->vw->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -33,6 +35,10 @@ TasksView::TasksView(QWidget *parent) :
 
     model = new TasksModel;
     ui->vw->setModel(model);
+
+    QTimer * refreshTimer = new QTimer(this);
+    connect(refreshTimer, SIGNAL(timeout()), this, SLOT(run()));
+    refreshTimer->start(2000);
 }
 
 TasksView::~TasksView()
@@ -84,6 +90,40 @@ void TasksView::setActionsHandler(ActionsHandler * a)
 
     connect(ui->vw, SIGNAL(customContextMenuRequested(const QPoint &)),
             aHdl, SLOT(showTaskMonitContextMenu(const QPoint &)));
+}
+
+//----------------------------------------------------------------------
+// SLOT: toggleAutoUpdate
+// Toggle auto update
+//----------------------------------------------------------------------
+void TasksView::toggleAutoUpdate(bool tog)
+{
+    autoUpdate = tog;
+}
+
+//----------------------------------------------------------------------
+// SLOT: run
+// Periodic update of the view, if needed
+//----------------------------------------------------------------------
+void TasksView::run()
+{
+    // Update context menus depending on config flags
+    //aHdl->acReprocess->setEnabled(cfg.flags.allowReprocessing());
+
+    if (autoUpdate) { arefresh(); }
+}
+
+//----------------------------------------------------------------------
+// SLOT: arefresh
+// Updates the local archive model on demand
+//----------------------------------------------------------------------
+void TasksView::arefresh()
+{
+    model->refresh();
+
+    int sortCol = ui->vw->horizontalHeader()->sortIndicatorSection();
+    Qt::SortOrder sortOrd = ui->vw->horizontalHeader()->sortIndicatorOrder();
+    ui->vw->sortByColumn(sortCol, sortOrd);
 }
 
 //----------------------------------------------------------------------

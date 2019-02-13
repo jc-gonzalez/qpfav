@@ -43,6 +43,10 @@ public slots:
     void doHostStop();
     void doHostReactivate();
 
+    void toggleAutoUpdate(bool tog);
+    void run();
+    void arefresh();
+
 private:
     Ui::TasksView * ui;
 
@@ -52,6 +56,8 @@ private:
 
     QMap<QString,TaskStatus>  agentProcStatus;
     QMap<QString,TaskStatus>  hostProcStatus;
+
+    bool autoUpdate;
 };
 
 #endif // TASKSVIEW_H

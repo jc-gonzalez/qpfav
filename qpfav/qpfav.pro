@@ -64,7 +64,8 @@ SOURCES += \
     keyevt.cpp \
     voshdl.cpp \
     rwc.cpp \
-    filetools.cpp
+    filetools.cpp \
+    statelbl.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -113,7 +114,8 @@ HEADERS  += \
     rwc.h \
     voshdl.h \
     filetools.h \
-    scopeexit.h
+    scopeexit.h \
+    statelbl.h
 
 MAINGUI  += \
     mainwindow.ui 
@@ -129,7 +131,8 @@ WIDGETS  += \
     swarmedit.ui \
     ruleedit.ui \
     qjsonviewer.ui \
-    productsviewer.ui 
+    productsviewer.ui \
+    statelbl.ui
 
 DIALOGS  += \
     exttooledit.ui \
@@ -144,7 +147,8 @@ DIALOGS  += \
 FORMS = $$MAINGUI $$WIDGETS $$DIALOGS
 
 RESOURCES += \
-    icons_nav.qrc
+    icons_nav.qrc \
+    states.qrc
 
 DISTFILES +=
 

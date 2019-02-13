@@ -75,6 +75,9 @@ public slots:
 
     void getUserTools(MapOfUserDefTools & u);
 
+private slots:
+    void run();
+
 private:
     void configure(QString & cfgFile);
     void completeUi();
@@ -104,6 +107,8 @@ private:
     QStandardItem* Item2;
  
     std::vector<QStandardItem*> Items;
+
+    QString stateName;
 
     friend class ActionsHandler;
 };
