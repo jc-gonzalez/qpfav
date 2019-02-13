@@ -60,6 +60,7 @@ public:
     int getVerbosityLevelIdx();
 
 public slots:
+    void setVerbosityLevel(QString lvl);
     void setVerbosityLevel(int lvl);
 
 private:

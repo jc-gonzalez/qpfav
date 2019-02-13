@@ -25,20 +25,6 @@ class MainWindow : public QMainWindow
     // Status bar
     static const int MessageDelay;
 
-    // Valid Manager states
-    static const int ERROR;
-    static const int OFF;
-    static const int INITIALISED;
-    static const int RUNNING;
-    static const int OPERATIONAL;
-
-    // Valid Manager states
-    static const std::string ERROR_StateName;
-    static const std::string OFF_StateName;
-    static const std::string INITIALISED_StateName;
-    static const std::string RUNNING_StateName;
-    static const std::string OPERATIONAL_StateName;
-
     // URLs
     static const QString VOSpaceURL;
 
@@ -76,6 +62,8 @@ public slots:
     void getUserTools(MapOfUserDefTools & u);
 
 private slots:
+    QString getVar(QString var, QString filter);
+    void setVar(QString var, QString filter, QString new_value);
     void run();
 
 private:
@@ -90,6 +78,9 @@ private:
     void storeQUTools2Cfg(MapOfUserDefTools qutmap);
     void setUToolTasks();
     void showSection(int sec);
+
+    void updateState();
+    void updateVerbLogLevel();
 
 private:
     Ui::MainWindow *ui;

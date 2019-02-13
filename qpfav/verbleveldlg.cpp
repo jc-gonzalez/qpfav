@@ -68,12 +68,28 @@ VerbLevelDlg::VerbLevelDlg(QWidget *parent) :
 // Method: setVerbosityLevel
 // setVerbosityLevel
 //----------------------------------------------------------------------
+void VerbLevelDlg::setVerbosityLevel(QString lvl)
+{
+    static QMap<QString, int> VerbLevelIdx 
+    {{"TRACE", 0}, {"DEBUG", 1}, {"INFO", 2}, {"WARNING", 3}, {"ERROR", 4}, {"FATAL", 5}};
+
+    ui->listWidget->setCurrentRow(VerbLevelIdx[lvl]);
+}
+
+//----------------------------------------------------------------------
+// Method: setVerbosityLevel
+// setVerbosityLevel
+//----------------------------------------------------------------------
 void VerbLevelDlg::setVerbosityLevel(int lvl)
 {
     currentLevel = ui->listWidget->currentItem()->text();
     currentLevelIdx = ui->listWidget->currentIndex().row();
 }
 
+//----------------------------------------------------------------------
+// Method: getVerbosityLevelName
+// getVerbosityLevelName
+//----------------------------------------------------------------------
 QString VerbLevelDlg::getVerbosityLevelName()
 {
     return currentLevel;

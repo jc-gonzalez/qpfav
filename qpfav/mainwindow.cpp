@@ -32,20 +32,6 @@ namespace QPF {
 // Status bar
 const int MainWindow::MessageDelay = 2000;
 
-// Valid Manager states
-const int MainWindow::ERROR        = -1;
-const int MainWindow::OFF          =  0;
-const int MainWindow::INITIALISED  =  1;
-const int MainWindow::RUNNING      =  2;
-const int MainWindow::OPERATIONAL  =  3;
-
-// Valid Manager state names (strings)
-const std::string MainWindow::ERROR_StateName("ERROR");
-const std::string MainWindow::OFF_StateName("OFF");
-const std::string MainWindow::INITIALISED_StateName("INITIALISED");
-const std::string MainWindow::RUNNING_StateName("RUNNING");
-const std::string MainWindow::OPERATIONAL_StateName("OPERATIONAL");
-
 // Sections in HMI
 const int SectionArchive = 0;    
 const int SectionTasks   = 1;  
@@ -126,8 +112,7 @@ void MainWindow::completeUi()
     }
 
     // Set verbosity level
-    QString cfgLogLevel = cfg.general("logLevel").toString();
-    ui->lblVerbosity->setText(cfgLogLevel);
+    updateVerbLogLevel();
 
     // Local Archive panel
     ui->localArchView->init(this);
@@ -396,6 +381,7 @@ void MainWindow::showExtToolsDef()
 void MainWindow::showVerbLevel()
 {
     VerbLevelDlg dlg;
+    dlg.setVerbosityLevel(cfg.general("logLevel").toString());
 
     if (dlg.exec()) {
         //int minLvl = dlg.getVerbosityLevelIdx();
@@ -403,6 +389,7 @@ void MainWindow::showVerbLevel()
 	QString newLogLevel = dlg.getVerbosityLevelName();
         ui->lblVerbosity->setText(newLogLevel);
 	cfg.general()["logLevel"] = newLogLevel;
+	setVar("log_level", "", newLogLevel);
         //hmiNode->sendMinLogLevel(dlg.getVerbosityLevelName().toStdString());
         statusBar()->showMessage(tr("Setting Verbosity level to ") +
                                 dlg.getVerbosityLevelName(), 2 * MessageDelay);
@@ -469,10 +456,65 @@ void MainWindow::showSection(int sec)
 }
 
 //----------------------------------------------------------------------
+// Method: getVar()
+// Get variable value from DB
+//----------------------------------------------------------------------
+QString MainWindow::getVar(QString var, QString filter)
+{
+    QString flt("");
+
+    if (!filter.isEmpty()) { 
+	flt = " AND filter=" + filter; 
+    } else {
+	filter = "''";
+    }
+
+    QString qryStr("SELECT var_value FROM qpf_vars WHERE var_name='" + 
+		      var + "'" + flt);
+
+    // Get state
+    QSqlQuery qry(qryStr, DBManager::getDB());
+    if (qry.next()) {
+        return qry.value(0).toString();
+    }   
+}
+
+//----------------------------------------------------------------------
+// Method: setVar()
+// Set variable in DB
+//----------------------------------------------------------------------
+void MainWindow::setVar(QString var, QString filter, QString new_value)
+{
+    QString flt("");
+
+    if (!filter.isEmpty()) { flt = "AND filter='" + filter + "' "; }
+
+    QString qryStr("WITH upsert AS (UPDATE qpf_vars "
+		   "SET var_value='" + new_value + "' "
+		   "WHERE var_name='" + var + "' " + flt + 
+		   "RETURNING *) "
+		   "INSERT INTO qpf_vars (var_name, filter, var_value) "
+		   "SELECT '" + var + "', '" + filter + "', '" + new_value + "' "
+		   "WHERE NOT EXISTS (SELECT * FROM upsert)");
+
+    // Get state
+    QSqlQuery qry(qryStr, DBManager::getDB());
+}
+
+//----------------------------------------------------------------------
 // Method: run()
 // Run loop
 //----------------------------------------------------------------------
 void MainWindow::run()
+{
+    updateState();
+    updateVerbLogLevel();
+}
+
+//----------------------------------------------------------------------
+// Method: updateStatee
+//----------------------------------------------------------------------
+void MainWindow::updateState()
 {
     // Get state
     static QString qryStr("select node_state from node_states "
@@ -485,6 +527,15 @@ void MainWindow::run()
 	    ui->lblState->setState(stateName);
 	}
     }   
+}
+
+//----------------------------------------------------------------------
+// Method: updateVerbLogLevel
+//----------------------------------------------------------------------
+void MainWindow::updateVerbLogLevel()
+{
+    QString cfgLogLevel = getVar("log_level", "");
+    ui->lblVerbosity->setText(cfgLogLevel);
 }
 
 }
