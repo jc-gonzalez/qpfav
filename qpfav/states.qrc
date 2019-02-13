@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="state">
+    <file>img/error.png</file>
+    <file>img/initialised.png</file>
+    <file>img/off.png</file>
+    <file>img/operational.png</file>
+    <file>img/running.png</file>
+  </qresource>
+</RCC>
