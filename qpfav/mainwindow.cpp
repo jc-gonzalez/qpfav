@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent, QString & cfgFile, QString s) :
     //std::thread(&LocalArchiveView::run, this).detach();
     QTimer * refreshTimer = new QTimer(this);
     connect(refreshTimer, SIGNAL(timeout()), this, SLOT(run()));
-    refreshTimer->start(1000);
+    refreshTimer->start(3000);
 }
 
 //----------------------------------------------------------------------
@@ -474,9 +474,13 @@ QString MainWindow::getVar(QString var, QString filter)
 
     // Get state
     QSqlQuery qry(qryStr, DBManager::getDB());
+    QString result("");
+
     if (qry.next()) {
-        return qry.value(0).toString();
+        result = qry.value(0).toString();
     }   
+
+    return result;
 }
 
 //----------------------------------------------------------------------
@@ -517,15 +521,11 @@ void MainWindow::run()
 void MainWindow::updateState()
 {
     // Get state
-    static QString qryStr("select node_state from node_states "
-			  "where node_name='master'");
-    QSqlQuery qry(qryStr, DBManager::getDB());
-    if (qry.next()) {
-        QString newStateName = qry.value(0).toString();
-	if (newStateName != stateName) {
-	    stateName = newStateName;
-	    ui->lblState->setState(stateName);
-	}
+    QString newStateName = getVar("qpf_state", "");
+    if (newStateName != stateName) {
+	std::cout << "NEW STATE: " << newStateName.toStdString() << '\n';
+	stateName = newStateName;
+	ui->lblState->setState(stateName.toLower());
     }   
 }
 
